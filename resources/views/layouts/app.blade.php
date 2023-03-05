@@ -10,7 +10,7 @@
     <title>Homepage</title>
 </head>
 <body>
-
+<header></header>
 <div id="app" class="p-5">
     @yield('content')
 </div>
