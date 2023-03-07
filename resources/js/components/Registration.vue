@@ -21,6 +21,7 @@ export default {
             email: null,
             password: null,
             password_confirm: null,
+            response:null,
         }
     },
     methods: {
@@ -33,8 +34,14 @@ export default {
                     password_confirm: this.password_confirm
                 })
                 .then(res => {
-                    console.log(res);
+                    console.log(res.data);
                 })
+                .catch(
+                    error=>{
+                        this.response=error.response.data.response
+                        console.log(this.response);
+                    }
+                )
         }
     }
 

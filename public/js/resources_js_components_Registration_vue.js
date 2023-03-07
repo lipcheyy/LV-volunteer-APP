@@ -18,18 +18,23 @@ __webpack_require__.r(__webpack_exports__);
       name: null,
       email: null,
       password: null,
-      password_confirm: null
+      password_confirm: null,
+      response: null
     };
   },
   methods: {
     storeUser: function storeUser() {
+      var _this = this;
       axios.post('/api/users/registration', {
         name: this.name,
         email: this.email,
         password: this.password,
         password_confirm: this.password_confirm
       }).then(function (res) {
-        console.log(res);
+        console.log(res.data);
+      })["catch"](function (error) {
+        _this.response = error.response.data.response;
+        console.log(_this.response);
       });
     }
   }
