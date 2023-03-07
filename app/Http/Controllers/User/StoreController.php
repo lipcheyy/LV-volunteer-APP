@@ -13,6 +13,11 @@ class StoreController extends Controller
     public function __invoke(StoreRequest $request)
     {
         $data=$request->validated();
-
+        $data["password"]=Hash::make($data["password"]);
+        $user = User::where("email",$data["email"])->first();
+        if($user){
+            return response(["error"=>"Користувач з такою поштою існує"],403);
+        }
+        $user = User::create($data);
     }
 }
