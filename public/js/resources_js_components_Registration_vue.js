@@ -22,8 +22,15 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    log: function log() {
-      console.log(this.name);
+    storeUser: function storeUser() {
+      axios.post('/api/users/registration', {
+        name: this.name,
+        email: this.email,
+        password: this.password,
+        password_confirm: this.password_confirm
+      }).then(function (res) {
+        console.log(res);
+      });
     }
   }
 });
@@ -134,7 +141,7 @@ var render = function render() {
     on: {
       click: function click($event) {
         $event.preventDefault();
-        return _vm.log.apply(null, arguments);
+        return _vm.storeUser.apply(null, arguments);
       }
     }
   })]);

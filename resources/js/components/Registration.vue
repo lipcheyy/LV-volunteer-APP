@@ -8,24 +8,33 @@
         <input type="password" v-model="password" class="form-control">
         pass_conf
         <input type="password" v-model="password_confirm" class="form-control">
-        <input @click.prevent="log" type="submit" value="reg">
+        <input @click.prevent="storeUser" type="submit" value="reg">
     </div>
 </template>
 
 <script>
 export default {
     name: "Registration",
-    data(){
-        return{
-            name:null,
-            email:null,
-            password:null,
-            password_confirm:null,
+    data() {
+        return {
+            name: null,
+            email: null,
+            password: null,
+            password_confirm: null,
         }
     },
-    methods:{
-        log(){
-            console.log(this.name);
+    methods: {
+        storeUser() {
+            axios.post('/api/users/registration',
+                {
+                    name: this.name,
+                    email: this.email,
+                    password: this.password,
+                    password_confirm: this.password_confirm
+                })
+                .then(res => {
+                    console.log(res);
+                })
         }
     }
 
