@@ -6,7 +6,7 @@ export default new VueRouter({
     routes:[
         {
             path:'/users/login',
-            component: ()=> import('./components/Login'),
+            component: ()=> import('./components/User/Login'),
             name:'user.login'
         },
         {
