@@ -29,6 +29,9 @@ Route::group([
 
 ], function ($router) {
 
+    Route::group(['middleware'=>'auth:api'],function (){
+        //лише для авторизованих
+    });
     Route::post('login', 'AuthController@login');
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
