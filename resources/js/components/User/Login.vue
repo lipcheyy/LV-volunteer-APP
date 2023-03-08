@@ -6,7 +6,7 @@
         password
         <input type="password" v-model="password" class="form-control w-25">
         <input type="submit" @click.prevent="login" class="btn btn-primary" value="log">
-        <p v-if="error" >{{this.error}}</p>
+        <p v-if="error" >{{error}}</p>
     </div>
 </template>
 
@@ -30,6 +30,7 @@ export default {
                 .then(res=>{
                     let access_token=res.data.access_token
                     localStorage.setItem('access_token',access_token)
+                    this.$router.push({name:'personal.page'})
 
                 })
                 .catch(error=>{

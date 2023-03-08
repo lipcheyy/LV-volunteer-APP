@@ -29,6 +29,9 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         var access_token = res.data.access_token;
         localStorage.setItem('access_token', access_token);
+        _this.$router.push({
+          name: 'personal.page'
+        });
       })["catch"](function (error) {
         _this.error = error.response.data.error;
       });
@@ -104,7 +107,7 @@ var render = function render() {
         return _vm.login.apply(null, arguments);
       }
     }
-  }), _vm._v(" "), _vm.error ? _c("p", [_vm._v(_vm._s(this.error))]) : _vm._e()]);
+  }), _vm._v(" "), _vm.error ? _c("p", [_vm._v(_vm._s(_vm.error))]) : _vm._e()]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
