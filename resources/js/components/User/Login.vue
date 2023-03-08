@@ -6,6 +6,7 @@
         password
         <input type="password" v-model="password" class="form-control w-25">
         <input type="submit" @click.prevent="login" class="btn btn-primary" value="log">
+        <p v-if="error" >{{this.error}}</p>
     </div>
 </template>
 
@@ -16,6 +17,7 @@ export default {
         return{
             email:null,
             password:null,
+            error:null,
         }
     },
     methods:{
@@ -27,9 +29,11 @@ export default {
                 })
                 .then(res=>{
                     let access_token=res.data.access_token
-                    console.log(access_token);
                     localStorage.setItem('access_token',access_token)
 
+                })
+                .catch(error=>{
+                    this.error= error.response.data.error;
                 })
         }
     }

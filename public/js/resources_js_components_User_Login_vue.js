@@ -16,18 +16,21 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       email: null,
-      password: null
+      password: null,
+      error: null
     };
   },
   methods: {
     login: function login() {
+      var _this = this;
       axios.post('/api/auth/login', {
         'email': this.email,
         'password': this.password
       }).then(function (res) {
         var access_token = res.data.access_token;
-        console.log(access_token);
         localStorage.setItem('access_token', access_token);
+      })["catch"](function (error) {
+        _this.error = error.response.data.error;
       });
     }
   }
@@ -101,7 +104,7 @@ var render = function render() {
         return _vm.login.apply(null, arguments);
       }
     }
-  })]);
+  }), _vm._v(" "), _vm.error ? _c("p", [_vm._v(_vm._s(this.error))]) : _vm._e()]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
