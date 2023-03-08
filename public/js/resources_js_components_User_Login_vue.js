@@ -18,6 +18,18 @@ __webpack_require__.r(__webpack_exports__);
       email: null,
       password: null
     };
+  },
+  methods: {
+    login: function login() {
+      axios.post('/api/auth/login', {
+        'email': this.email,
+        'password': this.password
+      }).then(function (res) {
+        var access_token = res.data.access_token;
+        console.log(access_token);
+        localStorage.setItem('access_token', access_token);
+      });
+    }
   }
 });
 
@@ -82,6 +94,12 @@ var render = function render() {
     attrs: {
       type: "submit",
       value: "log"
+    },
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+        return _vm.login.apply(null, arguments);
+      }
     }
   })]);
 };
