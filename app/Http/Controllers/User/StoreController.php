@@ -16,7 +16,7 @@ class StoreController extends Controller
         $data["password"]=Hash::make($data["password"]);
         $user = User::where("email",$data["email"])->first();
         if($user){
-            return response(["error"=>"Користувач з такою поштою існує"],403);
+            return response(["message"=>"Користувач з такою поштою існує"],403);
         }
         $user = User::create($data);
     }

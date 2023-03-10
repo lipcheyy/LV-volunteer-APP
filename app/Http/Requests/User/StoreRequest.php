@@ -31,4 +31,10 @@ class StoreRequest extends FormRequest
 
         ];
     }
+    public function messages()
+    {
+        return [
+            'password.same'=>'Паролі не співпадають',
+        ];
+    }
 }

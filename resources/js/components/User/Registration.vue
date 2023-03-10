@@ -9,6 +9,7 @@
         pass_conf
         <input type="password" v-model="password_confirm" class="form-control">
         <input @click.prevent="storeUser" type="submit" value="reg">
+        <p v-if="error">{{this.error}}</p>
     </div>
 </template>
 
@@ -21,7 +22,7 @@ export default {
             email: null,
             password: null,
             password_confirm: null,
-            response:null,
+            error:null,
         }
     },
     methods: {
@@ -34,12 +35,12 @@ export default {
                     password_confirm: this.password_confirm
                 })
                 .then(res => {
-                    console.log(res.data);
+                    //console.log(res.data);
                 })
                 .catch(
                     error=>{
-                        this.response=error.response.data.response
-                        console.log(this.response);
+                        this.error=error.response.data.message
+                        this.error=error.response.data.errors.password[0];
                     }
                 )
         }

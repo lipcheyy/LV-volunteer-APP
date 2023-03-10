@@ -19,7 +19,7 @@ __webpack_require__.r(__webpack_exports__);
       email: null,
       password: null,
       password_confirm: null,
-      response: null
+      error: null
     };
   },
   methods: {
@@ -31,10 +31,10 @@ __webpack_require__.r(__webpack_exports__);
         password: this.password,
         password_confirm: this.password_confirm
       }).then(function (res) {
-        console.log(res.data);
+        //console.log(res.data);
       })["catch"](function (error) {
-        _this.response = error.response.data.response;
-        console.log(_this.response);
+        _this.error = error.response.data.message;
+        _this.error = error.response.data.errors.password[0];
       });
     }
   }
@@ -149,7 +149,7 @@ var render = function render() {
         return _vm.storeUser.apply(null, arguments);
       }
     }
-  })]);
+  }), _vm._v(" "), _vm.error ? _c("p", [_vm._v(_vm._s(this.error))]) : _vm._e()]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
