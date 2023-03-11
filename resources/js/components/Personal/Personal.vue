@@ -1,5 +1,5 @@
 <template>
-<div>personal page but its frontend</div>
+<div>personal page but its frontend remote</div>
 </template>
 
 <script>
