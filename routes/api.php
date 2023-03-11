@@ -31,11 +31,18 @@ Route::group([
 
     Route::group(['middleware'=>'auth:api'],function (){
         //лише для авторизованих
+        Route::post('me', 'AuthController@me');
+        Route::post('refresh', 'AuthController@refresh');
+        Route::group(['namespace' => 'Personal'], function () {
+            Route::get('personal','IndexController');
+        });
+
     });
+
     Route::post('login', 'AuthController@login');
     Route::post('logout', 'AuthController@logout');
-    Route::post('refresh', 'AuthController@refresh');
-    Route::post('me', 'AuthController@me');
+
+
 
 
 });

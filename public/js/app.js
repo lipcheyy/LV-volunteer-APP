@@ -5335,9 +5335,9 @@ __webpack_require__.r(__webpack_exports__);
     logout: function logout() {
       var _this = this;
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/auth/logout').then(function (res) {
-        localStorage.removeItem('access_token');
+        localStorage.clear();
         _this.$router.push({
-          name: 'user.registration'
+          name: 'user.login'
         });
       });
     }
@@ -5442,7 +5442,7 @@ api.interceptors.response.use(function (config) {
   // console.log(error.response.data.message);
   if (error.response.status) {
     _router__WEBPACK_IMPORTED_MODULE_1__["default"].push({
-      name: 'fruit.login'
+      name: 'user.login'
     });
   }
 });

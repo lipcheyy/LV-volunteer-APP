@@ -36,7 +36,8 @@ __webpack_require__.r(__webpack_exports__);
         _this.error = error.response.data.error;
       });
     }
-  }
+  },
+  mounted: function mounted() {}
 });
 
 /***/ }),

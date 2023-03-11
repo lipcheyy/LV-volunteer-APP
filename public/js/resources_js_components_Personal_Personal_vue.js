@@ -11,8 +11,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../api */ "./resources/js/api.js");
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "Personal"
+  name: "Personal",
+  mounted: function mounted() {
+    this.username();
+    this.userdata();
+  },
+  methods: {
+    userdata: function userdata() {
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/auth/me').then(function (res) {
+        var user = res.data.name;
+        localStorage.setItem('username', user);
+      });
+    },
+    username: function username() {
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/auth/personal').then(function (res) {
+        console.log(res);
+      });
+    }
+  }
 });
 
 /***/ }),

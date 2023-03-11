@@ -37,6 +37,9 @@ export default {
                     this.error= error.response.data.error;
                 })
         }
+    },
+    mounted() {
+
     }
 }
 </script>

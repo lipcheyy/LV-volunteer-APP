@@ -43,7 +43,7 @@ api.interceptors.response.use(config => {
     // console.log(localStorage.getItem('access_token'));
     // console.log(error.response.data.message);
     if (error.response.status) {
-        router.push({name: 'fruit.login'})
+        router.push({name: 'user.login'})
     }
 })
 export default api
