@@ -1,5 +1,5 @@
 <template>
-<div>personal</div>
+<div>personal page</div>
 </template>
 
 <script>
