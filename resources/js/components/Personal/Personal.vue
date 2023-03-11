@@ -1,5 +1,5 @@
 <template>
-<div>personal page</div>
+<div>personal page but its backend</div>
 </template>
 
 <script>
