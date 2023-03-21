@@ -1,5 +1,5 @@
 <template>
-<div>personal page but its backend rem2</div>
+
 </template>
 
 <script>
