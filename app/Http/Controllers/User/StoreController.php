@@ -18,6 +18,9 @@ class StoreController extends Controller
         if($user){
             return response(["message"=>"Користувач з такою поштою існує"],403);
         }
+
         $user = User::create($data);
+        $token=auth()->tokenById($user->id);
+        return response(['access_token'=>$token]);
     }
 }

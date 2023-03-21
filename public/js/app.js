@@ -5530,7 +5530,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
+var route = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   mode: 'history',
   routes: [{
     path: '/users/login',
@@ -5551,7 +5551,29 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_router__WEBPACK_IMPORTED_MOD
     },
     name: 'personal.page'
   }]
-}));
+});
+route.beforeEach(function (to, from, next) {
+  var access_token = localStorage.getItem('access_token');
+  console.log(access_token);
+  if (!access_token) {
+    if (to.name === 'user.login' || to.name === 'user.registration') {
+      next();
+    } else {
+      next({
+        name: 'user.login'
+      });
+    }
+  }
+  if (to.name === 'user.login') {
+    if (access_token) {
+      next({
+        name: 'personal.page'
+      });
+    }
+  }
+  return next();
+});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (route);
 
 /***/ }),
 
