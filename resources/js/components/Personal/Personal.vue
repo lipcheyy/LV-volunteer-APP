@@ -1,5 +1,4 @@
 <template>
-<div>personal page but its frontend remote</div>
 </template>
 
 <script>
