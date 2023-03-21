@@ -2,7 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 
 Vue.use(VueRouter)
-export default new VueRouter({
+const route =new VueRouter({
     mode:'history',
     routes:[
         {
@@ -22,3 +22,28 @@ export default new VueRouter({
         }
     ]
 })
+
+route.beforeEach((to,from,next)=>{
+    const access_token=localStorage.getItem('access_token')
+    console.log(access_token);
+    if (!access_token){
+        if (to.name==='user.login' || to.name==='user.registration'){
+            next()
+        }
+        else {
+            next({
+                name:'user.login'
+            })
+        }
+    }
+    if (to.name==='user.login'){
+        if (access_token){
+            next({
+                name:'personal.page'
+            })
+        }
+    }
+    return next()
+})
+
+export default route
