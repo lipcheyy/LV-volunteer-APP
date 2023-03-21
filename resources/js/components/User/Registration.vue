@@ -35,12 +35,13 @@ export default {
                     password_confirm: this.password_confirm
                 })
                 .then(res => {
-                    //console.log(res.data);
+                    localStorage.setItem('access_token',res.data.access_token)
+                    this.$router.push({name:'personal.page'})
                 })
                 .catch(
                     error=>{
                         this.error=error.response.data.message
-                        this.error=error.response.data.errors.password[0];
+                        //this.error=error.response.data.errors.password[0];
                     }
                 )
         }

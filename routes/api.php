@@ -29,7 +29,7 @@ Route::group([
 
 ], function ($router) {
 
-    Route::group(['middleware'=>'auth:api'],function (){
+    Route::group(['middleware'=>'jwt.auth'],function (){
         //лише для авторизованих
         Route::post('me', 'AuthController@me');
         Route::post('refresh', 'AuthController@refresh');

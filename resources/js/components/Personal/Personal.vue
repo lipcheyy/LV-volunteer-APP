@@ -1,5 +1,4 @@
 <template>
-<div>personal page</div>
 </template>
 
 <script>
