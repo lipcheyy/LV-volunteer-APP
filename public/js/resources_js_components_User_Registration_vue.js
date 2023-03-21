@@ -31,10 +31,13 @@ __webpack_require__.r(__webpack_exports__);
         password: this.password,
         password_confirm: this.password_confirm
       }).then(function (res) {
-        //console.log(res.data);
+        localStorage.setItem('access_token', res.data.access_token);
+        _this.$router.push({
+          name: 'personal.page'
+        });
       })["catch"](function (error) {
         _this.error = error.response.data.message;
-        _this.error = error.response.data.errors.password[0];
+        //this.error=error.response.data.errors.password[0];
       });
     }
   }
