@@ -19,6 +19,11 @@ const route =new VueRouter({
             path:'/personal',
             component: ()=> import('./components/Personal/Personal'),
             name:'personal.page'
+        },
+        {
+            path:'/admin/main',
+            component:()=>import('./components/Admin/AdminStatistic')
+            name:'admin.statistic'
         }
     ]
 })
