@@ -16,27 +16,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      user: null
+      user: null,
+      username: null
     };
   },
   name: "Personal",
   mounted: function mounted() {
-    this.username();
     this.userdata();
+    this.getUser();
   },
   methods: {
     userdata: function userdata() {
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/auth/me').then(function (res) {
         var user = res.data;
-        console.log(user.name);
         localStorage.setItem('username', user.name);
+        localStorage.setItem('id', user.id);
       });
     },
-    username: function username() {
-      var _this = this;
-      _api__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/auth/personal').then(function (res) {
-        _this.user = res.data[0];
-        console.log(_this.user);
+    getUser: function getUser() {
+      var id = localStorage.getItem('id');
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/auth/user/userdata', {
+        id: id
+      }).then(function (res) {
+        console.log(res.data.role);
       });
     }
   }

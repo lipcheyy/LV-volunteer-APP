@@ -22,7 +22,7 @@ const route =new VueRouter({
         },
         {
             path:'/admin/main',
-            component:()=>import('./components/Admin/AdminStatistic')
+            component:()=>import('./components/Admin/AdminStatistic'),
             name:'admin.statistic'
         }
     ]

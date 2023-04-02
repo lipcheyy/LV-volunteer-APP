@@ -10,30 +10,31 @@ export default {
     data(){
         return{
             user:null,
-
+            username:null,
         }
     },
     name: "Personal",
     mounted() {
-        this.username()
         this.userdata()
+        this.getUser()
     },
     methods:{
         userdata() {
             api.post('/api/auth/me')
                 .then(res=>{
                     const user =res.data
-                    console.log(user.name);
                     localStorage.setItem('username',user.name)
+                    localStorage.setItem('id',user.id)
                 })
         },
-        username(){
-            api.get('/api/auth/personal')
+        getUser(){
+            const id=localStorage.getItem('id');
+            api.post('/api/auth/user/userdata',{id:id})
                 .then(res=>{
-                    this.user=res.data[0]
-                    console.log(this.user);
+                    console.log(res.data.role);
                 })
         }
+
     },
 
 }
