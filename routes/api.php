@@ -34,7 +34,7 @@ Route::group([
         Route::post('me', 'AuthController@me');
         Route::post('refresh', 'AuthController@refresh');
         Route::group(['namespace' => 'Personal'], function () {
-            Route::get('personal','IndexController');
+            Route::post('personal','IndexController');
         });
 
     });

@@ -14,6 +14,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../api */ "./resources/js/api.js");
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      user: null
+    };
+  },
   name: "Personal",
   mounted: function mounted() {
     this.username();
@@ -22,13 +27,16 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     userdata: function userdata() {
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/auth/me').then(function (res) {
-        var user = res.data.name;
-        localStorage.setItem('username', user);
+        var user = res.data;
+        console.log(user.name);
+        localStorage.setItem('username', user.name);
       });
     },
     username: function username() {
+      var _this = this;
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/auth/personal').then(function (res) {
-        console.log(res);
+        _this.user = res.data[0];
+        console.log(_this.user);
       });
     }
   }
@@ -50,7 +58,7 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-
+  return _c("div", [this.user === "Admin" ? _c("div", [_vm._v("sui")]) : _vm._e()]);
 };
 var staticRenderFns = [];
 render._withStripped = true;

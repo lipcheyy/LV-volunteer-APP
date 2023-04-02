@@ -1,9 +1,18 @@
 <template>
+    <div>
+        <div v-if="this.user==='Admin'">sui</div>
+    </div>
 </template>
 
 <script>
 import api from "../../api";
 export default {
+    data(){
+        return{
+            user:null,
+
+        }
+    },
     name: "Personal",
     mounted() {
         this.username()
@@ -13,14 +22,16 @@ export default {
         userdata() {
             api.post('/api/auth/me')
                 .then(res=>{
-                    const user =res.data.name
-                    localStorage.setItem('username',user)
+                    const user =res.data
+                    console.log(user.name);
+                    localStorage.setItem('username',user.name)
                 })
         },
         username(){
             api.get('/api/auth/personal')
                 .then(res=>{
-                    console.log(res);
+                    this.user=res.data[0]
+                    console.log(this.user);
                 })
         }
     },
