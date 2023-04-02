@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="this.user==='Admin'">sui</div>
+        <div v-if="this.userRole==='1'">sui</div>
     </div>
 </template>
 
@@ -9,14 +9,14 @@ import api from "../../api";
 export default {
     data(){
         return{
-            user:null,
+            userRole:null,
             username:null,
         }
     },
     name: "Personal",
     mounted() {
         this.userdata()
-        this.getUser()
+
     },
     methods:{
         userdata() {
@@ -25,13 +25,6 @@ export default {
                     const user =res.data
                     localStorage.setItem('username',user.name)
                     localStorage.setItem('id',user.id)
-                })
-        },
-        getUser(){
-            const id=localStorage.getItem('id');
-            api.post('/api/auth/user/userdata',{id:id})
-                .then(res=>{
-                    console.log(res.data.role);
                 })
         }
 

@@ -16,14 +16,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      user: null,
+      userRole: null,
       username: null
     };
   },
   name: "Personal",
   mounted: function mounted() {
     this.userdata();
-    this.getUser();
   },
   methods: {
     userdata: function userdata() {
@@ -31,14 +30,6 @@ __webpack_require__.r(__webpack_exports__);
         var user = res.data;
         localStorage.setItem('username', user.name);
         localStorage.setItem('id', user.id);
-      });
-    },
-    getUser: function getUser() {
-      var id = localStorage.getItem('id');
-      _api__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/auth/user/userdata', {
-        id: id
-      }).then(function (res) {
-        console.log(res.data.role);
       });
     }
   }
@@ -60,7 +51,7 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [this.user === "Admin" ? _c("div", [_vm._v("sui")]) : _vm._e()]);
+  return _c("div", [this.userRole === "1" ? _c("div", [_vm._v("sui")]) : _vm._e()]);
 };
 var staticRenderFns = [];
 render._withStripped = true;

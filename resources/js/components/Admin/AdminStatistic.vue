@@ -1,5 +1,5 @@
 <template>
-
+    <div>adminka</div>
 </template>
 
 <script>
