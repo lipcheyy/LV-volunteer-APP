@@ -16,7 +16,6 @@ export default {
     name: "Personal",
     mounted() {
         this.userdata()
-
     },
     methods:{
         userdata() {
@@ -24,10 +23,9 @@ export default {
                 .then(res=>{
                     const user =res.data
                     localStorage.setItem('username',user.name)
-                    localStorage.setItem('id',user.id)
+                    localStorage.setItem('user_role',user.role)
                 })
-        }
-
+        },
     },
 
 }

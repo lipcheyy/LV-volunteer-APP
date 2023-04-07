@@ -29,7 +29,7 @@ __webpack_require__.r(__webpack_exports__);
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/auth/me').then(function (res) {
         var user = res.data;
         localStorage.setItem('username', user.name);
-        localStorage.setItem('id', user.id);
+        localStorage.setItem('user_role', user.role);
       });
     }
   }

@@ -5320,19 +5320,24 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       access_token: null,
-      userRole: null
+      user_role: null
     };
   },
   mounted: function mounted() {
+    this.userRole();
     this.getAccessToken();
-    this.getUser();
+    console.log(this.user_role);
   },
   updated: function updated() {
     this.getAccessToken();
+    this.userRole();
   },
   methods: {
     getAccessToken: function getAccessToken() {
       this.access_token = localStorage.getItem('access_token');
+    },
+    userRole: function userRole() {
+      this.user_role = localStorage.getItem('user_role');
     },
     logout: function logout() {
       var _this = this;
@@ -5341,16 +5346,6 @@ __webpack_require__.r(__webpack_exports__);
         _this.$router.push({
           name: 'user.login'
         });
-      });
-    },
-    getUser: function getUser() {
-      var _this2 = this;
-      var id = localStorage.getItem('id');
-      _api__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/auth/user/userdata', {
-        id: id
-      }).then(function (res) {
-        _this2.userRole = res.data.role;
-        localStorage.setItem('user_role', _this2.userRole);
       });
     }
   }
@@ -5385,7 +5380,7 @@ var render = function render() {
         name: "user.registration"
       }
     }
-  }, [_vm._v("registration")]) : _vm._e(), _vm._v(" "), _vm.userRole === "1" ? _c("router-link", {
+  }, [_vm._v("registration")]) : _vm._e(), _vm._v(" "), _vm.user_role === "1" && _vm.access_token ? _c("router-link", {
     attrs: {
       to: {
         name: "admin.statistic"
@@ -5456,8 +5451,8 @@ api.interceptors.response.use(function (config) {
       return api.request(error.config);
     });
   }
-  // console.log(localStorage.getItem('access_token'));
-  // console.log(error.response.data.message);
+
+  //console.log(error.response.status);
   if (error.response.status) {
     _router__WEBPACK_IMPORTED_MODULE_1__["default"].push({
       name: 'user.login'
@@ -5578,17 +5573,24 @@ var route = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 });
 route.beforeEach(function (to, from, next) {
   var access_token = localStorage.getItem('access_token');
-  console.log(access_token);
+  var user_role = localStorage.getItem('user_role');
   if (!access_token) {
     if (to.name === 'user.login' || to.name === 'user.registration') {
-      next();
+      return next();
     } else {
-      next({
+      return next({
         name: 'user.login'
       });
     }
   }
-  if (to.name === 'user.login') {
+  if (user_role !== '1') {
+    if (to.name === 'admin.statistic') {
+      return next({
+        name: 'personal.page'
+      });
+    }
+  }
+  if (to.name === 'admin.statistic') if (to.name === 'user.login' || to.name === 'user.registration') {
     if (access_token) {
       next({
         name: 'personal.page'

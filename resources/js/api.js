@@ -40,8 +40,8 @@ api.interceptors.response.use(config => {
 
             })
     }
-    // console.log(localStorage.getItem('access_token'));
-    // console.log(error.response.data.message);
+
+    //console.log(error.response.status);
     if (error.response.status) {
         router.push({name: 'user.login'})
     }
