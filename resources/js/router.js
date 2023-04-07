@@ -19,24 +19,37 @@ const route =new VueRouter({
             path:'/personal',
             component: ()=> import('./components/Personal/Personal'),
             name:'personal.page'
+        },
+        {
+            path:'/admin/main',
+            component:()=>import('./components/Admin/AdminStatistic'),
+            name:'admin.statistic'
         }
     ]
 })
 
 route.beforeEach((to,from,next)=>{
     const access_token=localStorage.getItem('access_token')
-    console.log(access_token);
+    const user_role=localStorage.getItem('user_role')
     if (!access_token){
         if (to.name==='user.login' || to.name==='user.registration'){
-            next()
+            return next()
         }
         else {
-            next({
+            return next({
                 name:'user.login'
             })
         }
     }
-    if (to.name==='user.login'){
+    if (user_role!=='1'){
+        if (to.name==='admin.statistic'){
+            return next({
+                name:'personal.page'
+            })
+        }
+    }
+    if (to.name==='admin.statistic' )
+    if (to.name==='user.login' || to.name==='user.registration'){
         if (access_token){
             next({
                 name:'personal.page'

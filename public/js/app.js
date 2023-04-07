@@ -5319,18 +5319,25 @@ __webpack_require__.r(__webpack_exports__);
   name: "Index",
   data: function data() {
     return {
-      access_token: null
+      access_token: null,
+      user_role: null
     };
   },
   mounted: function mounted() {
+    this.userRole();
     this.getAccessToken();
+    console.log(this.user_role);
   },
   updated: function updated() {
     this.getAccessToken();
+    this.userRole();
   },
   methods: {
     getAccessToken: function getAccessToken() {
       this.access_token = localStorage.getItem('access_token');
+    },
+    userRole: function userRole() {
+      this.user_role = localStorage.getItem('user_role');
     },
     logout: function logout() {
       var _this = this;
@@ -5373,7 +5380,13 @@ var render = function render() {
         name: "user.registration"
       }
     }
-  }, [_vm._v("registration")]) : _vm._e(), _vm._v(" "), _vm.access_token ? _c("a", {
+  }, [_vm._v("registration")]) : _vm._e(), _vm._v(" "), _vm.user_role === "1" && _vm.access_token ? _c("router-link", {
+    attrs: {
+      to: {
+        name: "admin.statistic"
+      }
+    }
+  }, [_vm._v("adminka")]) : _vm._e(), _vm._v(" "), _vm.access_token ? _c("a", {
     attrs: {
       href: "#"
     },
@@ -5438,8 +5451,8 @@ api.interceptors.response.use(function (config) {
       return api.request(error.config);
     });
   }
-  // console.log(localStorage.getItem('access_token'));
-  // console.log(error.response.data.message);
+
+  //console.log(error.response.status);
   if (error.response.status) {
     _router__WEBPACK_IMPORTED_MODULE_1__["default"].push({
       name: 'user.login'
@@ -5550,21 +5563,34 @@ var route = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       return __webpack_require__.e(/*! import() */ "resources_js_components_Personal_Personal_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Personal/Personal */ "./resources/js/components/Personal/Personal.vue"));
     },
     name: 'personal.page'
+  }, {
+    path: '/admin/main',
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ "resources_js_components_Admin_AdminStatistic_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Admin/AdminStatistic */ "./resources/js/components/Admin/AdminStatistic.vue"));
+    },
+    name: 'admin.statistic'
   }]
 });
 route.beforeEach(function (to, from, next) {
   var access_token = localStorage.getItem('access_token');
-  console.log(access_token);
+  var user_role = localStorage.getItem('user_role');
   if (!access_token) {
     if (to.name === 'user.login' || to.name === 'user.registration') {
-      next();
+      return next();
     } else {
-      next({
+      return next({
         name: 'user.login'
       });
     }
   }
-  if (to.name === 'user.login') {
+  if (user_role !== '1') {
+    if (to.name === 'admin.statistic') {
+      return next({
+        name: 'personal.page'
+      });
+    }
+  }
+  if (to.name === 'admin.statistic') if (to.name === 'user.login' || to.name === 'user.registration') {
     if (access_token) {
       next({
         name: 'personal.page'
@@ -43647,7 +43673,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_User_Login_vue":1,"resources_js_components_User_Registration_vue":1,"resources_js_components_Personal_Personal_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_User_Login_vue":1,"resources_js_components_User_Registration_vue":1,"resources_js_components_Personal_Personal_vue":1,"resources_js_components_Admin_AdminStatistic_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

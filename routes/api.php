@@ -36,7 +36,9 @@ Route::group([
         Route::group(['namespace' => 'Personal'], function () {
             Route::post('personal','IndexController');
         });
-
+        Route::group(['namespace' => 'User', 'prefix' => 'user'], function () {
+            Route::post('/userdata','DataController');
+        });
     });
 
     Route::post('login', 'AuthController@login');
