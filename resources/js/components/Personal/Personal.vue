@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="this.userRole==='1'">sui</div>
+        <router-link v-if="userRole==='1'" :to="{name:'admin.statistic'}">Admin panel</router-link>
     </div>
 </template>
 
@@ -22,8 +22,8 @@ export default {
             api.post('/api/auth/me')
                 .then(res=>{
                     const user =res.data
-                    localStorage.setItem('username',user.name)
                     localStorage.setItem('user_role',user.role)
+                    this.userRole=user.role
                 })
         },
     },

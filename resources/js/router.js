@@ -23,8 +23,16 @@ const route =new VueRouter({
         {
             path:'/admin/main',
             component:()=>import('./components/Admin/AdminStatistic'),
-            name:'admin.statistic'
-        }
+            name:'admin.statistic',
+            children:[
+                {
+                    path:'/category',
+                    component:()=>import('./components/Admin/Category/CategoryIndex'),
+                    name:'category.index'
+                }
+            ]
+        },
+
     ]
 })
 
