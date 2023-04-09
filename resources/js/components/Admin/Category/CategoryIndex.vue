@@ -1,14 +1,21 @@
 <template>
     <div>
         <p>category main page</p>
+
+        <create-component></create-component>
+
+
     </div>
 </template>
 
 <script>
 import api from "../../../api";
+import CreateComponent from "./CreateComponent";
 
 export default {
     name: "CategoryIndex",
+    components: {CreateComponent},
+
     mounted() {
         this.test()
     },

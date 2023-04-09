@@ -39,6 +39,7 @@ Route::group([
         Route::group(['namespace'=>'Admin','prefix'=>'/admin'], function () {
             Route::group(['namespace' => 'Category'], function () {
                 Route::get('/category','CategoryController@index');
+                Route::post('/category/store', 'CategoryController@store');
             });
         });
         Route::group(['namespace' => 'User', 'prefix' => 'user'], function () {
