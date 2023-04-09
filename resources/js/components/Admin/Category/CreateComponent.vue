@@ -18,7 +18,10 @@ export default {
     },
     methods:{
         create(){
-            api.post()
+            api.post('/api/auth/admin/category/store',{title:this.title})
+                .then(res=>{
+                    this.title=''
+                })
         }
     }
 }

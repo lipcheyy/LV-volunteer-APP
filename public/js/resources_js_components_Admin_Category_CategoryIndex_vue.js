@@ -57,7 +57,12 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     create: function create() {
-      _api__WEBPACK_IMPORTED_MODULE_0__["default"].post();
+      var _this = this;
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/auth/admin/category/store', {
+        title: this.title
+      }).then(function (res) {
+        _this.title = '';
+      });
     }
   }
 });
