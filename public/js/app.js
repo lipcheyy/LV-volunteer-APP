@@ -5555,14 +5555,13 @@ var route = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     component: function component() {
       return __webpack_require__.e(/*! import() */ "resources_js_components_Admin_AdminStatistic_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Admin/AdminStatistic */ "./resources/js/components/Admin/AdminStatistic.vue"));
     },
-    name: 'admin.statistic',
-    children: [{
-      path: '/category',
-      component: function component() {
-        return __webpack_require__.e(/*! import() */ "resources_js_components_Admin_Category_CategoryIndex_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Admin/Category/CategoryIndex */ "./resources/js/components/Admin/Category/CategoryIndex.vue"));
-      },
-      name: 'category.index'
-    }]
+    name: 'admin.statistic'
+  }, {
+    path: '/admin/category',
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ "resources_js_components_Admin_Category_CategoryIndex_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Admin/Category/CategoryIndex */ "./resources/js/components/Admin/Category/CategoryIndex.vue"));
+    },
+    name: 'category.index'
   }]
 });
 route.beforeEach(function (to, from, next) {
