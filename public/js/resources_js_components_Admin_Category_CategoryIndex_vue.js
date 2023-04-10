@@ -58,7 +58,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     create: function create() {
       var _this = this;
-      _api__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/auth/admin/category/store', {
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/auth/admin/category', {
         title: this.title
       }).then(function (res) {
         _this.title = '';

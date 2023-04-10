@@ -18,7 +18,7 @@ export default {
     },
     methods:{
         create(){
-            api.post('/api/auth/admin/category/store',{title:this.title})
+            api.post('/api/auth/admin/category',{title:this.title})
                 .then(res=>{
                     this.title=''
                 })
