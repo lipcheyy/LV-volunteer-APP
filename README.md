@@ -1,3 +1,20 @@
+| ПІБ | Група | Роль |
+|:-----:|:-------:|:--------:|
+|Ткач Василь Віталійович|ІПЗ-2|frontend|
+|Андрішак Іван Вікторович|КН|teamlead Figma/Design|
+|Грига Михайло Михайлович|ІПЗ-1|backend|
+|Липчей Владислав Васильович|ІПЗ-1|Frontend/backend|
+
+
+<br>
+<br>
+
+## Technology stack
+- HTML, CSS, VUE.JS
+- PHP LARAVEL MVC
+- SQLITE DATABASE
+
+
 # Порядок дій
 * Стягнути проект
   + ```git clone git@github.com:lipcheyy/LV-gallery-app.git ```
