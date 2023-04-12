@@ -26,14 +26,13 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    this.test();
+    this.getCategories();
   },
   methods: {
-    test: function test() {
+    getCategories: function getCategories() {
+      var _this = this;
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/auth/admin/category').then(function (res) {
-        console.log(res.data.data);
-      })["catch"](function (error) {
-        console.log(error);
+        _this.data = res.data.data;
       });
     }
   }
@@ -88,9 +87,17 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_c("p", [_vm._v("category main page")]), _vm._v(" "), _c("create-component")], 1);
+  return _c("div", [_c("p", [_vm._v("category main page")]), _vm._v(" "), _c("create-component"), _vm._v(" "), _c("table", {
+    staticClass: "table"
+  }, [_vm._m(0), _vm._v(" "), _c("tbody", _vm._l(_vm.data, function (category) {
+    return _c("tr", [_c("td", [_vm._v(_vm._s(category.id))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(category.title))])]);
+  }), 0)])], 1);
 };
-var staticRenderFns = [];
+var staticRenderFns = [function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("thead", [_c("tr", [_c("th", [_vm._v("#")]), _vm._v(" "), _c("th", [_vm._v("title")])])]);
+}];
 render._withStripped = true;
 
 

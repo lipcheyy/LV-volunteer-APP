@@ -4,7 +4,20 @@
 
         <create-component></create-component>
 
-
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>title</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="category in data">
+                    <td>{{category.id}}</td>
+                    <td>{{category.title}}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </template>
 
@@ -15,22 +28,19 @@ import CreateComponent from "./CreateComponent";
 export default {
     name: "CategoryIndex",
     components: {CreateComponent},
-    data(){
+    data() {
         return {
-            data:null
+            data: null
         }
     },
     mounted() {
-        this.test()
+        this.getCategories()
     },
-    methods:{
-        test() {
+    methods: {
+        getCategories() {
             api.get('/api/auth/admin/category')
-                .then(res=>{
-                    console.log(res.data.data);
-                })
-                .catch(error=>{
-                    console.log(error);
+                .then(res => {
+                    this.data=res.data.data
                 })
         },
     }
