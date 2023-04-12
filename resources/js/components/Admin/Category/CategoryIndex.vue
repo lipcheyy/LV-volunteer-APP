@@ -2,7 +2,7 @@
     <div>
         <p>category main page</p>
 
-        <create-component></create-component>
+        <create-component ref="test"></create-component>
 
         <table class="table">
             <thead>
@@ -34,6 +34,7 @@ export default {
         }
     },
     mounted() {
+        //console.log(this.$refs.test.backcall());
         this.getCategories()
     },
     methods: {

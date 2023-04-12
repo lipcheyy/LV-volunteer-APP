@@ -21,7 +21,11 @@ export default {
             api.post('/api/auth/admin/category',{title:this.title})
                 .then(res=>{
                     this.title=''
+                    this.$parent.getCategories();
                 })
+        },
+        backcall(){
+            console.log('siiiuiii');;
         }
     }
 }

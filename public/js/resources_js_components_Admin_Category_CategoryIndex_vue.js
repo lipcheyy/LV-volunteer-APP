@@ -26,6 +26,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
+    //console.log(this.$refs.test.backcall());
     this.getCategories();
   },
   methods: {
@@ -66,7 +67,12 @@ __webpack_require__.r(__webpack_exports__);
         title: this.title
       }).then(function (res) {
         _this.title = '';
+        _this.$parent.getCategories();
       });
+    },
+    backcall: function backcall() {
+      console.log('siiiuiii');
+      ;
     }
   }
 });
@@ -87,7 +93,9 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_c("p", [_vm._v("category main page")]), _vm._v(" "), _c("create-component"), _vm._v(" "), _c("table", {
+  return _c("div", [_c("p", [_vm._v("category main page")]), _vm._v(" "), _c("create-component", {
+    ref: "test"
+  }), _vm._v(" "), _c("table", {
     staticClass: "table"
   }, [_vm._m(0), _vm._v(" "), _c("tbody", _vm._l(_vm.data, function (category) {
     return _c("tr", [_c("td", [_vm._v(_vm._s(category.id))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(category.title))])]);
