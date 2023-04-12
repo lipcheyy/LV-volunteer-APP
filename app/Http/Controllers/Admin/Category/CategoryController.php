@@ -10,7 +10,8 @@ use Illuminate\Http\Request;
 class CategoryController extends Controller
 {
     public function index(){
-        return 'siiiu';
+        $categories = Category::all();
+        return $categories;
     }
     public function store(StoreRequest $request){
         $data=$request->validated();

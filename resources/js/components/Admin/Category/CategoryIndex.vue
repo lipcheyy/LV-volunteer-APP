@@ -15,7 +15,11 @@ import CreateComponent from "./CreateComponent";
 export default {
     name: "CategoryIndex",
     components: {CreateComponent},
-
+    data(){
+        return {
+            data:null
+        }
+    };
     mounted() {
         this.test()
     },
@@ -23,6 +27,7 @@ export default {
         test() {
             api.get('/api/auth/admin/category')
                 .then(res=>{
+
                     console.log(res.data);
                 })
                 .catch(error=>{
