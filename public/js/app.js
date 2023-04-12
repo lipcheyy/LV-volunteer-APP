@@ -5319,25 +5319,18 @@ __webpack_require__.r(__webpack_exports__);
   name: "Index",
   data: function data() {
     return {
-      access_token: null,
-      user_role: null
+      access_token: null
     };
   },
   mounted: function mounted() {
-    this.userRole();
     this.getAccessToken();
-    console.log(this.user_role);
   },
   updated: function updated() {
     this.getAccessToken();
-    this.userRole();
   },
   methods: {
     getAccessToken: function getAccessToken() {
       this.access_token = localStorage.getItem('access_token');
-    },
-    userRole: function userRole() {
-      this.user_role = localStorage.getItem('user_role');
     },
     logout: function logout() {
       var _this = this;
@@ -5380,13 +5373,7 @@ var render = function render() {
         name: "user.registration"
       }
     }
-  }, [_vm._v("registration")]) : _vm._e(), _vm._v(" "), _vm.user_role === "1" && _vm.access_token ? _c("router-link", {
-    attrs: {
-      to: {
-        name: "admin.statistic"
-      }
-    }
-  }, [_vm._v("adminka")]) : _vm._e(), _vm._v(" "), _vm.access_token ? _c("a", {
+  }, [_vm._v("registration")]) : _vm._e(), _vm._v(" "), _vm.access_token ? _c("a", {
     attrs: {
       href: "#"
     },
@@ -5569,6 +5556,12 @@ var route = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       return __webpack_require__.e(/*! import() */ "resources_js_components_Admin_AdminStatistic_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Admin/AdminStatistic */ "./resources/js/components/Admin/AdminStatistic.vue"));
     },
     name: 'admin.statistic'
+  }, {
+    path: '/admin/category',
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ "resources_js_components_Admin_Category_CategoryIndex_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Admin/Category/CategoryIndex */ "./resources/js/components/Admin/Category/CategoryIndex.vue"));
+    },
+    name: 'category.index'
   }]
 });
 route.beforeEach(function (to, from, next) {
@@ -43673,7 +43666,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_User_Login_vue":1,"resources_js_components_User_Registration_vue":1,"resources_js_components_Personal_Personal_vue":1,"resources_js_components_Admin_AdminStatistic_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_User_Login_vue":1,"resources_js_components_User_Registration_vue":1,"resources_js_components_Personal_Personal_vue":1,"resources_js_components_Admin_AdminStatistic_vue":1,"resources_js_components_Admin_Category_CategoryIndex_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

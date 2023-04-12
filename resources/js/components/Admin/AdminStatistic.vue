@@ -1,5 +1,8 @@
 <template>
-    <div>adminka</div>
+    <div>
+        <div>adminka</div>
+        <router-link :to="{name:'category.index'}">Categories</router-link>
+    </div>
 </template>
 
 <script>

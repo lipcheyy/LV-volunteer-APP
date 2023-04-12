@@ -26,10 +26,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     userdata: function userdata() {
+      var _this = this;
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/auth/me').then(function (res) {
         var user = res.data;
-        localStorage.setItem('username', user.name);
         localStorage.setItem('user_role', user.role);
+        _this.userRole = user.role;
       });
     }
   }
@@ -51,7 +52,13 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [this.userRole === "1" ? _c("div", [_vm._v("sui")]) : _vm._e()]);
+  return _c("div", [_vm.userRole === "1" ? _c("router-link", {
+    attrs: {
+      to: {
+        name: "admin.statistic"
+      }
+    }
+  }, [_vm._v("Admin panel")]) : _vm._e()], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
