@@ -8,7 +8,7 @@
 
 # Порядок дій
 * Стягнути проект
-  + ```git clone git@github.com:lipcheyy/LV-gallery-app.git ```
+  
 * Встановити в проекті композер
   + ``` composer install ```
 * Встановити npm
