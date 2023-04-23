@@ -30,7 +30,7 @@ __webpack_require__.r(__webpack_exports__);
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/auth/me').then(function (res) {
         var user = res.data;
         localStorage.setItem('user_role', user.role);
-        _this.userRole = user.role;
+        _this.userRole = parseInt(user.role);
       });
     }
   }
@@ -52,7 +52,7 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_vm.userRole === "1" ? _c("router-link", {
+  return _c("div", [_vm.userRole === 1 ? _c("router-link", {
     attrs: {
       to: {
         name: "admin.statistic"

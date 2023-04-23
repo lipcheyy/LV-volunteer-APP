@@ -40,6 +40,7 @@ Route::group([
             Route::group(['namespace' => 'Category'], function () {
                 Route::get('/category','CategoryController@index');
                 Route::post('/category', 'CategoryController@store');
+                Route::patch('/category/{category}', 'CategoryController@update');
             });
         });
         Route::group(['namespace' => 'User', 'prefix' => 'user'], function () {

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <router-link v-if="userRole==='1'" :to="{name:'admin.statistic'}">Admin panel</router-link>
+        <router-link v-if="userRole===1" :to="{name:'admin.statistic'}">Admin panel</router-link>
     </div>
 </template>
 
@@ -23,7 +23,7 @@ export default {
                 .then(res=>{
                     const user =res.data
                     localStorage.setItem('user_role',user.role)
-                    this.userRole=user.role
+                    this.userRole=parseInt(user.role)
                 })
         },
     },

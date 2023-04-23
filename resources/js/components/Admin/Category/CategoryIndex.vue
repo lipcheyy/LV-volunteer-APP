@@ -9,13 +9,26 @@
                 <tr>
                     <th>#</th>
                     <th>title</th>
+                    <th colspan="2">actions</th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="category in data">
+            <template v-for="category in data">
+                <tr :class="categoryToEdit(category.id)?'d-none':''">
                     <td>{{category.id}}</td>
                     <td>{{category.title}}</td>
+                    <td>
+                        <div class="logoTable">
+                            <a class="tableLogo" href="#" @click.prevent="getCategoryDataToEdit(category.id,category.title)"><i class="fas fa-pencil"></i></a>
+<!--                            <a class="tableLogo" @click.prevent="destroy(category.id)"  href="#"><i class="fas fa-trash"></i></a>-->
+                        </div>
+                    </td>
+                <tr :class="categoryToEdit(category.id)?'':'d-none'">
+                    <td>{{category.id}}</td>
+                    <td><input v-model="title" type="text" class="form-control" ></td>
+                    <td><a href="#" @click.prevent="update(category.id)">update</a></td>
                 </tr>
+            </template>
             </tbody>
         </table>
     </div>
@@ -30,7 +43,8 @@ export default {
     components: {CreateComponent},
     data() {
         return {
-            data: null
+            data: null,
+            title:''
         }
     },
     mounted() {
@@ -42,6 +56,20 @@ export default {
             api.get('/api/auth/admin/category')
                 .then(res => {
                     this.data=res.data.data
+                })
+        },
+        getCategoryDataToEdit(id,title){
+            this.toEdit=id
+            this.title=title
+        },
+        categoryToEdit(id){
+            return this.toEdit===id
+        },
+        update(id){
+            this.toEdit=null
+            api.patch(`/api/auth/admin/category/${id}`,{title:this.title})
+                .then(res=>{
+                    this.getCategories()
                 })
         },
     }

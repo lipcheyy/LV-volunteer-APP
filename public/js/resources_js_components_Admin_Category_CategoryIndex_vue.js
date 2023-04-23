@@ -22,7 +22,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      data: null
+      data: null,
+      title: ''
     };
   },
   mounted: function mounted() {
@@ -34,6 +35,22 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/auth/admin/category').then(function (res) {
         _this.data = res.data.data;
+      });
+    },
+    getCategoryDataToEdit: function getCategoryDataToEdit(id, title) {
+      this.toEdit = id;
+      this.title = title;
+    },
+    categoryToEdit: function categoryToEdit(id) {
+      return this.toEdit === id;
+    },
+    update: function update(id) {
+      var _this2 = this;
+      this.toEdit = null;
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].patch("/api/auth/admin/category/".concat(id), {
+        title: this.title
+      }).then(function (res) {
+        _this2.getCategories();
       });
     }
   }
@@ -97,14 +114,67 @@ var render = function render() {
     ref: "test"
   }), _vm._v(" "), _c("table", {
     staticClass: "table"
-  }, [_vm._m(0), _vm._v(" "), _c("tbody", _vm._l(_vm.data, function (category) {
-    return _c("tr", [_c("td", [_vm._v(_vm._s(category.id))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(category.title))])]);
-  }), 0)])], 1);
+  }, [_vm._m(0), _vm._v(" "), _c("tbody", [_vm._l(_vm.data, function (category) {
+    return [_c("tr", {
+      "class": _vm.categoryToEdit(category.id) ? "d-none" : ""
+    }, [_c("td", [_vm._v(_vm._s(category.id))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(category.title))]), _vm._v(" "), _c("td", [_c("div", {
+      staticClass: "logoTable"
+    }, [_c("a", {
+      staticClass: "tableLogo",
+      attrs: {
+        href: "#"
+      },
+      on: {
+        click: function click($event) {
+          $event.preventDefault();
+          return _vm.getCategoryDataToEdit(category.id, category.title);
+        }
+      }
+    }, [_c("i", {
+      staticClass: "fas fa-pencil"
+    })])])])]), _c("tr", {
+      "class": _vm.categoryToEdit(category.id) ? "" : "d-none"
+    }, [_c("td", [_vm._v(_vm._s(category.id))]), _vm._v(" "), _c("td", [_c("input", {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: _vm.title,
+        expression: "title"
+      }],
+      staticClass: "form-control",
+      attrs: {
+        type: "text"
+      },
+      domProps: {
+        value: _vm.title
+      },
+      on: {
+        input: function input($event) {
+          if ($event.target.composing) return;
+          _vm.title = $event.target.value;
+        }
+      }
+    })]), _vm._v(" "), _c("td", [_c("a", {
+      attrs: {
+        href: "#"
+      },
+      on: {
+        click: function click($event) {
+          $event.preventDefault();
+          return _vm.update(category.id);
+        }
+      }
+    }, [_vm._v("update")])])])];
+  })], 2)])], 1);
 };
 var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("thead", [_c("tr", [_c("th", [_vm._v("#")]), _vm._v(" "), _c("th", [_vm._v("title")])])]);
+  return _c("thead", [_c("tr", [_c("th", [_vm._v("#")]), _vm._v(" "), _c("th", [_vm._v("title")]), _vm._v(" "), _c("th", {
+    attrs: {
+      colspan: "2"
+    }
+  }, [_vm._v("actions")])])]);
 }];
 render._withStripped = true;
 
