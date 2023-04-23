@@ -20,7 +20,7 @@
                     <td>
                         <div class="logoTable">
                             <a class="tableLogo" href="#" @click.prevent="getCategoryDataToEdit(category.id,category.title)"><i class="fas fa-pencil"></i></a>
-<!--                            <a class="tableLogo" @click.prevent="destroy(category.id)"  href="#"><i class="fas fa-trash"></i></a>-->
+                            <a class="tableLogo" @click.prevent="destroy(category.id)"  href="#"><i class="fas fa-trash"></i></a>
                         </div>
                     </td>
                 <tr :class="categoryToEdit(category.id)?'':'d-none'">
@@ -68,6 +68,12 @@ export default {
         update(id){
             this.toEdit=null
             api.patch(`/api/auth/admin/category/${id}`,{title:this.title})
+                .then(res=>{
+                    this.getCategories()
+                })
+        },
+        destroy(id){
+            api.delete(`/api/auth/admin/category/${id}`)
                 .then(res=>{
                     this.getCategories()
                 })

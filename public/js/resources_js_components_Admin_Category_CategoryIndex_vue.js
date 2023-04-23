@@ -52,6 +52,12 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         _this2.getCategories();
       });
+    },
+    destroy: function destroy(id) {
+      var _this3 = this;
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("/api/auth/admin/category/".concat(id)).then(function (res) {
+        _this3.getCategories();
+      });
     }
   }
 });
@@ -132,6 +138,19 @@ var render = function render() {
       }
     }, [_c("i", {
       staticClass: "fas fa-pencil"
+    })]), _vm._v(" "), _c("a", {
+      staticClass: "tableLogo",
+      attrs: {
+        href: "#"
+      },
+      on: {
+        click: function click($event) {
+          $event.preventDefault();
+          return _vm.destroy(category.id);
+        }
+      }
+    }, [_c("i", {
+      staticClass: "fas fa-trash"
     })])])])]), _c("tr", {
       "class": _vm.categoryToEdit(category.id) ? "" : "d-none"
     }, [_c("td", [_vm._v(_vm._s(category.id))]), _vm._v(" "), _c("td", [_c("input", {
