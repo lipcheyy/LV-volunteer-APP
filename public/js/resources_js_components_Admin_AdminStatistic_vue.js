@@ -37,7 +37,13 @@ var render = function render() {
         name: "category.index"
       }
     }
-  }, [_vm._v("Categories")])], 1);
+  }, [_vm._v("Categories")]), _vm._v(" "), _c("router-link", {
+    attrs: {
+      to: {
+        name: "post.index"
+      }
+    }
+  }, [_vm._v("post")])], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;

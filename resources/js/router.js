@@ -32,7 +32,7 @@ const route =new VueRouter({
             name:'category.index',
         },
         {
-            path:'admin/post',
+            path:'/admin/post',
             component:()=>import('./components/Admin/Post/PostIndex'),
             name:'post.index'
         }

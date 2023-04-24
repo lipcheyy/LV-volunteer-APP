@@ -1,14 +1,16 @@
 <template>
     <div>
-        <post-create></post-create>
+        <Create></Create>
     </div>
 </template>
 
 <script>
+import Create from "./Create";
 export default {
     name: "PostIndex",
-    components: {}
-
+    components: {
+        Create
+    }
 }
 </script>
 
