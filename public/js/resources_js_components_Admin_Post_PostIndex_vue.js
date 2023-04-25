@@ -11,6 +11,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../api */ "./resources/js/api.js");
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "PostCreate",
   data: function data() {
@@ -20,7 +22,14 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    store: function store() {}
+    store: function store() {
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/auth/admin/posts', {
+        title: this.title,
+        content: this.content
+      }).then(function (res) {
+        console.log(res);
+      });
+    }
   }
 });
 

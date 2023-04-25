@@ -10,6 +10,8 @@
 </template>
 
 <script>
+import api from "../../../api";
+
 export default {
     name: "PostCreate",
     data(){
@@ -20,6 +22,14 @@ export default {
     },
     methods:{
         store(){
+            api.post('/api/auth/admin/posts',
+                {
+                    title:this.title,
+                    content:this.content
+                })
+                .then(res=>{
+                    console.log(res);
+                })
 
         }
     }
