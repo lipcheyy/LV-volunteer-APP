@@ -114,7 +114,18 @@ var render = function render() {
         _vm.content = $event.target.value;
       }
     }
-  })])]);
+  })]), _vm._v(" "), _c("input", {
+    attrs: {
+      type: "submit",
+      value: "add"
+    },
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+        return _vm.store.apply(null, arguments);
+      }
+    }
+  })]);
 };
 var staticRenderFns = [];
 render._withStripped = true;

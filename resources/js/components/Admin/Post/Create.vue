@@ -6,6 +6,7 @@
         <div>
             <textarea type="text" v-model="content" class="form-control"> </textarea>
         </div>
+        <input type="submit" @click.prevent="store" value="add">
     </div>
 </template>
 
