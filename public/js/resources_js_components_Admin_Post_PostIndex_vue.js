@@ -11,6 +11,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../api */ "./resources/js/api.js");
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "PostCreate",
   data: function data() {
@@ -18,6 +20,16 @@ __webpack_require__.r(__webpack_exports__);
       title: '',
       content: null
     };
+  },
+  methods: {
+    store: function store() {
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/auth/admin/posts', {
+        title: this.title,
+        content: this.content
+      }).then(function (res) {
+        console.log(res);
+      });
+    }
   }
 });
 
@@ -58,13 +70,18 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_c("input", {
+  return _c("div", {
+    staticClass: "w-25"
+  }, [_c("div", {
+    staticClass: "mb-2"
+  }, [_c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
       value: _vm.title,
       expression: "title"
     }],
+    staticClass: "form-control",
     attrs: {
       type: "text"
     },
@@ -77,13 +94,14 @@ var render = function render() {
         _vm.title = $event.target.value;
       }
     }
-  }), _vm._v(" "), _c("input", {
+  })]), _vm._v(" "), _c("div", [_c("textarea", {
     directives: [{
       name: "model",
       rawName: "v-model",
       value: _vm.content,
       expression: "content"
     }],
+    staticClass: "form-control",
     attrs: {
       type: "text"
     },
@@ -94,6 +112,17 @@ var render = function render() {
       input: function input($event) {
         if ($event.target.composing) return;
         _vm.content = $event.target.value;
+      }
+    }
+  })]), _vm._v(" "), _c("input", {
+    attrs: {
+      type: "submit",
+      value: "add"
+    },
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+        return _vm.store.apply(null, arguments);
       }
     }
   })]);

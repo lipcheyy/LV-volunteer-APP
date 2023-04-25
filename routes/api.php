@@ -43,6 +43,9 @@ Route::group([
                 Route::patch('/category/{category}', 'CategoryController@update');
                 Route::delete('/category/{category}', 'CategoryController@destroy');
             });
+            Route::group(['namespace' => 'Post', 'prefix' => 'posts'], function () {
+                Route::post('/','PostController@store');
+            });
         });
         Route::group(['namespace' => 'User', 'prefix' => 'user'], function () {
             Route::post('/userdata','DataController');
