@@ -17,6 +17,11 @@ export default {
             title:'',
             content:null
         }
+    },
+    methods:{
+        store(){
+
+        }
     }
 }
 </script>
