@@ -5379,7 +5379,13 @@ var render = function render() {
         name: "posts.index"
       }
     }
-  }, [_vm._v("posts")]) : _vm._e(), _vm._v(" "), _vm.access_token ? _c("a", {
+  }, [_vm._v("posts")]) : _vm._e(), _vm._v(" "), _vm.access_token ? _c("router-link", {
+    attrs: {
+      to: {
+        name: "personal.page"
+      }
+    }
+  }, [_vm._v("personal")]) : _vm._e(), _vm._v(" "), _vm.access_token ? _c("a", {
     attrs: {
       href: "#"
     },
