@@ -5373,7 +5373,13 @@ var render = function render() {
         name: "user.registration"
       }
     }
-  }, [_vm._v("registration")]) : _vm._e(), _vm._v(" "), _vm.access_token ? _c("a", {
+  }, [_vm._v("registration")]) : _vm._e(), _vm._v(" "), _vm.access_token ? _c("router-link", {
+    attrs: {
+      to: {
+        name: "posts.index"
+      }
+    }
+  }, [_vm._v("posts")]) : _vm._e(), _vm._v(" "), _vm.access_token ? _c("a", {
     attrs: {
       href: "#"
     },
@@ -5565,9 +5571,15 @@ var route = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   }, {
     path: '/admin/post',
     component: function component() {
+      return __webpack_require__.e(/*! import() */ "resources_js_components_Admin_Post_Create_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Admin/Post/Create */ "./resources/js/components/Admin/Post/Create.vue"));
+    },
+    name: 'post.create'
+  }, {
+    path: '/posts',
+    component: function component() {
       return __webpack_require__.e(/*! import() */ "resources_js_components_Admin_Post_PostIndex_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Admin/Post/PostIndex */ "./resources/js/components/Admin/Post/PostIndex.vue"));
     },
-    name: 'post.index'
+    name: 'posts.index'
   }]
 });
 route.beforeEach(function (to, from, next) {
@@ -43672,7 +43684,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_User_Login_vue":1,"resources_js_components_User_Registration_vue":1,"resources_js_components_Personal_Personal_vue":1,"resources_js_components_Admin_AdminStatistic_vue":1,"resources_js_components_Admin_Category_CategoryIndex_vue":1,"resources_js_components_Admin_Post_PostIndex_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_User_Login_vue":1,"resources_js_components_User_Registration_vue":1,"resources_js_components_Personal_Personal_vue":1,"resources_js_components_Admin_AdminStatistic_vue":1,"resources_js_components_Admin_Category_CategoryIndex_vue":1,"resources_js_components_Admin_Post_Create_vue":1,"resources_js_components_Admin_Post_PostIndex_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

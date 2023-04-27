@@ -33,8 +33,13 @@ const route =new VueRouter({
         },
         {
             path:'/admin/post',
+            component:()=>import('./components/Admin/Post/Create'),
+            name:'post.create'
+        },
+        {
+            path:'/posts',
             component:()=>import('./components/Admin/Post/PostIndex'),
-            name:'post.index'
+            name:'posts.index'
         }
     ]
 })

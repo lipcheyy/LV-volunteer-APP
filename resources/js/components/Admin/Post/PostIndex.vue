@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Create></Create>
+        posts page
     </div>
 </template>
 
