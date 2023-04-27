@@ -5575,7 +5575,7 @@ var route = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     },
     name: 'post.create'
   }, {
-    path: '/posts',
+    path: '/',
     component: function component() {
       return __webpack_require__.e(/*! import() */ "resources_js_components_Admin_Post_PostIndex_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Admin/Post/PostIndex */ "./resources/js/components/Admin/Post/PostIndex.vue"));
     },

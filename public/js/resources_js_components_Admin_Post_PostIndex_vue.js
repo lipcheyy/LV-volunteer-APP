@@ -49,8 +49,24 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "PostIndex",
+  data: function data() {
+    return {
+      posts: null
+    };
+  },
   components: {
     Create: _Create__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  mounted: function mounted() {
+    this.getPosts();
+  },
+  methods: {
+    getPosts: function getPosts() {
+      var _this = this;
+      axios.get('/').then(function (res) {
+        _this.posts = res.data;
+      });
+    }
   }
 });
 

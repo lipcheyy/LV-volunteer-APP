@@ -37,7 +37,7 @@ const route =new VueRouter({
             name:'post.create'
         },
         {
-            path:'/posts',
+            path:'/',
             component:()=>import('./components/Admin/Post/PostIndex'),
             name:'posts.index'
         }

@@ -54,7 +54,7 @@ Route::group([
 
     Route::post('login', 'AuthController@login');
     Route::post('logout', 'AuthController@logout');
-
+    Route::get('/','PostController@index');
 
 
 
