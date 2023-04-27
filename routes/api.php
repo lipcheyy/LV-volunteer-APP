@@ -22,6 +22,11 @@ Route::group(
     function (){
         Route::post('/registration','StoreController');
 });
+Route::group(['namespace'=>'Admin'],function (){
+    Route::group(['namespace'=>'Post'],function (){
+        Route::get('/','PostController@index');
+    });
+});
 Route::group([
 
     'middleware' => 'api',
@@ -54,7 +59,7 @@ Route::group([
 
     Route::post('login', 'AuthController@login');
     Route::post('logout', 'AuthController@logout');
-    Route::get('/','PostController@index');
+
 
 
 

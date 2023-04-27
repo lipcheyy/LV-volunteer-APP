@@ -1,6 +1,9 @@
 <template>
-    <div>
-        posts page
+    <div class="d-flex">
+        <div class="post_container w-25 " v-for="post in posts">
+            <h2>{{post.title}}</h2>
+            <div>{{post.content}}</div>
+        </div>
     </div>
 </template>
 
@@ -21,7 +24,7 @@ export default {
     },
     methods:{
         getPosts(){
-            axios.get('/')
+            axios.get('/api')
                 .then(res=>{
                     this.posts=res.data
                 })

@@ -63,7 +63,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     getPosts: function getPosts() {
       var _this = this;
-      axios.get('/').then(function (res) {
+      axios.get('/api').then(function (res) {
         _this.posts = res.data;
       });
     }
@@ -163,7 +163,13 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_vm._v("\n    posts page\n")]);
+  return _c("div", {
+    staticClass: "d-flex"
+  }, _vm._l(_vm.posts, function (post) {
+    return _c("div", {
+      staticClass: "post_container w-25"
+    }, [_c("h2", [_vm._v(_vm._s(post.title))]), _vm._v(" "), _c("div", [_vm._v(_vm._s(post.content))])]);
+  }), 0);
 };
 var staticRenderFns = [];
 render._withStripped = true;
