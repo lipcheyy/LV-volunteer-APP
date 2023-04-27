@@ -31,7 +31,6 @@ export default {
                     let access_token=res.data.access_token
                     localStorage.setItem('access_token',access_token)
                     this.$router.push({name:'personal.page'})
-
                 })
                 .catch(error=>{
                     this.error= error.response.data.error;

@@ -14,4 +14,8 @@ class PostController extends Controller
         Post::create($data);
         return $data;
     }
+    public function index(){
+        $posts=Post::all();
+        return $posts;
+    }
 }

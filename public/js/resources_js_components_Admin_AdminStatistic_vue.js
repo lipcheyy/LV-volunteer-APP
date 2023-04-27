@@ -40,7 +40,7 @@ var render = function render() {
   }, [_vm._v("Categories")]), _vm._v(" "), _c("router-link", {
     attrs: {
       to: {
-        name: "post.index"
+        name: "post.create"
       }
     }
   }, [_vm._v("post")])], 1);
