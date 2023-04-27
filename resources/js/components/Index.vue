@@ -4,6 +4,7 @@
         <router-link v-if="!access_token" :to="{name:'user.registration'}">registration</router-link>
         <router-link v-if="access_token" :to="{name:'posts.index'}">posts</router-link>
         <router-link v-if="access_token" :to="{name:'personal.page'}">personal</router-link>
+        <router-link v-if="access_token && user_role===1" :to="{name:'admin.statistic'}">admin</router-link>
         <a href="#" v-if="access_token" @click.prevent="logout">logout</a>
         <router-view></router-view>
 
@@ -18,18 +19,28 @@ export default {
     data(){
         return{
             access_token:null,
+            user_role:null
         }
     },
     mounted() {
         this.getAccessToken()
+        this.getUserRole()
     },
     updated() {
         this.getAccessToken()
-
+        this.getUserRole()
     },
     methods:{
         getAccessToken(){
             this.access_token=localStorage.getItem('access_token')
+        },
+        getUserRole() {
+            api.post('/api/auth/me')
+                .then(res=>{
+                    const user =res.data
+                    localStorage.setItem('user_role',user.role)
+                    this.user_role=parseInt(user.role)
+                })
         },
         logout() {
             api.post('/api/auth/logout')

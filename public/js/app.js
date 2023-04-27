@@ -5319,24 +5319,35 @@ __webpack_require__.r(__webpack_exports__);
   name: "Index",
   data: function data() {
     return {
-      access_token: null
+      access_token: null,
+      user_role: null
     };
   },
   mounted: function mounted() {
     this.getAccessToken();
+    this.getUserRole();
   },
   updated: function updated() {
     this.getAccessToken();
+    this.getUserRole();
   },
   methods: {
     getAccessToken: function getAccessToken() {
       this.access_token = localStorage.getItem('access_token');
     },
-    logout: function logout() {
+    getUserRole: function getUserRole() {
       var _this = this;
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/auth/me').then(function (res) {
+        var user = res.data;
+        localStorage.setItem('user_role', user.role);
+        _this.user_role = parseInt(user.role);
+      });
+    },
+    logout: function logout() {
+      var _this2 = this;
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/auth/logout').then(function (res) {
         localStorage.clear();
-        _this.$router.push({
+        _this2.$router.push({
           name: 'user.login'
         });
       });
@@ -5385,7 +5396,13 @@ var render = function render() {
         name: "personal.page"
       }
     }
-  }, [_vm._v("personal")]) : _vm._e(), _vm._v(" "), _vm.access_token ? _c("a", {
+  }, [_vm._v("personal")]) : _vm._e(), _vm._v(" "), _vm.access_token && _vm.user_role === 1 ? _c("router-link", {
+    attrs: {
+      to: {
+        name: "admin.statistic"
+      }
+    }
+  }, [_vm._v("admin")]) : _vm._e(), _vm._v(" "), _vm.access_token ? _c("a", {
     attrs: {
       href: "#"
     },
