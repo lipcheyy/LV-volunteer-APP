@@ -7,6 +7,11 @@
 <!--            <textarea type="text" v-model="content" class="form-control"> </textarea>-->
             <vue-editor v-model="content"></vue-editor>
         </div>
+        <select>
+            <template v-for="category in categories">
+                <option :value="category.id">{{category.title}}</option>
+            </template>
+        </select>
         <input type="submit" @click.prevent="store" value="add">
     </div>
 </template>
@@ -22,20 +27,33 @@ export default {
     data(){
         return{
             title:'',
-            content:null
+            content:null,
+            categories:null,
+            category_id:1
         }
+    },
+    mounted() {
+        this.getCategories()
     },
     methods:{
         store(){
             api.post('/api/auth/admin/posts',
                 {
                     title:this.title,
-                    content:this.content
+                    content:this.content,
+                    category_id:this.category_id
                 })
                 .then(res=>{
                     console.log(res);
                 })
 
+        },
+        getCategories(){
+            api.get('/api/auth/admin/category')
+                .then(res=>{
+                    this.categories=res.data.data
+
+                })
         }
     }
 }
