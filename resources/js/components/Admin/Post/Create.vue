@@ -4,7 +4,8 @@
             <input type="text" v-model="title" class="form-control">
         </div>
         <div>
-            <textarea type="text" v-model="content" class="form-control"> </textarea>
+<!--            <textarea type="text" v-model="content" class="form-control"> </textarea>-->
+            <vue-editor v-model="content"></vue-editor>
         </div>
         <input type="submit" @click.prevent="store" value="add">
     </div>
@@ -12,9 +13,12 @@
 
 <script>
 import api from "../../../api";
-
+import {VueEditor} from 'vue2-editor'
 export default {
     name: "PostCreate",
+    components:{
+        VueEditor
+    },
     data(){
         return{
             title:'',
