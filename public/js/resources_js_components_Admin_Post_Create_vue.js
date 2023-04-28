@@ -99,7 +99,25 @@ var render = function render() {
       },
       expression: "content"
     }
-  })], 1), _vm._v(" "), _c("select", [_vm._l(_vm.categories, function (category) {
+  })], 1), _vm._v(" "), _c("select", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.category_id,
+      expression: "category_id"
+    }],
+    on: {
+      change: function change($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+          return o.selected;
+        }).map(function (o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val;
+        });
+        _vm.category_id = $event.target.multiple ? $$selectedVal : $$selectedVal[0];
+      }
+    }
+  }, [_vm._l(_vm.categories, function (category) {
     return [_c("option", {
       domProps: {
         value: category.id

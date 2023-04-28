@@ -27,6 +27,8 @@ export default {
             axios.get('/api')
                 .then(res=>{
                     this.posts=res.data
+                    console.log(this.posts);
+                    console.log(res);
                 })
         }
     }

@@ -7,7 +7,7 @@
 <!--            <textarea type="text" v-model="content" class="form-control"> </textarea>-->
             <vue-editor v-model="content"></vue-editor>
         </div>
-        <select>
+        <select v-model="category_id">
             <template v-for="category in categories">
                 <option :value="category.id">{{category.title}}</option>
             </template>
