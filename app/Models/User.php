@@ -14,10 +14,12 @@ class User extends Authenticatable implements JWTSubject
     use HasApiTokens, HasFactory, Notifiable;
     const ROLE_ADMIN=1;
     const ROLE_GUEST=0;
+    const ROLE_VOLUNTEER=2;
     public static function getRole(){
         return [
             self::ROLE_ADMIN=>'Admin',
             self::ROLE_GUEST=>'Guest',
+            self::ROLE_VOLUNTEER=>'Volunteer',
         ];
     }
     /**
@@ -29,6 +31,7 @@ class User extends Authenticatable implements JWTSubject
         'name',
         'email',
         'password',
+        'role'
     ];
 
     /**
