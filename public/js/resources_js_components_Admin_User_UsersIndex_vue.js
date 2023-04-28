@@ -11,6 +11,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../api */ "./resources/js/api.js");
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "UserCreate",
   data: function data() {
@@ -20,11 +22,28 @@ __webpack_require__.r(__webpack_exports__);
       password: null,
       password_confirm: null,
       roles: null,
-      role_id: 1
+      role_id: 0
     };
   },
-  mounted: function mounted() {},
-  methods: {}
+  mounted: function mounted() {
+    this.getRoles();
+  },
+  methods: {
+    getRoles: function getRoles() {
+      var _this = this;
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/auth/admin/users/roles').then(function (res) {
+        _this.roles = res.data;
+      });
+    },
+    store: function store() {
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/auth/admin/users', {
+        name: this.name,
+        email: this.email,
+        password: this.password,
+        password_confirm: this.password_confirm
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -66,24 +85,48 @@ var render = function render() {
     _c = _vm._self._c;
   return _c("div", {
     staticClass: "d-flex flex-md-column w-25"
-  }, [_vm._v("\n        login\n        "), _c("input", {
+  }, [_vm._v("\n    login\n    "), _c("input", {
     attrs: {
       type: "text"
     }
-  }), _vm._v("\n        email\n        "), _c("input", {
+  }), _vm._v("\n    email\n    "), _c("input", {
     attrs: {
       type: "email"
     }
-  }), _vm._v("\n        pass\n        "), _c("input", {
+  }), _vm._v("\n    pass\n    "), _c("input", {
     attrs: {
       type: "password"
     }
-  }), _vm._v("\n        passs_conf\n        "), _c("input", {
+  }), _vm._v("\n    passs_conf\n    "), _c("input", {
     staticClass: "mb-2",
     attrs: {
       type: "password"
     }
-  }), _vm._v(" "), _c("input", {
+  }), _vm._v(" "), _c("select", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.role_id,
+      expression: "role_id"
+    }],
+    on: {
+      change: function change($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+          return o.selected;
+        }).map(function (o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val;
+        });
+        _vm.role_id = $event.target.multiple ? $$selectedVal : $$selectedVal[0];
+      }
+    }
+  }, [_vm._l(_vm.roles, function (role, roleId) {
+    return [_c("option", {
+      domProps: {
+        value: roleId
+      }
+    }, [_vm._v(_vm._s(role))])];
+  })], 2), _vm._v(" "), _c("input", {
     attrs: {
       type: "submit",
       value: "add new"
