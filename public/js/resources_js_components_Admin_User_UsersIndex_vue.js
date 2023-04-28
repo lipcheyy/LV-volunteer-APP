@@ -40,7 +40,10 @@ __webpack_require__.r(__webpack_exports__);
         name: this.name,
         email: this.email,
         password: this.password,
-        password_confirm: this.password_confirm
+        password_confirm: this.password_confirm,
+        role: this.role_id
+      }).then(function (res) {
+        console.log(res.data.message);
       });
     }
   }
@@ -86,21 +89,81 @@ var render = function render() {
   return _c("div", {
     staticClass: "d-flex flex-md-column w-25"
   }, [_vm._v("\n    login\n    "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.name,
+      expression: "name"
+    }],
     attrs: {
       type: "text"
+    },
+    domProps: {
+      value: _vm.name
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.name = $event.target.value;
+      }
     }
   }), _vm._v("\n    email\n    "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.email,
+      expression: "email"
+    }],
     attrs: {
       type: "email"
+    },
+    domProps: {
+      value: _vm.email
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.email = $event.target.value;
+      }
     }
   }), _vm._v("\n    pass\n    "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.password,
+      expression: "password"
+    }],
     attrs: {
       type: "password"
+    },
+    domProps: {
+      value: _vm.password
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.password = $event.target.value;
+      }
     }
   }), _vm._v("\n    passs_conf\n    "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.password_confirm,
+      expression: "password_confirm"
+    }],
     staticClass: "mb-2",
     attrs: {
       type: "password"
+    },
+    domProps: {
+      value: _vm.password_confirm
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.password_confirm = $event.target.value;
+      }
     }
   }), _vm._v(" "), _c("select", {
     directives: [{
@@ -134,6 +197,7 @@ var render = function render() {
     on: {
       click: function click($event) {
         $event.preventDefault();
+        return _vm.store.apply(null, arguments);
       }
     }
   })]);

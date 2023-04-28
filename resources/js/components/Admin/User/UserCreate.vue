@@ -1,19 +1,19 @@
 <template>
     <div class="d-flex flex-md-column w-25">
         login
-        <input type="text">
+        <input type="text" v-model="name">
         email
-        <input type="email">
+        <input type="email" v-model="email">
         pass
-        <input type="password">
+        <input type="password" v-model="password">
         passs_conf
-        <input type="password" class="mb-2">
+        <input type="password" class="mb-2" v-model="password_confirm">
         <select v-model="role_id">
             <template v-for="(role,roleId) in roles">
                 <option :value="roleId">{{role}}</option>
             </template>
         </select>
-        <input @click.prevent type="submit" value="add new">
+        <input @click.prevent="store" type="submit" value="add new">
     </div>
 </template>
 
@@ -49,7 +49,11 @@ export default {
                     email:this.email,
                     password:this.password,
                     password_confirm:this.password_confirm,
+                    role:this.role_id
 
+                })
+                .then(res=>{
+                    console.log(res.data.message);
                 })
 
         }
