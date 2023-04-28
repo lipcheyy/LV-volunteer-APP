@@ -40,6 +40,12 @@ var render = function render() {
   }, [_vm._v("Categories")]), _vm._v(" "), _c("router-link", {
     attrs: {
       to: {
+        name: "user.index"
+      }
+    }
+  }, [_vm._v("users")]), _vm._v(" "), _c("router-link", {
+    attrs: {
+      to: {
         name: "post.create"
       }
     }
