@@ -27,6 +27,7 @@ class StoreRequest extends FormRequest
         return [
             'title'=>'string|required',
             'content'=>'string|required',
+            'category_id'=>'integer|required'
         ];
     }
 }

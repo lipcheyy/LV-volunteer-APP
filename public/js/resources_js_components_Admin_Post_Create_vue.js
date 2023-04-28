@@ -23,16 +23,28 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       title: '',
-      content: null
+      content: null,
+      categories: null,
+      category_id: 1
     };
+  },
+  mounted: function mounted() {
+    this.getCategories();
   },
   methods: {
     store: function store() {
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/auth/admin/posts', {
         title: this.title,
-        content: this.content
+        content: this.content,
+        category_id: this.category_id
       }).then(function (res) {
         console.log(res);
+      });
+    },
+    getCategories: function getCategories() {
+      var _this = this;
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/auth/admin/category').then(function (res) {
+        _this.categories = res.data.data;
       });
     }
   }
@@ -87,7 +99,31 @@ var render = function render() {
       },
       expression: "content"
     }
-  })], 1), _vm._v(" "), _c("input", {
+  })], 1), _vm._v(" "), _c("select", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.category_id,
+      expression: "category_id"
+    }],
+    on: {
+      change: function change($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+          return o.selected;
+        }).map(function (o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val;
+        });
+        _vm.category_id = $event.target.multiple ? $$selectedVal : $$selectedVal[0];
+      }
+    }
+  }, [_vm._l(_vm.categories, function (category) {
+    return [_c("option", {
+      domProps: {
+        value: category.id
+      }
+    }, [_vm._v(_vm._s(category.title))])];
+  })], 2), _vm._v(" "), _c("input", {
     attrs: {
       type: "submit",
       value: "add"
