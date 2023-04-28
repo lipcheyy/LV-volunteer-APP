@@ -12,7 +12,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "UserCreate"
+  name: "UserCreate",
+  data: function data() {
+    return {
+      name: '',
+      email: null,
+      password: null,
+      password_confirm: null,
+      roles: null,
+      role_id: 1
+    };
+  },
+  mounted: function mounted() {},
+  methods: {}
 });
 
 /***/ }),
@@ -52,7 +64,36 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div");
+  return _c("div", {
+    staticClass: "d-flex flex-md-column w-25"
+  }, [_vm._v("\n        login\n        "), _c("input", {
+    attrs: {
+      type: "text"
+    }
+  }), _vm._v("\n        email\n        "), _c("input", {
+    attrs: {
+      type: "email"
+    }
+  }), _vm._v("\n        pass\n        "), _c("input", {
+    attrs: {
+      type: "password"
+    }
+  }), _vm._v("\n        passs_conf\n        "), _c("input", {
+    staticClass: "mb-2",
+    attrs: {
+      type: "password"
+    }
+  }), _vm._v(" "), _c("input", {
+    attrs: {
+      type: "submit",
+      value: "add new"
+    },
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+      }
+    }
+  })]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
