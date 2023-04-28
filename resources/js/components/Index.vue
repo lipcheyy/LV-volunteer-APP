@@ -35,12 +35,15 @@ export default {
             this.access_token=localStorage.getItem('access_token')
         },
         getUserRole() {
-            api.post('/api/auth/me')
-                .then(res=>{
-                    const user =res.data
-                    localStorage.setItem('user_role',user.role)
-                    this.user_role=parseInt(user.role)
-                })
+            if (this.access_token){
+                api.post('/api/auth/me')
+                    .then(res=>{
+                        const user =res.data
+                        localStorage.setItem('user_role',user.role)
+                        this.user_role=parseInt(user.role)
+                    })
+            }
+
         },
         logout() {
             api.post('/api/auth/logout')

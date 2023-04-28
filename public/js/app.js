@@ -5337,11 +5337,13 @@ __webpack_require__.r(__webpack_exports__);
     },
     getUserRole: function getUserRole() {
       var _this = this;
-      _api__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/auth/me').then(function (res) {
-        var user = res.data;
-        localStorage.setItem('user_role', user.role);
-        _this.user_role = parseInt(user.role);
-      });
+      if (this.access_token) {
+        _api__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/auth/me').then(function (res) {
+          var user = res.data;
+          localStorage.setItem('user_role', user.role);
+          _this.user_role = parseInt(user.role);
+        });
+      }
     },
     logout: function logout() {
       var _this2 = this;
@@ -5470,6 +5472,7 @@ api.interceptors.response.use(function (config) {
 
   //console.log(error.response.status);
   if (error.response.status) {
+    localStorage.clear();
     _router__WEBPACK_IMPORTED_MODULE_1__["default"].push({
       name: 'user.login'
     });

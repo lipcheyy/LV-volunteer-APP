@@ -43,6 +43,7 @@ api.interceptors.response.use(config => {
 
     //console.log(error.response.status);
     if (error.response.status) {
+        localStorage.clear()
         router.push({name: 'user.login'})
     }
 })
