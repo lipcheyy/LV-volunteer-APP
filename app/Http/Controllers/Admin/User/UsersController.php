@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\StoreRequest;
+use App\Http\Requests\User\UpdateRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -17,8 +18,10 @@ class UsersController extends Controller
         $users=User::all();
         return $users;
     }
-    public function update(User $user){
-
+    public function update(User $user,UpdateRequest $request){
+        $data=$request->validated();
+        $user->update($data);
+        return response()->json(['message'=>'success']);
     }
     public function destroy(User $user){
 
