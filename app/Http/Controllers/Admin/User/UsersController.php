@@ -17,6 +17,12 @@ class UsersController extends Controller
         $users=User::all();
         return $users;
     }
+    public function update(User $user){
+
+    }
+    public function destroy(User $user){
+
+    }
     public function store(StoreRequest $request){
         $data=$request->validated();
         $data["password"]=Hash::make($data["password"]);
