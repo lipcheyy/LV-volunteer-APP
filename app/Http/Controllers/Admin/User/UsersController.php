@@ -24,7 +24,8 @@ class UsersController extends Controller
         return response()->json(['message'=>'success']);
     }
     public function destroy(User $user){
-
+        $user->delete();
+        return response()->json(['message'=>'user deleted success']);
     }
     public function store(StoreRequest $request){
         $data=$request->validated();

@@ -20,6 +20,7 @@
                             <a href="#"
                                @click.prevent="getUserDataToEdit(user.id,user.name,user.role)"
                             >edit</a>
+                            <a href="#" @click.prevent="destroy(user.id)">destroy</a>
                         </td>
                     </tr>
                     <tr :class="userToEdit(user.id)?'':'d-none'">
@@ -91,8 +92,13 @@ export default {
                 })
                 .then(res=>{
                     this.getUsers()
+                    console.log(res.data.message);
                 })
         },
+        destroy(id){
+            api.delete(`/api/auth/admin/users/${id}`)
+                .then(res=>{this.getUsers()})
+        }
     }
 }
 </script>

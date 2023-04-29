@@ -116,6 +116,13 @@ __webpack_require__.r(__webpack_exports__);
         role: this.role_id
       }).then(function (res) {
         _this3.getUsers();
+        console.log(res.data.message);
+      });
+    },
+    destroy: function destroy(id) {
+      var _this4 = this;
+      _api__WEBPACK_IMPORTED_MODULE_1__["default"]["delete"]("/api/auth/admin/users/".concat(id)).then(function (res) {
+        _this4.getUsers();
       });
     }
   }
@@ -290,7 +297,17 @@ var render = function render() {
           return _vm.getUserDataToEdit(user.id, user.name, user.role);
         }
       }
-    }, [_vm._v("edit")])])]), _vm._v(" "), _c("tr", {
+    }, [_vm._v("edit")]), _vm._v(" "), _c("a", {
+      attrs: {
+        href: "#"
+      },
+      on: {
+        click: function click($event) {
+          $event.preventDefault();
+          return _vm.destroy(user.id);
+        }
+      }
+    }, [_vm._v("destroy")])])]), _vm._v(" "), _c("tr", {
       "class": _vm.userToEdit(user.id) ? "" : "d-none"
     }, [_c("td", [_vm._v(_vm._s(user.id))]), _vm._v(" "), _c("td", [_c("input", {
       directives: [{
