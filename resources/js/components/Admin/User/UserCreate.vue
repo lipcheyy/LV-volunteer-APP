@@ -53,7 +53,7 @@ export default {
 
                 })
                 .then(res=>{
-                    console.log(res.data.message);
+                    this.$parent.getUsers()
                 })
 
         }
