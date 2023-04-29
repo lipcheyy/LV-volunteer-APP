@@ -62,11 +62,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _UserCreate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UserCreate */ "./resources/js/components/Admin/User/UserCreate.vue");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../api */ "./resources/js/api.js");
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "UsersIndex",
   components: {
     UserCreate: _UserCreate__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      users: null
+    };
+  },
+  mounted: function mounted() {
+    this.getUsers();
+  },
+  methods: {
+    getUsers: function getUsers() {
+      var _this = this;
+      _api__WEBPACK_IMPORTED_MODULE_1__["default"].get('/api/auth/admin/users').then(function (res) {
+        _this.users = res.data;
+        console.log(_this.users);
+      });
+    }
   }
 });
 
@@ -222,9 +241,17 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_c("user-create")], 1);
+  return _c("div", [_c("user-create"), _vm._v(" "), _c("table", {
+    staticClass: "table"
+  }, [_vm._m(0), _vm._v(" "), _c("tbody", [_vm._l(_vm.users, function (user) {
+    return [_c("tr", [_c("td", [_vm._v(_vm._s(user.id))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(user.name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(user.email))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(user.role))])])];
+  })], 2)])], 1);
 };
-var staticRenderFns = [];
+var staticRenderFns = [function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("thead", [_c("th", [_vm._v("#")]), _vm._v(" "), _c("th", [_vm._v("name")]), _vm._v(" "), _c("th", [_vm._v("email")]), _vm._v(" "), _c("th", [_vm._v("role")])]);
+}];
 render._withStripped = true;
 
 
