@@ -45,6 +45,11 @@ const route =new VueRouter({
             path:'/',
             component:()=>import('./components/Admin/Post/PostIndex'),
             name:'posts.index'
+        },
+        {
+            path:'/wanted',
+            component:()=>import('./components/FindRelative/WantedRelativesDashboard'),
+            name:'wanted.index'
         }
     ]
 })
