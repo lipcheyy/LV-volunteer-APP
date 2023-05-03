@@ -17,6 +17,7 @@
 
 <script>
 import Dropzone from 'dropzone'
+import api from "../../api";
 export default {
     name: "FindPersonRequestForm",
     data(){
@@ -31,18 +32,25 @@ export default {
             this.$refs.dropzone,
             {
                 url:'/sdf',
-                maxFiles:1
+                maxFiles:1,
+                autoProcessQueue:false
             }
         )
     },
     methods:{
         store(){
-            const image=this.dropzone.getAcceptedFiles();
-            const data=new FormData
-            data.append('image',image)
+            const images=this.dropzone.getAcceptedFiles();
+            const data=new FormData()
+            images.forEach(image=>{
+                data.append('images[]',image)
+            })
+            // data.append('image[]',image)
             data.append('name',this.name)
             data.append('about',this.about)
-            console.log(data);
+            api.post('/api/auth/wanted',data)
+                .then(res=>{
+                    console.log(res);
+                })
         }
     }
 }

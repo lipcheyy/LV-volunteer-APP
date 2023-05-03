@@ -7,5 +7,8 @@ use Illuminate\Http\Request;
 
 class WantedController extends Controller
 {
-    //
+    public function store(){
+        $data=\request()->all();
+        return dump($data);
+    }
 }

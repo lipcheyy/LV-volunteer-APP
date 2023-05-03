@@ -12,6 +12,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var dropzone__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! dropzone */ "./node_modules/dropzone/dist/dropzone.mjs");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../api */ "./resources/js/api.js");
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "FindPersonRequestForm",
@@ -25,17 +27,23 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     this.dropzone = new dropzone__WEBPACK_IMPORTED_MODULE_0__["default"](this.$refs.dropzone, {
       url: '/sdf',
-      maxFiles: 1
+      maxFiles: 1,
+      autoProcessQueue: false
     });
   },
   methods: {
     store: function store() {
-      var image = this.dropzone.getAcceptedFiles();
+      var images = this.dropzone.getAcceptedFiles();
       var data = new FormData();
-      data.append('image', image);
+      images.forEach(function (image) {
+        data.append('images[]', image);
+      });
+      // data.append('image[]',image)
       data.append('name', this.name);
       data.append('about', this.about);
-      console.log(data);
+      _api__WEBPACK_IMPORTED_MODULE_1__["default"].post('/api/auth/wanted', data).then(function (res) {
+        console.log(res);
+      });
     }
   }
 });
