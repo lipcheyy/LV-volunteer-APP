@@ -24,8 +24,19 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.dropzone = new dropzone__WEBPACK_IMPORTED_MODULE_0__["default"](this.$refs.dropzone, {
-      url: '/sdf'
+      url: '/sdf',
+      maxFiles: 1
     });
+  },
+  methods: {
+    store: function store() {
+      var image = this.dropzone.getAcceptedFiles();
+      var data = new FormData();
+      data.append('image', image);
+      data.append('name', this.name);
+      data.append('about', this.about);
+      console.log(data);
+    }
   }
 });
 
@@ -87,7 +98,19 @@ var render = function render() {
   })]), _vm._v(" "), _c("div", {
     ref: "dropzone",
     staticClass: "p-4 bg-info"
-  })]);
+  }), _vm._v(" "), _c("div", [_c("input", {
+    staticClass: "btn btn-success",
+    attrs: {
+      type: "submit",
+      value: "add request"
+    },
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+        return _vm.store.apply(null, arguments);
+      }
+    }
+  })])]);
 };
 var staticRenderFns = [];
 render._withStripped = true;

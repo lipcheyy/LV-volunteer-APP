@@ -9,6 +9,9 @@
             <textarea v-model="about" class="form-control"></textarea>
         </div>
         <div ref="dropzone" class="p-4 bg-info"></div>
+        <div>
+            <input type="submit" class="btn btn-success" @click.prevent="store" value="add request">
+        </div>
     </div>
 </template>
 
@@ -27,9 +30,20 @@ export default {
         this.dropzone=new Dropzone(
             this.$refs.dropzone,
             {
-                url:'/sdf'
+                url:'/sdf',
+                maxFiles:1
             }
         )
+    },
+    methods:{
+        store(){
+            const image=this.dropzone.getAcceptedFiles();
+            const data=new FormData
+            data.append('image',image)
+            data.append('name',this.name)
+            data.append('about',this.about)
+            console.log(data);
+        }
     }
 }
 </script>
