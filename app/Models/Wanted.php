@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Wanted extends Model
 {
     use HasFactory;
+    protected $guarded=[];
+    public function images(){
+        return $this->hasMany(Image::class,'wanted_id','id');
+    }
 }
