@@ -59,6 +59,10 @@ Route::group([
                 Route::delete('/{user}','UsersController@destroy');
             });
         });
+        Route::group(['namespace' => 'Wanted', 'prefix' => 'wanted'], function () {
+            Route::get('/','WantedController@index');
+            Route::post('/','WantedController@store');
+        });
         Route::group(['namespace' => 'User', 'prefix' => 'user'], function () {
             Route::post('/userdata','DataController');
         });

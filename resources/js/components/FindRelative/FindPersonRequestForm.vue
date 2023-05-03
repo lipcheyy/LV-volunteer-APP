@@ -1,10 +1,14 @@
 <template>
-    <div>
+    <div class="w-25 d-flex gap-4 flex-column">
         name of wanted person
-        <input v-model="name" type="text">
+        <div>
+            <input v-model="name" type="text" class="form-control">
+        </div>
         write about person
-        <textarea v-model="about"></textarea>
-        <div ref="dropzone"></div>
+        <div>
+            <textarea v-model="about" class="form-control"></textarea>
+        </div>
+        <div ref="dropzone" class="p-4 bg-info"></div>
     </div>
 </template>
 

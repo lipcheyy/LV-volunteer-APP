@@ -50,6 +50,11 @@ const route =new VueRouter({
             path:'/wanted',
             component:()=>import('./components/FindRelative/WantedRelativesDashboard'),
             name:'wanted.index'
+        },
+        {
+            path:'/wanted/request',
+            component:()=>import('./components/FindRelative/FindPersonRequestForm'),
+            name:'wanted.request'
         }
     ]
 })
@@ -58,7 +63,7 @@ route.beforeEach((to,from,next)=>{
     const access_token=localStorage.getItem('access_token')
     const user_role=localStorage.getItem('user_role')
     if (!access_token){
-        if (to.name==='user.login' || to.name==='user.registration'){
+        if (to.name==='user.login' || to.name==='user.registration' ||to.name==='wanted.index'){
             return next()
         }
         else {

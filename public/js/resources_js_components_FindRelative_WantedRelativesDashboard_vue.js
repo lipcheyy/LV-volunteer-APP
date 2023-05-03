@@ -12,7 +12,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "WantedRelativesDashboard"
+  name: "WantedRelativesDashboard",
+  methods: {
+    findForm: function findForm() {
+      var access_token = localStorage.getItem('access_token');
+      if (access_token) {
+        this.$router.push({
+          name: 'wanted.request'
+        });
+      } else {
+        this.$router.push({
+          name: 'user.login'
+        });
+      }
+    }
+  }
 });
 
 /***/ }),
@@ -31,7 +45,18 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_vm._v("\n    wanted persons\n")]);
+  return _c("div", [_vm._v("\n    wanted persons\n\n    "), _c("a", {
+    staticClass: "btn btn-primary",
+    attrs: {
+      href: ""
+    },
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+        return _vm.findForm.apply(null, arguments);
+      }
+    }
+  }, [_vm._v("find yout relative")])]);
 };
 var staticRenderFns = [];
 render._withStripped = true;

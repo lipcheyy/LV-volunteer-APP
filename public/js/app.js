@@ -5624,13 +5624,19 @@ var route = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       return __webpack_require__.e(/*! import() */ "resources_js_components_FindRelative_WantedRelativesDashboard_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/FindRelative/WantedRelativesDashboard */ "./resources/js/components/FindRelative/WantedRelativesDashboard.vue"));
     },
     name: 'wanted.index'
+  }, {
+    path: '/wanted/request',
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ "resources_js_components_FindRelative_FindPersonRequestForm_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/FindRelative/FindPersonRequestForm */ "./resources/js/components/FindRelative/FindPersonRequestForm.vue"));
+    },
+    name: 'wanted.request'
   }]
 });
 route.beforeEach(function (to, from, next) {
   var access_token = localStorage.getItem('access_token');
   var user_role = localStorage.getItem('user_role');
   if (!access_token) {
-    if (to.name === 'user.login' || to.name === 'user.registration') {
+    if (to.name === 'user.login' || to.name === 'user.registration' || to.name === 'wanted.index') {
       return next();
     } else {
       return next({
@@ -43728,7 +43734,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_User_Login_vue":1,"resources_js_components_User_Registration_vue":1,"resources_js_components_Personal_Personal_vue":1,"resources_js_components_Admin_AdminStatistic_vue":1,"resources_js_components_Admin_Category_CategoryIndex_vue":1,"resources_js_components_Admin_Post_Create_vue":1,"resources_js_components_Admin_User_UsersIndex_vue":1,"resources_js_components_Admin_Post_PostIndex_vue":1,"resources_js_components_FindRelative_WantedRelativesDashboard_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_User_Login_vue":1,"resources_js_components_User_Registration_vue":1,"resources_js_components_Personal_Personal_vue":1,"resources_js_components_Admin_AdminStatistic_vue":1,"resources_js_components_Admin_Category_CategoryIndex_vue":1,"resources_js_components_Admin_Post_Create_vue":1,"resources_js_components_Admin_User_UsersIndex_vue":1,"resources_js_components_Admin_Post_PostIndex_vue":1,"resources_js_components_FindRelative_WantedRelativesDashboard_vue":1,"resources_js_components_FindRelative_FindPersonRequestForm_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};
