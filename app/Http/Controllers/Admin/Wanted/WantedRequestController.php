@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class WantedRequestController extends Controller
 {
     public function index(){
-        $wanteds=Wanted::where('approved',false);
+        $wanteds=Wanted::where('approved',false)->get();
         return $wanteds;
     }
 }

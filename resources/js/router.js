@@ -58,7 +58,7 @@ const route =new VueRouter({
         },
         {
             path:'/admin/wanted',
-            component:()=>import('./components/FindRelative/FindPersonRequestForm'),
+            component:()=>import('./components/Admin/WantedRequests/WantedIndex'),
             name:'admin.wanted'
         }
     ]
