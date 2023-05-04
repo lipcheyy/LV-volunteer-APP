@@ -58,6 +58,9 @@ Route::group([
                 Route::patch('/{user}','UsersController@update');
                 Route::delete('/{user}','UsersController@destroy');
             });
+            Route::group(['namespace' => 'Wanted', 'prefix' => 'wanted'], function () {
+                Route::get('/','WantedRequestController@index');
+            });
         });
         Route::group(['namespace' => 'Wanted', 'prefix' => 'wanted'], function () {
             Route::get('/','WantedController@index');
