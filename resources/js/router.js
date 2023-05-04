@@ -55,6 +55,11 @@ const route =new VueRouter({
             path:'/wanted/request',
             component:()=>import('./components/FindRelative/FindPersonRequestForm'),
             name:'wanted.request'
+        },
+        {
+            path:'/admin/wanted',
+            component:()=>import('./components/FindRelative/FindPersonRequestForm'),
+            name:'admin.wanted'
         }
     ]
 })
