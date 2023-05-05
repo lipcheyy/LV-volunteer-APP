@@ -1,12 +1,16 @@
 <template>
-    <div>
-        login
-        your email
-        <input type="email" v-model="email" class="form-control w-25">
-        password
-        <input type="password" v-model="password" class="form-control w-25">
-        <input type="submit" @click.prevent="login" class="btn btn-primary" value="log">
-        <p v-if="error" >{{error}}</p>
+    <div class="login-container">
+        <h2 class="login-title">Login</h2>
+        <div class="form-group">
+            <label for="email">Your email</label>
+            <input type="email" v-model="email" class="form-control" id="email">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" v-model="password" class="form-control" id="password">
+        </div>
+        <button type="submit" @click.prevent="login" class="btn btn-primary">Log in</button>
+        <p v-if="error" class="error-message">{{error}}</p>
     </div>
 </template>
 
@@ -44,5 +48,22 @@ export default {
 </script>
 
 <style scoped>
+.login-container {
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center;
+}
 
+.login-title {
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.error-message {
+    color: red;
+    margin-top: 1rem;
+}
 </style>
