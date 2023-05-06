@@ -7,8 +7,18 @@
 </template>
 
 <script>
+import api from "../../api";
+
 export default {
     name: "WantedRelativesDashboard",
+    data(){
+        return{
+            wanteds:null
+        }
+    },
+    mounted() {
+        this.getWanteds()
+    },
     methods:{
         findForm(){
             const access_token=localStorage.getItem('access_token')
@@ -18,6 +28,12 @@ export default {
             else {
                 this.$router.push({name:'user.login'})
             }
+        },
+        getWanteds(){
+            axios.get('/api/wanted')
+                .then(res=>{
+                    console.log(res);
+                })
         }
     }
 }

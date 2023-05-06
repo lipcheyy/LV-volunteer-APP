@@ -11,8 +11,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../api */ "./resources/js/api.js");
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "WantedRelativesDashboard",
+  data: function data() {
+    return {
+      wanteds: null
+    };
+  },
+  mounted: function mounted() {
+    this.getWanteds();
+  },
   methods: {
     findForm: function findForm() {
       var access_token = localStorage.getItem('access_token');
@@ -25,6 +35,11 @@ __webpack_require__.r(__webpack_exports__);
           name: 'user.login'
         });
       }
+    },
+    getWanteds: function getWanteds() {
+      axios.get('/api/wanted').then(function (res) {
+        console.log(res);
+      });
     }
   }
 });

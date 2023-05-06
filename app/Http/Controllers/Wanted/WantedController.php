@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Wanted;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Wanted\StoreRequest;
+use App\Http\Resources\Wanted\WantedResource;
 use App\Models\Image;
 use App\Models\Wanted;
 use Carbon\Carbon;
@@ -12,6 +13,10 @@ use Illuminate\Support\Facades\Storage;
 
 class WantedController extends Controller
 {
+    public function index(){
+        $wanteds=Wanted::where('approved',true)->get();
+        return WantedResource::collection($wanteds);
+    }
     public function store(StoreRequest $request){
         $data=$request->validated();
         $images=$data['images'];
