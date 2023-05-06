@@ -1,14 +1,16 @@
 <template>
     <div>
-        <div>
+        <div v-for="wanted in wanteds">
+            <template v-for="image in wanted.images">
+                <div>
+                    <img :src="image.url" alt="">
+                </div>
+            </template>
             <div>
-                <img src="" alt="">
+                {{ wanted.name }}
             </div>
             <div>
-                name
-            </div>
-            <div>
-                info
+                {{ wanted.about }}
             </div>
         </div>
     </div>
@@ -19,19 +21,23 @@ import api from "../../../api";
 
 export default {
     name: "WantedIndex",
-    data(){
-        return{
-            wanteds:null
+    data() {
+        return {
+            wanteds: null
         }
     },
     mounted() {
         this.getWanteds()
     },
-    methods:{
-        getWanteds(){
+    methods: {
+        getWanteds() {
             api.get('/api/auth/admin/wanted')
-                .then(res=>{
-                    console.log(res);
+                .then(res => {
+                    this.wanteds = res.data.data
+
+                    this.wanteds.forEach(e=>{
+                        console.log(e);
+                    })
                 })
         }
     }

@@ -25,8 +25,12 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     getWanteds: function getWanteds() {
+      var _this = this;
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/auth/admin/wanted').then(function (res) {
-        console.log(res);
+        _this.wanteds = res.data.data;
+        _this.wanteds.forEach(function (e) {
+          console.log(e);
+        });
       });
     }
   }
@@ -48,18 +52,18 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _vm._m(0);
+  return _c("div", _vm._l(_vm.wanteds, function (wanted) {
+    return _c("div", [_vm._l(wanted.images, function (image) {
+      return [_c("div", [_c("img", {
+        attrs: {
+          src: image.url,
+          alt: ""
+        }
+      })])];
+    }), _vm._v(" "), _c("div", [_vm._v("\n            " + _vm._s(wanted.name) + "\n        ")]), _vm._v(" "), _c("div", [_vm._v("\n            " + _vm._s(wanted.about) + "\n        ")])], 2);
+  }), 0);
 };
-var staticRenderFns = [function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("div", [_c("div", [_c("div", [_c("img", {
-    attrs: {
-      src: "",
-      alt: ""
-    }
-  })]), _vm._v(" "), _c("div", [_vm._v("\n            name\n        ")]), _vm._v(" "), _c("div", [_vm._v("\n            info\n        ")])])]);
-}];
+var staticRenderFns = [];
 render._withStripped = true;
 
 
