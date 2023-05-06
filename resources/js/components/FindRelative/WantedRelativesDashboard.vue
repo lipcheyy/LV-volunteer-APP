@@ -7,17 +7,28 @@
 </template>
 
 <script>
+import api from "../../api";
+
 export default {
     name: "WantedRelativesDashboard",
+    data(){
+        return{
+            wanteds:null
+        }
+    },
+    mounted() {
+        this.getWanteds()
+    },
     methods:{
         findForm(){
             const access_token=localStorage.getItem('access_token')
-            if (access_token){
-                this.$router.push({name:'wanted.request'})
-            }
-            else {
-                this.$router.push({name:'user.login'})
-            }
+            return access_token ? this.$router.push({name:'wanted.request'}):this.$router.push({name:'user.login'})
+        },
+        getWanteds(){
+            axios.get('/api/wanted')
+                .then(res=>{
+                    console.log(res);
+                })
         }
     }
 }

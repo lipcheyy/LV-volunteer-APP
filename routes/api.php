@@ -27,6 +27,9 @@ Route::group(['namespace'=>'Admin'],function (){
         Route::get('/','PostController@index');
     });
 });
+Route::group(['namespace' => 'Wanted', 'prefix' => 'wanted'], function () {
+    Route::get('/','WantedController@index');
+});
 Route::group([
 
     'middleware' => 'api',
@@ -58,9 +61,12 @@ Route::group([
                 Route::patch('/{user}','UsersController@update');
                 Route::delete('/{user}','UsersController@destroy');
             });
+            Route::group(['namespace' => 'Wanted', 'prefix' => 'wanted'], function () {
+                Route::get('/','WantedRequestController@index');
+                Route::patch('/{wanted}','WantedRequestController@update');
+            });
         });
         Route::group(['namespace' => 'Wanted', 'prefix' => 'wanted'], function () {
-            Route::get('/','WantedController@index');
             Route::post('/','WantedController@store');
         });
         Route::group(['namespace' => 'User', 'prefix' => 'user'], function () {

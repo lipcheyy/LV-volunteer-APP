@@ -17,6 +17,7 @@ class CreateWantedsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('about');
+            $table->boolean('approved')->default(false);
             $table->timestamps();
         });
     }

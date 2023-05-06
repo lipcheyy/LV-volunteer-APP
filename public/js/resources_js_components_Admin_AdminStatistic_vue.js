@@ -49,7 +49,13 @@ var render = function render() {
         name: "post.create"
       }
     }
-  }, [_vm._v("post")])], 1);
+  }, [_vm._v("post")]), _vm._v(" "), _c("router-link", {
+    attrs: {
+      to: {
+        name: "admin.wanted"
+      }
+    }
+  }, [_vm._v("wanted approve requests")])], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
