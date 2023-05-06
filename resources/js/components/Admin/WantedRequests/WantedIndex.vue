@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-for="wanted in wanteds">
+        <div v-for="wanted in wanteds" class="w-100">
             <template v-for="image in wanted.images">
                 <div>
                     <img :src="image.url" alt="">
@@ -11,6 +11,10 @@
             </div>
             <div>
                 {{ wanted.about }}
+            </div>
+            <div>
+                <input type="submit" @click.prevent="approveRequest(wanted.id)"
+                       class="btn btn-success" value="approve this request">
             </div>
         </div>
     </div>
@@ -23,7 +27,8 @@ export default {
     name: "WantedIndex",
     data() {
         return {
-            wanteds: null
+            wanteds: null,
+            approveStatus:null
         }
     },
     mounted() {
@@ -34,11 +39,13 @@ export default {
             api.get('/api/auth/admin/wanted')
                 .then(res => {
                     this.wanteds = res.data.data
-
-                    this.wanteds.forEach(e=>{
-                        console.log(e);
-                    })
+                    console.log(this.wanteds);
                 })
+        },
+        approveRequest(id){
+            api.patch(`/api/auth/admin/wanted/${id}`,{
+                'approved':true
+            })
         }
     }
 }

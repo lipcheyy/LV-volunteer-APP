@@ -13,4 +13,11 @@ class WantedRequestController extends Controller
         $wanteds=Wanted::where('approved',false)->get();
         return WantedResource::collection($wanteds);
     }
+    public function update(Wanted $wanted){
+        $data=\request()->validate([
+            'approved'=>'boolean'
+        ]);
+        $wanted->update($data);
+        return dump($wanted);
+    }
 }

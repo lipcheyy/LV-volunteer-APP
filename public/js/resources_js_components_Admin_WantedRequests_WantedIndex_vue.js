@@ -17,7 +17,8 @@ __webpack_require__.r(__webpack_exports__);
   name: "WantedIndex",
   data: function data() {
     return {
-      wanteds: null
+      wanteds: null,
+      approveStatus: null
     };
   },
   mounted: function mounted() {
@@ -28,9 +29,12 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/auth/admin/wanted').then(function (res) {
         _this.wanteds = res.data.data;
-        _this.wanteds.forEach(function (e) {
-          console.log(e);
-        });
+        console.log(_this.wanteds);
+      });
+    },
+    approveRequest: function approveRequest(id) {
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].patch("/api/auth/admin/wanted/".concat(id), {
+        'approved': true
       });
     }
   }
@@ -53,14 +57,28 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", _vm._l(_vm.wanteds, function (wanted) {
-    return _c("div", [_vm._l(wanted.images, function (image) {
+    return _c("div", {
+      staticClass: "w-100"
+    }, [_vm._l(wanted.images, function (image) {
       return [_c("div", [_c("img", {
         attrs: {
           src: image.url,
           alt: ""
         }
       })])];
-    }), _vm._v(" "), _c("div", [_vm._v("\n            " + _vm._s(wanted.name) + "\n        ")]), _vm._v(" "), _c("div", [_vm._v("\n            " + _vm._s(wanted.about) + "\n        ")])], 2);
+    }), _vm._v(" "), _c("div", [_vm._v("\n            " + _vm._s(wanted.name) + "\n        ")]), _vm._v(" "), _c("div", [_vm._v("\n            " + _vm._s(wanted.about) + "\n        ")]), _vm._v(" "), _c("div", [_c("input", {
+      staticClass: "btn btn-success",
+      attrs: {
+        type: "submit",
+        value: "approve this request"
+      },
+      on: {
+        click: function click($event) {
+          $event.preventDefault();
+          return _vm.approveRequest(wanted.id);
+        }
+      }
+    })])], 2);
   }), 0);
 };
 var staticRenderFns = [];

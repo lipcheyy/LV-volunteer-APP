@@ -60,6 +60,7 @@ Route::group([
             });
             Route::group(['namespace' => 'Wanted', 'prefix' => 'wanted'], function () {
                 Route::get('/','WantedRequestController@index');
+                Route::patch('/{wanted}','WantedRequestController@update');
             });
         });
         Route::group(['namespace' => 'Wanted', 'prefix' => 'wanted'], function () {
