@@ -22,12 +22,7 @@ export default {
     methods:{
         findForm(){
             const access_token=localStorage.getItem('access_token')
-            if (access_token){
-                this.$router.push({name:'wanted.request'})
-            }
-            else {
-                this.$router.push({name:'user.login'})
-            }
+            return access_token ? this.$router.push({name:'wanted.request'}):this.$router.push({name:'user.login'})
         },
         getWanteds(){
             axios.get('/api/wanted')

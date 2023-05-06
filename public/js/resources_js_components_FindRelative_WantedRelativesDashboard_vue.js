@@ -26,15 +26,11 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     findForm: function findForm() {
       var access_token = localStorage.getItem('access_token');
-      if (access_token) {
-        this.$router.push({
-          name: 'wanted.request'
-        });
-      } else {
-        this.$router.push({
-          name: 'user.login'
-        });
-      }
+      return access_token ? this.$router.push({
+        name: 'wanted.request'
+      }) : this.$router.push({
+        name: 'user.login'
+      });
     },
     getWanteds: function getWanteds() {
       axios.get('/api/wanted').then(function (res) {

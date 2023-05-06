@@ -29,7 +29,6 @@ Route::group(['namespace'=>'Admin'],function (){
 });
 Route::group(['namespace' => 'Wanted', 'prefix' => 'wanted'], function () {
     Route::get('/','WantedController@index');
-    Route::post('/','WantedController@store');
 });
 Route::group([
 
@@ -67,7 +66,9 @@ Route::group([
                 Route::patch('/{wanted}','WantedRequestController@update');
             });
         });
-
+        Route::group(['namespace' => 'Wanted', 'prefix' => 'wanted'], function () {
+            Route::post('/','WantedController@store');
+        });
         Route::group(['namespace' => 'User', 'prefix' => 'user'], function () {
             Route::post('/userdata','DataController');
         });
