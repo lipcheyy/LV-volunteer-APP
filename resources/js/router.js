@@ -60,6 +60,11 @@ const route =new VueRouter({
             path:'/admin/wanted',
             component:()=>import('./components/Admin/WantedRequests/WantedIndex'),
             name:'admin.wanted'
+        },
+        {
+            path:'/personal/volunteer-role-apply',
+            component:()=>import('./components/Personal/VolunteerRoleRequestForm/VolunteerRoleRequestForm'),
+            name:'personal.role.apply'
         }
     ]
 })
