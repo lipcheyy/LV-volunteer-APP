@@ -69,6 +69,9 @@ Route::group([
         Route::group(['namespace' => 'Wanted', 'prefix' => 'wanted'], function () {
             Route::post('/','WantedController@store');
         });
+        Route::group(['namespace'=>'VolunteerRoleRequest','prefix'=>'volunteer-role-request'],function (){
+            Route::post('/','VolunteerRoleController@store');
+        });
         Route::group(['namespace' => 'User', 'prefix' => 'user'], function () {
             Route::post('/userdata','DataController');
         });

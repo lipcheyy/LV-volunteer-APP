@@ -14,13 +14,15 @@
         <textarea v-model="about" id="about"></textarea>
 
         <label for="apply">Подати заявку на отримання статусу волонтера</label>
-        <input class="btn-primary btn" id="apply" value="подати ">
+        <input class="btn-primary btn" @click.prevent="store" id="apply" value="подати ">
 
     </div>
 </div>
 </template>
 
 <script>
+import api from "../../../api";
+
 export default {
     name: "VolunteerRoleRequestForm",
     data(){
@@ -29,6 +31,14 @@ export default {
             surname:'',
             middlename:'',
             about:'',
+        }
+    },
+    methods:{
+        store(){
+            api.post('/api/auth/volunteer-role-request',{
+                name:this.name, surname:this.surname,
+                middlename:this.middlename, about:this.about
+            })
         }
     }
 }

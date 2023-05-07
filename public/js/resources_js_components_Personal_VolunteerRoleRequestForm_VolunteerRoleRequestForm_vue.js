@@ -11,6 +11,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../api */ "./resources/js/api.js");
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "VolunteerRoleRequestForm",
   data: function data() {
@@ -20,6 +22,16 @@ __webpack_require__.r(__webpack_exports__);
       middlename: '',
       about: ''
     };
+  },
+  methods: {
+    store: function store() {
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/auth/volunteer-role-request', {
+        name: this.name,
+        surname: this.surname,
+        middlename: this.middlename,
+        about: this.about
+      });
+    }
   }
 });
 
@@ -145,6 +157,12 @@ var render = function render() {
     attrs: {
       id: "apply",
       value: "подати "
+    },
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+        return _vm.store.apply(null, arguments);
+      }
     }
   })])]);
 };
