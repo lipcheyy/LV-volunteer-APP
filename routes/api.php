@@ -56,7 +56,7 @@ Route::group([
             });
             Route::group(['namespace' => 'Volunteer', 'prefix' => 'volunteer'],function (){
                 Route::get('/','VolunteerController@index');
-                Route::patch('/','VolunteerController@update');
+                Route::patch('/{user}','VolunteerController@update');
             });
             Route::group(['namespace'=>'User','prefix'=>'users'],function (){
                 Route::get('/','UsersController@index');

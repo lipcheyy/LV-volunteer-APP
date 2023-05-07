@@ -3,7 +3,7 @@
         <div v-for="request in requests">
             <h3>{{ `${request.name}  ${request.surname} ${request.middlename}`}}</h3>
             <p>{{request.about}}</p>
-            <input value="approve" class="btn btn-success">
+            <input value="approve" class="btn btn-success" @click.prevent="approveStatus(request.id)">
         </div>
     </div>
 </template>
@@ -29,7 +29,7 @@ export default {
                 })
         },
         approveStatus(id){
-
+            api.patch(`/api/auth/admin/volunteer/${id}`,{role:2})
         }
     }
 }

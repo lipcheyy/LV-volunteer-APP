@@ -30,7 +30,11 @@ __webpack_require__.r(__webpack_exports__);
         _this.requests = res.data;
       });
     },
-    approveStatus: function approveStatus(id) {}
+    approveStatus: function approveStatus(id) {
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].patch("/api/auth/admin/volunteer/".concat(id), {
+        role: 2
+      });
+    }
   }
 });
 
@@ -55,6 +59,12 @@ var render = function render() {
       staticClass: "btn btn-success",
       attrs: {
         value: "approve"
+      },
+      on: {
+        click: function click($event) {
+          $event.preventDefault();
+          return _vm.approveStatus(request.id);
+        }
       }
     })]);
   }), 0);

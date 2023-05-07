@@ -4,6 +4,7 @@ namespace App\Http\Controllers\VolunteerRoleRequest;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\VolunteerRoleRequest\VolunteerRoleRequest;
+use App\Models\User;
 use App\Models\VolunteerStatus;
 use Illuminate\Http\Request;
 
