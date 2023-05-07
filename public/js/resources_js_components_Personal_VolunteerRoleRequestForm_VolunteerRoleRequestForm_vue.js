@@ -12,7 +12,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "VolunteerRoleRequestForm"
+  name: "VolunteerRoleRequestForm",
+  data: function data() {
+    return {
+      name: '',
+      surname: '',
+      middlename: '',
+      about: ''
+    };
+  }
 });
 
 /***/ }),
@@ -31,7 +39,114 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_vm._v("\n    form\n")]);
+  return _c("div", [_c("div", {
+    staticClass: "d-flex flex-column gap-4 w-50"
+  }, [_c("label", {
+    attrs: {
+      "for": "firstname"
+    }
+  }, [_vm._v("Ім'я:")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.name,
+      expression: "name"
+    }],
+    attrs: {
+      type: "text",
+      id: "firstname"
+    },
+    domProps: {
+      value: _vm.name
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.name = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), _c("label", {
+    attrs: {
+      "for": "surname"
+    }
+  }, [_vm._v("Прізвище:")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.surname,
+      expression: "surname"
+    }],
+    attrs: {
+      type: "text",
+      id: "surname"
+    },
+    domProps: {
+      value: _vm.surname
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.surname = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), _c("label", {
+    attrs: {
+      "for": "middlename"
+    }
+  }, [_vm._v("По батькові:")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.middlename,
+      expression: "middlename"
+    }],
+    attrs: {
+      type: "text",
+      id: "middlename"
+    },
+    domProps: {
+      value: _vm.middlename
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.middlename = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), _c("label", {
+    attrs: {
+      "for": "about"
+    }
+  }, [_vm._v("Дайте коротку інформацію чому саме ви повинні отримати статус волонтера")]), _vm._v(" "), _c("textarea", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.about,
+      expression: "about"
+    }],
+    attrs: {
+      id: "about"
+    },
+    domProps: {
+      value: _vm.about
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.about = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), _c("label", {
+    attrs: {
+      "for": "apply"
+    }
+  }, [_vm._v("Подати заявку на отримання статусу волонтера")]), _vm._v(" "), _c("input", {
+    staticClass: "btn-primary btn",
+    attrs: {
+      id: "apply",
+      value: "подати "
+    }
+  })])]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
