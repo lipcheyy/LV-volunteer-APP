@@ -55,7 +55,13 @@ var render = function render() {
         name: "admin.wanted"
       }
     }
-  }, [_vm._v("wanted approve requests")])], 1);
+  }, [_vm._v("wanted approve requests")]), _vm._v(" "), _c("router-link", {
+    attrs: {
+      to: {
+        name: "admin.status.request"
+      }
+    }
+  }, [_vm._v("requests")])], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;

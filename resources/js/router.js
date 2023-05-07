@@ -65,6 +65,11 @@ const route =new VueRouter({
             path:'/personal/volunteer-role-apply',
             component:()=>import('./components/Personal/VolunteerRoleRequestForm/VolunteerRoleRequestForm'),
             name:'personal.role.apply'
+        },
+        {
+            path:'/admin/accept-user-volunteer-status',
+            component:()=>import('./components/Admin/VolunteerRoleRequest/VolunteerRoleRequest'),
+            name:'admin.status.request'
         }
     ]
 })
