@@ -54,6 +54,10 @@ Route::group([
             Route::group(['namespace' => 'Post', 'prefix' => 'posts'], function () {
                 Route::post('/','PostController@store');
             });
+            Route::group(['namespace' => 'Volunteer', 'prefix' => 'volunteer'],function (){
+                Route::get('/','VolunteerController@index');
+                Route::patch('/{user}','VolunteerController@update');
+            });
             Route::group(['namespace'=>'User','prefix'=>'users'],function (){
                 Route::get('/','UsersController@index');
                 Route::get('/roles','UsersController@getRoles');
@@ -68,6 +72,9 @@ Route::group([
         });
         Route::group(['namespace' => 'Wanted', 'prefix' => 'wanted'], function () {
             Route::post('/','WantedController@store');
+        });
+        Route::group(['namespace'=>'VolunteerRoleRequest','prefix'=>'volunteer-role-request'],function (){
+            Route::post('/','VolunteerRoleController@store');
         });
         Route::group(['namespace' => 'User', 'prefix' => 'user'], function () {
             Route::post('/userdata','DataController');

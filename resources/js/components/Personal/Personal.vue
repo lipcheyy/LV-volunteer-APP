@@ -1,6 +1,6 @@
 <template>
     <div>
-<!--        <router-link v-if="userRole===1" :to="{name:'admin.statistic'}">Admin panel</router-link>-->
+        <router-link :to="{name:'personal.role.apply'}" class="btn btn-primary">Подати заявку на отримання звання волонотера</router-link>
     </div>
 </template>
 
