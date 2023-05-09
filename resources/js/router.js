@@ -70,6 +70,11 @@ const route =new VueRouter({
             path:'/admin/accept-user-volunteer-status',
             component:()=>import('./components/Admin/VolunteerRoleRequest/VolunteerRoleRequest'),
             name:'admin.status.request'
+        },
+        {
+            path:'/map',
+            component:()=>import('./components/OpenStreetMap/MapComponent'),
+            name:'map.index'
         }
     ]
 })
