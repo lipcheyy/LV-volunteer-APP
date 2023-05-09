@@ -53,6 +53,11 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "MapIndex",
+  data: function data() {
+    return {
+      markers: new (leaflet__WEBPACK_IMPORTED_MODULE_2___default().FeatureGroup)()
+    };
+  },
   components: {
     MapComponent: _MapComponent__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
@@ -62,6 +67,13 @@ __webpack_require__.r(__webpack_exports__);
       attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
       maxZoom: 18
     }).addTo(map);
+    map.on('click', this.addNewMarker).addLayer(this.markers);
+  },
+  methods: {
+    addNewMarker: function addNewMarker(click) {
+      var marker = leaflet__WEBPACK_IMPORTED_MODULE_2___default().marker(click.latlng);
+      this.markers.addLayer(marker);
+    }
   }
 });
 

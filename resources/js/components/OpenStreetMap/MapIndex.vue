@@ -10,6 +10,11 @@ import 'leaflet/dist/leaflet.css';
 import L from 'leaflet'
 export default {
     name: "MapIndex",
+    data(){
+        return{
+            markers:new L.FeatureGroup()
+        }
+    },
     components: {MapComponent},
     mounted() {
         let map=L.map('map').setView([48.6208, 22.2879],13)
@@ -18,6 +23,13 @@ export default {
                 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
             maxZoom: 18,
         }).addTo(map);
+        map.on('click',this.addNewMarker).addLayer(this.markers)
+    },
+    methods:{
+        addNewMarker(click){
+            let marker=L.marker(click.latlng)
+            this.markers.addLayer(marker)
+        }
     }
 
 }
