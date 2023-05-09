@@ -73,7 +73,7 @@ const route =new VueRouter({
         },
         {
             path:'/map',
-            component:()=>import('./components/OpenStreetMap/MapComponent'),
+            component:()=>import('./components/OpenStreetMap/MapIndex'),
             name:'map.index'
         }
     ]
