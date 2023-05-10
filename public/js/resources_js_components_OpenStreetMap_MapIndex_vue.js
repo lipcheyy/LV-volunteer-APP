@@ -49,6 +49,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var leaflet__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! leaflet */ "./node_modules/leaflet/dist/leaflet-src.js");
 /* harmony import */ var leaflet__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(leaflet__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../api */ "./resources/js/api.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_4__);
+
 
 
 
@@ -58,7 +61,9 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       markers: new (leaflet__WEBPACK_IMPORTED_MODULE_2___default().FeatureGroup)(),
-      marker: []
+      marker: [],
+      lat: '',
+      lng: ''
     };
   },
   components: {
@@ -71,21 +76,42 @@ __webpack_require__.r(__webpack_exports__);
       maxZoom: 18
     }).addTo(map);
     map.on('click', this.addNewMarker).addLayer(this.markers);
+    this.getMarkers();
   },
   methods: {
     addNewMarker: function addNewMarker(click) {
-      var marker = leaflet__WEBPACK_IMPORTED_MODULE_2___default().marker(click.latlng);
+      var marker = leaflet__WEBPACK_IMPORTED_MODULE_2___default().marker(click.latlng, {
+        icon: leaflet__WEBPACK_IMPORTED_MODULE_2___default().icon({
+          iconUrl: 'storage/icons/pin.png',
+          iconSize: [30, 38],
+          iconAnchor: [16, 35]
+        })
+      });
       this.markers.addLayer(marker);
       this.marker.push(marker);
     },
     saveMarkers: function saveMarkers() {
-      var data = this.marker.map(function (marker) {
+      var _this = this;
+      var coordinates = this.marker.map(function (marker) {
         return marker.getLatLng();
       });
+      coordinates.forEach(function (coordinate) {
+        _this.lat = coordinate.lat;
+        _this.lng = coordinate.lng;
+      });
+      console.log(this.lat, this.lng);
       _api__WEBPACK_IMPORTED_MODULE_3__["default"].post('/api/auth/markers', {
-        markers: data
-      }).then(function (response) {
-        console.log(response.data);
+        lat: this.lat,
+        lng: this.lng
+      }).then(function (response) {});
+    },
+    getMarkers: function getMarkers() {
+      var _this2 = this;
+      _api__WEBPACK_IMPORTED_MODULE_3__["default"].get('/api/auth/markers').then(function (res) {
+        res.data.forEach(function (mark) {
+          var markes = leaflet__WEBPACK_IMPORTED_MODULE_2___default().marker([mark.lat, mark.lng]);
+          _this2.markers.addLayer(markes);
+        });
       });
     }
   }

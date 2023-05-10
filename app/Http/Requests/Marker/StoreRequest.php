@@ -24,8 +24,8 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'lat'=>'string',
-            'lng'=>'string',
+            'lat'=>'required',
+            'lng'=>'required',
         ];
     }
 }

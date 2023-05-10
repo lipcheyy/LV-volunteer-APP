@@ -81,6 +81,7 @@ Route::group([
         });
         Route::group(['namespace' => 'Marker', 'prefix' => '/markers'], function () {
             Route::post('/','MarkerController@store');
+            Route::get('/','MarkerController@getMarkers');
         });
     });
 
