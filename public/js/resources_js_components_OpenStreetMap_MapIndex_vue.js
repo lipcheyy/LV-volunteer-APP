@@ -63,41 +63,60 @@ __webpack_require__.r(__webpack_exports__);
       markers: new (leaflet__WEBPACK_IMPORTED_MODULE_2___default().FeatureGroup)(),
       marker: [],
       lat: '',
-      lng: ''
+      lng: '',
+      markerIconUrl: '',
+      markerIconSize: [],
+      markerIconAnchor: []
     };
   },
   components: {
     MapComponent: _MapComponent__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   mounted: function mounted() {
+    var _this = this;
     var map = leaflet__WEBPACK_IMPORTED_MODULE_2___default().map('map').setView([48.6208, 22.2879], 13);
     leaflet__WEBPACK_IMPORTED_MODULE_2___default().tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
       maxZoom: 18
     }).addTo(map);
+    this.loadMarkerIcon();
+    this.markers.eachLayer(function (layer) {
+      var marker = leaflet__WEBPACK_IMPORTED_MODULE_2___default().marker(layer.getLatLng(), {
+        icon: _this.createMarkerIcon()
+      });
+      _this.marker.push(marker);
+    });
     map.on('click', this.addNewMarker).addLayer(this.markers);
     this.getMarkers();
   },
   methods: {
     addNewMarker: function addNewMarker(click) {
       var marker = leaflet__WEBPACK_IMPORTED_MODULE_2___default().marker(click.latlng, {
-        icon: leaflet__WEBPACK_IMPORTED_MODULE_2___default().icon({
-          iconUrl: 'storage/icons/pin.png',
-          iconSize: [30, 38],
-          iconAnchor: [16, 35]
-        })
+        icon: this.createMarkerIcon()
       });
       this.markers.addLayer(marker);
       this.marker.push(marker);
     },
+    createMarkerIcon: function createMarkerIcon() {
+      return leaflet__WEBPACK_IMPORTED_MODULE_2___default().icon({
+        iconUrl: this.markerIconUrl,
+        iconSize: this.markerIconSize,
+        iconAnchor: this.markerIconAnchor
+      });
+    },
+    loadMarkerIcon: function loadMarkerIcon() {
+      this.markerIconUrl = localStorage.getItem('markerIconUrl');
+      this.markerIconSize = JSON.parse(localStorage.getItem('markerIconSize'));
+      this.markerIconAnchor = JSON.parse(localStorage.getItem('markerIconAnchor'));
+    },
     saveMarkers: function saveMarkers() {
-      var _this = this;
+      var _this2 = this;
       var coordinates = this.marker.map(function (marker) {
         return marker.getLatLng();
       });
       coordinates.forEach(function (coordinate) {
-        _this.lat = coordinate.lat;
-        _this.lng = coordinate.lng;
+        _this2.lat = coordinate.lat;
+        _this2.lng = coordinate.lng;
       });
       console.log(this.lat, this.lng);
       _api__WEBPACK_IMPORTED_MODULE_3__["default"].post('/api/auth/markers', {
@@ -106,11 +125,13 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {});
     },
     getMarkers: function getMarkers() {
-      var _this2 = this;
+      var _this3 = this;
       _api__WEBPACK_IMPORTED_MODULE_3__["default"].get('/api/auth/markers').then(function (res) {
         res.data.forEach(function (mark) {
-          var markes = leaflet__WEBPACK_IMPORTED_MODULE_2___default().marker([mark.lat, mark.lng]);
-          _this2.markers.addLayer(markes);
+          var markes = leaflet__WEBPACK_IMPORTED_MODULE_2___default().marker([mark.lat, mark.lng], {
+            icon: _this3.createMarkerIcon()
+          });
+          _this3.markers.addLayer(markes);
         });
       });
     }

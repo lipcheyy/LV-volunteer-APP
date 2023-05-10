@@ -18,7 +18,10 @@ export default {
             markers:new L.FeatureGroup(),
             marker:[],
             lat:'',
-            lng:''
+            lng:'',
+            markerIconUrl: '',
+            markerIconSize: [],
+            markerIconAnchor: []
         }
     },
     components: {MapComponent},
@@ -29,19 +32,31 @@ export default {
                 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
             maxZoom: 18,
         }).addTo(map);
-        map.on('click',this.addNewMarker).addLayer(this.markers)
-        this.getMarkers()
-
+        this.loadMarkerIcon();
+        this.markers.eachLayer((layer) => {
+            let marker = L.marker(layer.getLatLng(), {icon: this.createMarkerIcon()});
+            this.marker.push(marker);
+        });
+        map.on('click', this.addNewMarker).addLayer(this.markers);
+        this.getMarkers();
     },
     methods:{
         addNewMarker(click){
-            let marker = L.marker(click.latlng,{icon: L.icon({
-                    iconUrl: 'storage/icons/pin.png',
-                    iconSize: [30, 38],
-                    iconAnchor: [16, 35]
-                })});
+            let marker = L.marker(click.latlng,{icon: this.createMarkerIcon()});
             this.markers.addLayer(marker)
             this.marker.push(marker);
+        },
+        createMarkerIcon() {
+            return L.icon({
+                iconUrl: this.markerIconUrl,
+                iconSize: this.markerIconSize,
+                iconAnchor: this.markerIconAnchor
+            });
+        },
+        loadMarkerIcon() {
+            this.markerIconUrl = localStorage.getItem('markerIconUrl');
+            this.markerIconSize = JSON.parse(localStorage.getItem('markerIconSize'));
+            this.markerIconAnchor = JSON.parse(localStorage.getItem('markerIconAnchor'));
         },
         saveMarkers() {
             const coordinates = this.marker.map((marker) => marker.getLatLng());
@@ -55,13 +70,13 @@ export default {
                 {lat:this.lat, lng:this.lng })
                 .then((response) => {
 
-            });
+                });
         },
         getMarkers(){
             api.get('/api/auth/markers')
                 .then(res=>{
                     res.data.forEach(mark=>{
-                        let markes=L.marker([mark.lat,mark.lng])
+                        let markes=L.marker([mark.lat,mark.lng], {icon: this.createMarkerIcon()});
                         this.markers.addLayer(markes)
                     })
                 })
@@ -70,6 +85,7 @@ export default {
 
 }
 </script>
+
 
 <style scoped>
     #map{
