@@ -1,6 +1,7 @@
 <template>
     <div>
         <div id="map"></div>
+        <a href="#" @click.prevent="saveMarkers">save</a>
     </div>
 </template>
 
@@ -8,11 +9,13 @@
 import MapComponent from "./MapComponent";
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet'
+import api from '../../api'
 export default {
     name: "MapIndex",
     data(){
         return{
-            markers:new L.FeatureGroup()
+            markers:new L.FeatureGroup(),
+            marker:[]
         }
     },
     components: {MapComponent},
@@ -29,7 +32,14 @@ export default {
         addNewMarker(click){
             let marker=L.marker(click.latlng)
             this.markers.addLayer(marker)
-        }
+        },
+        saveMarkers() {
+            // Відправляємо координати маркерів на сервер
+            const data = this.marker.map((marker) => marker.getLatLng());
+            api.post('/api/auth/markers', { markers: data }).then((response) => {
+                alert('Маркери успішно збережено');
+            });
+        },
     }
 
 }

@@ -79,6 +79,9 @@ Route::group([
         Route::group(['namespace' => 'User', 'prefix' => 'user'], function () {
             Route::post('/userdata','DataController');
         });
+        Route::group(['namespace' => 'Marker', 'prefix' => '/markers'], function () {
+            Route::post('/','MarkerController@store');
+        });
     });
 
     Route::post('login', 'AuthController@login');

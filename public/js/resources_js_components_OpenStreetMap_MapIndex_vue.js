@@ -48,6 +48,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var leaflet_dist_leaflet_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! leaflet/dist/leaflet.css */ "./node_modules/leaflet/dist/leaflet.css");
 /* harmony import */ var leaflet__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! leaflet */ "./node_modules/leaflet/dist/leaflet-src.js");
 /* harmony import */ var leaflet__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(leaflet__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../api */ "./resources/js/api.js");
+
 
 
 
@@ -55,7 +57,8 @@ __webpack_require__.r(__webpack_exports__);
   name: "MapIndex",
   data: function data() {
     return {
-      markers: new (leaflet__WEBPACK_IMPORTED_MODULE_2___default().FeatureGroup)()
+      markers: new (leaflet__WEBPACK_IMPORTED_MODULE_2___default().FeatureGroup)(),
+      marker: []
     };
   },
   components: {
@@ -73,6 +76,17 @@ __webpack_require__.r(__webpack_exports__);
     addNewMarker: function addNewMarker(click) {
       var marker = leaflet__WEBPACK_IMPORTED_MODULE_2___default().marker(click.latlng);
       this.markers.addLayer(marker);
+    },
+    saveMarkers: function saveMarkers() {
+      // Відправляємо координати маркерів на сервер
+      var data = this.marker.map(function (marker) {
+        return marker.getLatLng();
+      });
+      _api__WEBPACK_IMPORTED_MODULE_3__["default"].post('/api/auth/markers', {
+        markers: data
+      }).then(function (response) {
+        alert('Маркери успішно збережено');
+      });
     }
   }
 });
@@ -127,17 +141,23 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _vm._m(0);
-};
-var staticRenderFns = [function () {
-  var _vm = this,
-    _c = _vm._self._c;
   return _c("div", [_c("div", {
     attrs: {
       id: "map"
     }
-  })]);
-}];
+  }), _vm._v(" "), _c("a", {
+    attrs: {
+      href: "#"
+    },
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+        return _vm.saveMarkers.apply(null, arguments);
+      }
+    }
+  }, [_vm._v("save")])]);
+};
+var staticRenderFns = [];
 render._withStripped = true;
 
 
