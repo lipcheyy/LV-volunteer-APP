@@ -76,16 +76,16 @@ __webpack_require__.r(__webpack_exports__);
     addNewMarker: function addNewMarker(click) {
       var marker = leaflet__WEBPACK_IMPORTED_MODULE_2___default().marker(click.latlng);
       this.markers.addLayer(marker);
+      this.marker.push(marker);
     },
     saveMarkers: function saveMarkers() {
-      // Відправляємо координати маркерів на сервер
       var data = this.marker.map(function (marker) {
         return marker.getLatLng();
       });
       _api__WEBPACK_IMPORTED_MODULE_3__["default"].post('/api/auth/markers', {
         markers: data
       }).then(function (response) {
-        alert('Маркери успішно збережено');
+        console.log(response.data);
       });
     }
   }

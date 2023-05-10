@@ -32,12 +32,12 @@ export default {
         addNewMarker(click){
             let marker=L.marker(click.latlng)
             this.markers.addLayer(marker)
+            this.marker.push(marker);
         },
         saveMarkers() {
-            // Відправляємо координати маркерів на сервер
             const data = this.marker.map((marker) => marker.getLatLng());
             api.post('/api/auth/markers', { markers: data }).then((response) => {
-                alert('Маркери успішно збережено');
+                console.log(response.data);
             });
         },
     }
