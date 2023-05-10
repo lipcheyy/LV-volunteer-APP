@@ -27,10 +27,12 @@ export default {
     mounted() {
         this.getAccessToken()
         this.getUserRole()
+        this.markerIconConfig()
     },
     updated() {
         this.getAccessToken()
         this.getUserRole()
+        this.markerIconConfig()
     },
     methods:{
         getAccessToken(){
@@ -46,6 +48,16 @@ export default {
                     })
             }
 
+        },
+        markerIconConfig(){
+            let config={
+                iconUrl:'storage/icons/pin.png',
+                iconSize: [30, 38],
+                iconAnchor: [16, 35]
+            }
+            localStorage.setItem('markerIconUrl', config.iconUrl);
+            localStorage.setItem('markerIconSize', JSON.stringify(config.iconSize));
+            localStorage.setItem('markerIconAnchor', JSON.stringify(config.iconAnchor));
         },
         logout() {
             api.post('/api/auth/logout')

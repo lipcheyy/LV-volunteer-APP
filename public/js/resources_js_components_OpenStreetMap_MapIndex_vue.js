@@ -88,8 +88,6 @@ __webpack_require__.r(__webpack_exports__);
     });
     map.on('click', this.addNewMarker).addLayer(this.markers);
     this.getMarkers();
-    this.markerIcon();
-    console.log(this.markerIconUrl);
   },
   methods: {
     addNewMarker: function addNewMarker(click) {
@@ -110,16 +108,6 @@ __webpack_require__.r(__webpack_exports__);
       this.markerIconUrl = localStorage.getItem('markerIconUrl');
       this.markerIconSize = JSON.parse(localStorage.getItem('markerIconSize'));
       this.markerIconAnchor = JSON.parse(localStorage.getItem('markerIconAnchor'));
-    },
-    markerIcon: function markerIcon() {
-      var config = {
-        iconUrl: 'storage/icons/pin.png',
-        iconSize: [30, 38],
-        iconAnchor: [16, 35]
-      };
-      localStorage.setItem('markerIconUrl', config.iconUrl);
-      localStorage.setItem('markerIconSize', JSON.stringify(config.iconSize));
-      localStorage.setItem('markerIconAnchor', JSON.stringify(config.iconAnchor));
     },
     saveMarkers: function saveMarkers() {
       var _this2 = this;

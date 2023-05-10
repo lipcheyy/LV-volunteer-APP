@@ -5326,10 +5326,12 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     this.getAccessToken();
     this.getUserRole();
+    this.markerIconConfig();
   },
   updated: function updated() {
     this.getAccessToken();
     this.getUserRole();
+    this.markerIconConfig();
   },
   methods: {
     getAccessToken: function getAccessToken() {
@@ -5344,6 +5346,16 @@ __webpack_require__.r(__webpack_exports__);
           _this.user_role = parseInt(user.role);
         });
       }
+    },
+    markerIconConfig: function markerIconConfig() {
+      var config = {
+        iconUrl: 'storage/icons/pin.png',
+        iconSize: [30, 38],
+        iconAnchor: [16, 35]
+      };
+      localStorage.setItem('markerIconUrl', config.iconUrl);
+      localStorage.setItem('markerIconSize', JSON.stringify(config.iconSize));
+      localStorage.setItem('markerIconAnchor', JSON.stringify(config.iconAnchor));
     },
     logout: function logout() {
       var _this2 = this;

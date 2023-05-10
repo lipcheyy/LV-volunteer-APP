@@ -42,8 +42,6 @@ export default {
 
         map.on('click', this.addNewMarker).addLayer(this.markers);
         this.getMarkers();
-        this.markerIcon()
-        console.log(this.markerIconUrl);
     },
     methods:{
         addNewMarker(click){
@@ -62,16 +60,6 @@ export default {
             this.markerIconUrl = localStorage.getItem('markerIconUrl');
             this.markerIconSize = JSON.parse(localStorage.getItem('markerIconSize'));
             this.markerIconAnchor = JSON.parse(localStorage.getItem('markerIconAnchor'));
-        },
-        markerIcon(){
-            let config={
-                iconUrl:'storage/icons/pin.png',
-                iconSize: [30, 38],
-                iconAnchor: [16, 35]
-            }
-            localStorage.setItem('markerIconUrl', config.iconUrl);
-            localStorage.setItem('markerIconSize', JSON.stringify(config.iconSize));
-            localStorage.setItem('markerIconAnchor', JSON.stringify(config.iconAnchor));
         },
         saveMarkers() {
             const coordinates = this.marker.map((marker) => marker.getLatLng());
