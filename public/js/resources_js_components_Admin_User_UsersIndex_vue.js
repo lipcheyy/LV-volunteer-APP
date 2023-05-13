@@ -77,27 +77,38 @@ __webpack_require__.r(__webpack_exports__);
       toEdit: null,
       name: '',
       role_id: null,
-      roles: null
+      roles: null,
+      search_user: ''
     };
   },
   mounted: function mounted() {
     this.getUsers();
     this.getRoles();
-    // this.roles=this.$refs.create.roles
   },
-
+  computed: {
+    filteredUsers: function filteredUsers() {
+      var _this = this;
+      if (!this.search_user) {
+        return this.users;
+      } else {
+        return this.users.filter(function (user) {
+          return user.name.toLowerCase().includes(_this.search_user.toLowerCase());
+        });
+      }
+    }
+  },
   methods: {
     getUsers: function getUsers() {
-      var _this = this;
+      var _this2 = this;
       _api__WEBPACK_IMPORTED_MODULE_1__["default"].get('/api/auth/admin/users').then(function (res) {
-        _this.users = res.data;
-        console.log(_this.users);
+        _this2.users = res.data;
       });
     },
     getRoles: function getRoles() {
-      var _this2 = this;
+      var _this3 = this;
       _api__WEBPACK_IMPORTED_MODULE_1__["default"].get('/api/auth/admin/users/roles').then(function (res) {
-        _this2.roles = res.data;
+        _this3.roles = res.data;
+        console.log(_this3.roles);
       });
     },
     getUserDataToEdit: function getUserDataToEdit(id, name, role) {
@@ -109,21 +120,24 @@ __webpack_require__.r(__webpack_exports__);
       return this.toEdit === id;
     },
     update: function update(id) {
-      var _this3 = this;
+      var _this4 = this;
       this.toEdit = null;
       _api__WEBPACK_IMPORTED_MODULE_1__["default"].patch("/api/auth/admin/users/".concat(id), {
         name: this.name,
         role: this.role_id
-      }).then(function (res) {
-        _this3.getUsers();
-        console.log(res.data.message);
+      }).then(function () {
+        _this4.name = '';
+        _this4.getUsers();
       });
     },
     destroy: function destroy(id) {
-      var _this4 = this;
-      _api__WEBPACK_IMPORTED_MODULE_1__["default"]["delete"]("/api/auth/admin/users/".concat(id)).then(function (res) {
-        _this4.getUsers();
-      });
+      var _this5 = this;
+      if (confirm('Ви точно хочете видалити даного користувача?')) {
+        _api__WEBPACK_IMPORTED_MODULE_1__["default"]["delete"]("/api/auth/admin/users/".concat(id)).then(function () {
+          _this5.getUsers();
+          _this5.search_user = '';
+        });
+      }
     }
   }
 });
@@ -282,9 +296,31 @@ var render = function render() {
     _c = _vm._self._c;
   return _c("div", [_c("user-create", {
     ref: "create"
-  }), _vm._v(" "), _c("table", {
+  }), _vm._v(" "), _c("div", {
+    staticClass: "mb-3"
+  }, [_vm._v("\n        search\n        "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.search_user,
+      expression: "search_user"
+    }],
+    attrs: {
+      id: "search-name",
+      type: "text"
+    },
+    domProps: {
+      value: _vm.search_user
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.search_user = $event.target.value;
+      }
+    }
+  })]), _vm._v(" "), _c("table", {
     staticClass: "table"
-  }, [_vm._m(0), _vm._v(" "), _c("tbody", [_vm._l(_vm.users, function (user) {
+  }, [_vm._m(0), _vm._v(" "), _c("tbody", [_vm._l(_vm.filteredUsers, function (user) {
     return [_c("tr", {
       "class": _vm.userToEdit(user.id) ? "d-none" : ""
     }, [_c("td", [_vm._v(_vm._s(user.id))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(user.name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(user.email))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(user.role))]), _vm._v(" "), _c("td", [_c("a", {
