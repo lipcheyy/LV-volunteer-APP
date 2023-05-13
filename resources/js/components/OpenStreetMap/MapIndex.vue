@@ -32,11 +32,14 @@ export default {
                 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
             maxZoom: 18,
         }).addTo(map);
+
         this.loadMarkerIcon();
+
         this.markers.eachLayer((layer) => {
             let marker = L.marker(layer.getLatLng(), {icon: this.createMarkerIcon()});
             this.marker.push(marker);
         });
+
         map.on('click', this.addNewMarker).addLayer(this.markers);
         this.getMarkers();
     },
@@ -85,6 +88,7 @@ export default {
 
 }
 </script>
+
 
 
 <style scoped>
