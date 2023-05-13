@@ -1,6 +1,6 @@
 <template>
     <div>
-        <router-link :to="{name:'personal.role.apply'}" class="btn btn-primary">Подати заявку на отримання звання волонотера</router-link>
+        <router-link v-if="userRole===0" :to="{name:'personal.role.apply'}" class="btn btn-primary">Подати заявку на отримання звання волонотера</router-link>
     </div>
 </template>
 
@@ -9,7 +9,7 @@ import api from "../../api";
 export default {
     data(){
         return{
-            // userRole:null,
+            userRole:parseInt(localStorage.getItem('user_role')),
             username:null,
         }
     },

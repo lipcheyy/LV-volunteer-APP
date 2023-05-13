@@ -16,7 +16,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      // userRole:null,
+      userRole: parseInt(localStorage.getItem('user_role')),
       username: null
     };
   },
@@ -52,14 +52,14 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_c("router-link", {
+  return _c("div", [_vm.userRole === 0 ? _c("router-link", {
     staticClass: "btn btn-primary",
     attrs: {
       to: {
         name: "personal.role.apply"
       }
     }
-  }, [_vm._v("Подати заявку на отримання звання волонотера")])], 1);
+  }, [_vm._v("Подати заявку на отримання звання волонотера")]) : _vm._e()], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;

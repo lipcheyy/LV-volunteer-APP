@@ -5693,6 +5693,13 @@ route.beforeEach(function (to, from, next) {
       });
     }
   }
+  if (user_role === '2') {
+    if (to.name === 'personal.role.apply') {
+      return next({
+        name: 'personal.page'
+      });
+    }
+  }
   if (to.name === 'admin.statistic') if (to.name === 'user.login' || to.name === 'user.registration') {
     if (access_token) {
       next({
