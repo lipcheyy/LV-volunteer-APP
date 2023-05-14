@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Http\Resources\Wanted;
+namespace App\Http\Resources\User;
 
-use App\Http\Resources\Image\ImageResource;
-use App\Http\Resources\User\UserResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class WantedResource extends JsonResource
+class UserResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,9 +17,7 @@ class WantedResource extends JsonResource
         return [
             'id'=>$this->id,
             'name'=>$this->name,
-            'about'=>$this->about,
-            'images'=>ImageResource::collection($this->images),
-            'user'=>new UserResource($this->user)
+            'role'=>$this->role
         ];
     }
 }
