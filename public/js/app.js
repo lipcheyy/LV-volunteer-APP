@@ -5386,7 +5386,11 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [!_vm.access_token ? _c("router-link", {
+  return _c("div", [_c("div", {
+    staticStyle: {
+      "margin-bottom": "10px"
+    }
+  }, [!_vm.access_token ? _c("router-link", {
     attrs: {
       to: {
         name: "user.login"
@@ -5438,7 +5442,7 @@ var render = function render() {
         return _vm.logout.apply(null, arguments);
       }
     }
-  }, [_vm._v("logout")]) : _vm._e(), _vm._v(" "), _c("router-view")], 1);
+  }, [_vm._v("logout")]) : _vm._e()], 1), _vm._v(" "), _c("router-view")], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;

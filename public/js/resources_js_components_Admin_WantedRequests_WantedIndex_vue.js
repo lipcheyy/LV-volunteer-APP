@@ -33,8 +33,11 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     approveRequest: function approveRequest(id) {
+      var _this2 = this;
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].patch("/api/auth/admin/wanted/".concat(id), {
         'approved': true
+      }).then(function () {
+        _this2.getWanteds();
       });
     }
   }

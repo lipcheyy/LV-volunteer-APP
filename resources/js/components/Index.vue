@@ -1,13 +1,16 @@
 <template>
-    <div>
-        <router-link v-if="!access_token" :to="{name:'user.login'}">logn</router-link>
-        <router-link v-if="!access_token" :to="{name:'user.registration'}">registration</router-link>
-        <router-link v-if="access_token" :to="{name:'posts.index'}">posts</router-link>
-        <router-link v-if="access_token" :to="{name:'personal.page'}">personal</router-link>
-        <router-link :to="{name:'map.index'}">map</router-link>
-        <router-link  :to="{name:'wanted.index'}">wanted</router-link>
-        <router-link v-if="access_token && user_role===1" :to="{name:'admin.statistic'}">admin</router-link>
-        <a href="#" v-if="access_token" @click.prevent="logout">logout</a>
+    <div >
+        <div style="margin-bottom: 10px">
+            <router-link v-if="!access_token" :to="{name:'user.login'}">logn</router-link>
+            <router-link v-if="!access_token" :to="{name:'user.registration'}">registration</router-link>
+            <router-link v-if="access_token" :to="{name:'posts.index'}">posts</router-link>
+            <router-link v-if="access_token" :to="{name:'personal.page'}">personal</router-link>
+            <router-link :to="{name:'map.index'}">map</router-link>
+            <router-link  :to="{name:'wanted.index'}">wanted</router-link>
+            <router-link v-if="access_token && user_role===1" :to="{name:'admin.statistic'}">admin</router-link>
+            <a href="#" v-if="access_token" @click.prevent="logout">logout</a>
+        </div>
+
         <router-view></router-view>
 
     </div>

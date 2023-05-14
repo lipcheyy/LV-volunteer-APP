@@ -6,6 +6,8 @@
                 <template v-for="image in wanted.images">
                     <wanted-template
                        :name="wanted.name"
+                       :about="wanted.about"
+                       :url="image.url"
                     >
                     </wanted-template>
                 </template>
@@ -30,8 +32,8 @@ export default {
         }
     },
     mounted() {
-        getWanteds().then((wanteds) => {
-            this.wanteds = wanteds;
+        getWanteds().then(res => {
+            this.wanteds = res;
             console.log(this.wanteds);
         });
     },
@@ -47,18 +49,15 @@ export default {
 
 <style scoped>
 .main{
-    width: 100%;
-    padding-top: 40px;
-    height: 100vh;
-    background-color: grey;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
 }
 .containers{
-    width: 350px;
-    height: 400px;
-    background-color: black;
+
     margin-bottom: 40px;
+    border: 2px solid #b4b4b4;
+    border-radius: 10px;
 }
+
 </style>

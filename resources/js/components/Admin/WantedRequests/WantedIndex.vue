@@ -46,6 +46,7 @@ export default {
             api.patch(`/api/auth/admin/wanted/${id}`,{
                 'approved':true
             })
+                .then(()=>{this.getWanteds()})
         }
     }
 }
