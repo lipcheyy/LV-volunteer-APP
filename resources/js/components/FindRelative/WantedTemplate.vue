@@ -1,10 +1,13 @@
 <template>
-
+    <div style="color: white">
+        {{name}}
+    </div>
 </template>
 
 <script>
 export default {
-    name: "WantedTemplate"
+    name: "WantedTemplate",
+    props:['name']
 }
 </script>
 
