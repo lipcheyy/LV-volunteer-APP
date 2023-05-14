@@ -33,16 +33,18 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     store: function store() {
+      var _this = this;
       var images = this.dropzone.getAcceptedFiles();
       var data = new FormData();
       images.forEach(function (image) {
         data.append('images[]', image);
       });
-      // data.append('image[]',image)
       data.append('name', this.name);
       data.append('about', this.about);
       _api__WEBPACK_IMPORTED_MODULE_1__["default"].post('/api/auth/wanted', data).then(function (res) {
-        console.log(res);
+        _this.dropzone.removeAllFiles();
+        _this.about = '';
+        _this.name = '';
       });
     }
   }

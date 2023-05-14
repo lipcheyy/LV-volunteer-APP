@@ -44,12 +44,13 @@ export default {
             images.forEach(image=>{
                 data.append('images[]',image)
             })
-            // data.append('image[]',image)
             data.append('name',this.name)
             data.append('about',this.about)
             api.post('/api/auth/wanted',data)
                 .then(res=>{
-                    console.log(res);
+                    this.dropzone.removeAllFiles()
+                    this.about=''
+                    this.name=''
                 })
         }
     }

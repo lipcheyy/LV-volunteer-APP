@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content')
-
-    <div>
+    <div style="height: 100vh;">
         <index></index>
     </div>
 @endsection

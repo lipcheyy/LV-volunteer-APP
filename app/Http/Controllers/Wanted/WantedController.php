@@ -20,6 +20,7 @@ class WantedController extends Controller
     public function store(StoreRequest $request){
         $data=$request->validated();
         $images=$data['images'];
+        $data['user_id']=auth()->user()->id;
         unset($data['images']);
         $wanted=Wanted::create($data);
         foreach ($images as $image)
@@ -36,5 +37,8 @@ class WantedController extends Controller
             );
         }
         return dump($images);
+    }
+    public function show(Wanted $wanted){
+        return new WantedResource($wanted);
     }
 }

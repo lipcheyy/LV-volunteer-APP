@@ -29,6 +29,7 @@ Route::group(['namespace'=>'Admin'],function (){
 });
 Route::group(['namespace' => 'Wanted', 'prefix' => 'wanted'], function () {
     Route::get('/','WantedController@index');
+    Route::get('/{wanted}','WantedController@show');
 });
 Route::group([
 
@@ -68,10 +69,12 @@ Route::group([
             Route::group(['namespace' => 'Wanted', 'prefix' => 'wanted'], function () {
                 Route::get('/','WantedRequestController@index');
                 Route::patch('/{wanted}','WantedRequestController@update');
+
             });
         });
         Route::group(['namespace' => 'Wanted', 'prefix' => 'wanted'], function () {
             Route::post('/','WantedController@store');
+
         });
         Route::group(['namespace'=>'VolunteerRoleRequest','prefix'=>'volunteer-role-request'],function (){
             Route::post('/','VolunteerRoleController@store');

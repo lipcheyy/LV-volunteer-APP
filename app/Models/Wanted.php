@@ -12,4 +12,7 @@ class Wanted extends Model
     public function images(){
         return $this->hasMany(Image::class,'wanted_id','id');
     }
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

@@ -5386,7 +5386,11 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [!_vm.access_token ? _c("router-link", {
+  return _c("div", [_c("div", {
+    staticStyle: {
+      "margin-bottom": "10px"
+    }
+  }, [!_vm.access_token ? _c("router-link", {
     attrs: {
       to: {
         name: "user.login"
@@ -5438,7 +5442,7 @@ var render = function render() {
         return _vm.logout.apply(null, arguments);
       }
     }
-  }, [_vm._v("logout")]) : _vm._e(), _vm._v(" "), _c("router-view")], 1);
+  }, [_vm._v("logout")]) : _vm._e()], 1), _vm._v(" "), _c("router-view")], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -5672,6 +5676,12 @@ var route = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       return __webpack_require__.e(/*! import() */ "resources_js_components_OpenStreetMap_MapIndex_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/OpenStreetMap/MapIndex */ "./resources/js/components/OpenStreetMap/MapIndex.vue"));
     },
     name: 'map.index'
+  }, {
+    path: '/wanted/:id/info',
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ "resources_js_components_FindRelative_WantedPersonShow_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/FindRelative/WantedPersonShow */ "./resources/js/components/FindRelative/WantedPersonShow.vue"));
+    },
+    name: 'wanted.show'
   }]
 });
 route.beforeEach(function (to, from, next) {
@@ -43783,7 +43793,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_User_Login_vue":1,"resources_js_components_User_Registration_vue":1,"resources_js_components_Personal_Personal_vue":1,"resources_js_components_Admin_AdminStatistic_vue":1,"resources_js_components_Admin_Category_CategoryIndex_vue":1,"resources_js_components_Admin_Post_Create_vue":1,"resources_js_components_Admin_User_UsersIndex_vue":1,"resources_js_components_Admin_Post_PostIndex_vue":1,"resources_js_components_FindRelative_WantedRelativesDashboard_vue":1,"resources_js_components_FindRelative_FindPersonRequestForm_vue":1,"resources_js_components_Admin_WantedRequests_WantedIndex_vue":1,"resources_js_components_Personal_VolunteerRoleRequestForm_VolunteerRoleRequestForm_vue":1,"resources_js_components_Admin_VolunteerRoleRequest_VolunteerRoleRequest_vue":1,"resources_js_components_OpenStreetMap_MapIndex_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_User_Login_vue":1,"resources_js_components_User_Registration_vue":1,"resources_js_components_Personal_Personal_vue":1,"resources_js_components_Admin_AdminStatistic_vue":1,"resources_js_components_Admin_Category_CategoryIndex_vue":1,"resources_js_components_Admin_Post_Create_vue":1,"resources_js_components_Admin_User_UsersIndex_vue":1,"resources_js_components_Admin_Post_PostIndex_vue":1,"resources_js_components_FindRelative_WantedRelativesDashboard_vue":1,"resources_js_components_FindRelative_FindPersonRequestForm_vue":1,"resources_js_components_Admin_WantedRequests_WantedIndex_vue":1,"resources_js_components_Personal_VolunteerRoleRequestForm_VolunteerRoleRequestForm_vue":1,"resources_js_components_Admin_VolunteerRoleRequest_VolunteerRoleRequest_vue":1,"resources_js_components_OpenStreetMap_MapIndex_vue":1,"resources_js_components_FindRelative_WantedPersonShow_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};
