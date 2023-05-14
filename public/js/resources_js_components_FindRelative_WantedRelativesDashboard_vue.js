@@ -24,7 +24,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      wanteds: null
+      wanteds: {}
     };
   },
   mounted: function mounted() {

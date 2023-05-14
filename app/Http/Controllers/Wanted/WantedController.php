@@ -38,4 +38,7 @@ class WantedController extends Controller
         }
         return dump($images);
     }
+    public function show(Wanted $wanted){
+        return new WantedResource($wanted);
+    }
 }

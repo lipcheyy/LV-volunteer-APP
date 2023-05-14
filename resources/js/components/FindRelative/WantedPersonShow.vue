@@ -4,7 +4,24 @@
 
 <script>
 export default {
-    name: "WantedPersonShow"
+    name: "WantedPersonShow",
+    data(){
+        return{
+            wanted:null
+        }
+    },
+    mounted() {
+        this.getWanted()
+    },
+    methods:{
+        getWanted(){
+            axios.get(`/api/wanted/${this.$route.params.id}`)
+                .then(res=>{
+                    this.wanted=res.data.data
+                    console.log(this.wanted);
+                })
+        }
+    }
 }
 </script>
 
