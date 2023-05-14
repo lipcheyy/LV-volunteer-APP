@@ -31,7 +31,6 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
     (0,_Scripts_Wanteds_getWanteds__WEBPACK_IMPORTED_MODULE_2__.getWanteds)().then(function (res) {
       _this.wanteds = res;
-      console.log(_this.wanteds);
     });
   },
   methods: {
@@ -60,7 +59,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "WantedTemplate",
-  props: ['name', 'url', 'about'],
+  props: ['name', 'url', 'about', 'id'],
   data: function data() {
     return {
       truncatedLength: 25,
@@ -117,7 +116,8 @@ var render = function render() {
         attrs: {
           name: wanted.name,
           about: wanted.about,
-          url: image.url
+          url: image.url,
+          id: wanted.id
         }
       })];
     })], 2);
@@ -157,13 +157,26 @@ var render = function render() {
     staticClass: "name"
   }, [_c("h3", [_vm._v(_vm._s(_vm.name))])]), _vm._v(" "), _c("div", {
     staticClass: "about"
-  }, [_c("p", [_vm._v(_vm._s(_vm.truncatedAbout) + " "), _vm.truncated ? _c("a", {
+  }, [_c("p", [_vm._v(_vm._s(_vm.truncatedAbout) + " "), _vm.truncated ? _c("router-link", {
     attrs: {
-      href: "#"
+      to: {
+        name: "wanted.show",
+        params: {
+          id: _vm.id
+        }
+      }
     }
-  }, [_vm._v("...детальніше")]) : _vm._e()])]), _vm._v(" "), !_vm.truncated ? _c("a", {
-    staticClass: "btn"
-  }, [_vm._v("детальніше ")]) : _vm._e()])])]);
+  }, [_vm._v("детальніше ")]) : _vm._e()], 1)]), _vm._v(" "), !_vm.truncated ? _c("router-link", {
+    staticClass: "btn",
+    attrs: {
+      to: {
+        name: "wanted.show",
+        params: {
+          id: _vm.id
+        }
+      }
+    }
+  }, [_vm._v("детальніше ")]) : _vm._e()], 1)])]);
 };
 var staticRenderFns = [];
 render._withStripped = true;

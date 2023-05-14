@@ -8,6 +8,7 @@
                        :name="wanted.name"
                        :about="wanted.about"
                        :url="image.url"
+                       :id="wanted.id"
                     >
                     </wanted-template>
                 </template>
@@ -34,7 +35,6 @@ export default {
     mounted() {
         getWanteds().then(res => {
             this.wanteds = res;
-            console.log(this.wanteds);
         });
     },
     methods:{

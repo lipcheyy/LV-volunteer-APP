@@ -7,9 +7,9 @@
                     <h3>{{name}}</h3>
                 </div>
                 <div class="about">
-                    <p>{{truncatedAbout}} <a href="#" v-if="truncated">...детальніше</a></p>
+                    <p>{{truncatedAbout}} <router-link :to="{name:'wanted.show',params:{id:id}}" v-if="truncated">детальніше </router-link></p>
                 </div>
-                <a class="btn" v-if="!truncated">детальніше </a>
+                <router-link :to="{name:'wanted.show',params:{id:id}}" class="btn" v-if="!truncated">детальніше </router-link>
             </div>
         </div>
 
@@ -19,7 +19,7 @@
 <script>
 export default {
     name: "WantedTemplate",
-    props:['name','url','about'],
+    props:['name','url','about','id'],
     data() {
         return {
             truncatedLength: 25,

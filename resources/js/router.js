@@ -75,6 +75,11 @@ const route =new VueRouter({
             path:'/map',
             component:()=>import('./components/OpenStreetMap/MapIndex'),
             name:'map.index'
+        },
+        {
+           path:'/wanted/:id/info',
+           component:()=>import('./components/FindRelative/WantedPersonShow'),
+           name:'wanted.show'
         }
     ]
 })
