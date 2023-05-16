@@ -11,8 +11,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../api */ "./resources/js/api.js");
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "StartDonationForm"
+  name: "StartDonationForm",
+  data: function data() {
+    return {
+      goals: 1
+    };
+  },
+  mounted: function mounted() {
+    this.getGoals();
+  },
+  methods: {
+    getGoals: function getGoals() {
+      var _this = this;
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/auth/goals').then(function (res) {
+        _this.goals = res.data;
+        console.log(_this.goals);
+      });
+    }
+  }
 });
 
 /***/ }),

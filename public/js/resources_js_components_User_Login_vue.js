@@ -30,7 +30,7 @@ __webpack_require__.r(__webpack_exports__);
         var access_token = res.data.access_token;
         localStorage.setItem('access_token', access_token);
         _this.$router.push({
-          name: 'personal.page'
+          name: 'posts.index'
         });
       })["catch"](function (error) {
         _this.error = error.response.data.error;
