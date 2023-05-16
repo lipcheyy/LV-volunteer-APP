@@ -27,7 +27,7 @@
 
                     </div>
                     <div class="actions">
-                        <input type="text" class="form-control ipt">
+                        <input type="text" v-model="commentContent" class="form-control ipt">
                         <input type="submit" value="add" class="tn btn btn-success">
                     </div>
 
@@ -39,11 +39,15 @@
 </template>
 
 <script>
+import api from "../../api";
+
 export default {
     name: "WantedPersonShow",
     data() {
         return {
-            wanted: {}
+            wanted: {},
+            wantedId:parseInt(this.$route.params.id),
+            commentContent:null
         }
     },
     mounted() {
@@ -51,11 +55,14 @@ export default {
     },
     methods: {
         getWanted() {
-            axios.get(`/api/wanted/${this.$route.params.id}`)
+            axios.get(`/api/wanted/${this.wantedId}`)
                 .then(res => {
                     this.wanted = res.data.data
                     console.log(this.wanted);
                 })
+        },
+        storeComment(){
+            api.post(`/api/auth/wanted/${this.wantedId}`)
         }
     }
 }
