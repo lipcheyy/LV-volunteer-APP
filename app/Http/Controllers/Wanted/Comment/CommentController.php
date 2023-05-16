@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    public function store(StoreRequest $request, Wanted $wanted){
+    public function store(StoreRequest $request){
         $data=$request->validated();
         $data['user_id']=auth()->user()->id;
         Comment::create($data);
