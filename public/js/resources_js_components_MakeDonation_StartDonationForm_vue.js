@@ -40,9 +40,11 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     store: function store() {
-      console.log(this.goalId);
-      console.log(this.title);
-      console.log(this.content);
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/auth/donations', {
+        content: this.content,
+        title: this.title,
+        goal_id: this.goalId
+      });
     }
   }
 });

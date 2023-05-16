@@ -40,9 +40,8 @@ export default {
                 })
         },
         store(){
-            console.log(this.goalId);
-            console.log(this.title);
-            console.log(this.content);
+            api.post('/api/auth/donations',
+                {content:this.content,title:this.title,goal_id:this.goalId})
         }
     }
 }
