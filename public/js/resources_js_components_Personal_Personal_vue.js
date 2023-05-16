@@ -59,7 +59,14 @@ var render = function render() {
         name: "personal.role.apply"
       }
     }
-  }, [_vm._v("Подати заявку на отримання звання волонотера")]) : _vm._e()], 1);
+  }, [_vm._v("Подати заявку на отримання звання волонотера")]) : _vm._e(), _vm._v(" "), _vm.userRole === 2 ? _c("router-link", {
+    staticClass: "btn btn-primary",
+    attrs: {
+      to: {
+        name: "donation.index"
+      }
+    }
+  }, [_vm._v("Почати збір")]) : _vm._e()], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;

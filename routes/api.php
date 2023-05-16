@@ -80,6 +80,12 @@ Route::group([
             });
             Route::get('/{wanted}','WantedController@show');
         });
+        Route::group(['namespace' => 'Goal', 'prefix' => 'goals'], function () {
+            Route::get('/','GoalController@getGoals');
+        });
+        Route::group(['namespace' => 'Donation', 'prefix' => 'donations'], function () {
+            Route::post('/','DonationController@store');
+        });
         Route::group(['namespace' => 'Wanted', 'prefix' => 'wanted'], function () {
             Route::post('/','WantedController@store');
 
