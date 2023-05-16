@@ -35,7 +35,7 @@
                                 </div>
                                 <div class="comment-interactions">
                                     <template v-if="comment.commentator.id===userId ">
-                                        <div @click.prevent="">
+                                        <div @click.prevent="destroy(comment.id)">
                                             <i class="fas fa-trash"></i>
                                         </div>
                                         <div @click.prevent="getCommentDataToEdit(comment.id,comment.content)">
@@ -118,6 +118,11 @@ export default {
                     this.getWanted()
                 })
         },
+        destroy(id){
+            api.delete(`/api/auth/wanted/${this.wantedId}/comments/${id}`) .then(()=>{
+                this.getWanted()
+            })
+        }
     }
 }
 </script>

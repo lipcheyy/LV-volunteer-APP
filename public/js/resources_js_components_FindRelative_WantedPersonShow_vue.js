@@ -69,6 +69,12 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function () {
         _this3.getWanted();
       });
+    },
+    destroy: function destroy(id) {
+      var _this4 = this;
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("/api/auth/wanted/".concat(this.wantedId, "/comments/").concat(id)).then(function () {
+        _this4.getWanted();
+      });
     }
   }
 });
@@ -163,6 +169,7 @@ var render = function render() {
       on: {
         click: function click($event) {
           $event.preventDefault();
+          return _vm.destroy(comment.id);
         }
       }
     }, [_c("i", {

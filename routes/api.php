@@ -76,6 +76,7 @@ Route::group([
             Route::group(['namespace' => 'Comment', 'prefix' => '{wanted}/comments'], function () {
                 Route::post('/','CommentController@store');
                 Route::patch('/{comment}','CommentController@update');
+                Route::delete('/{comment}','CommentController@destroy');
             });
             Route::get('/{wanted}','WantedController@show');
         });

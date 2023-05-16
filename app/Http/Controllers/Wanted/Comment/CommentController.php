@@ -23,4 +23,8 @@ class CommentController extends Controller
         $comment->update($data);
         return response()->json(['message'=>'success']);
     }
+    public function destroy($wantedId,Comment $comment){
+        $comment->delete();
+    return response()->json(['message'=>'success']);
+}
 }
