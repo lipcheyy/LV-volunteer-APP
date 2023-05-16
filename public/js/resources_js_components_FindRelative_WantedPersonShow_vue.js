@@ -11,11 +11,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../api */ "./resources/js/api.js");
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "WantedPersonShow",
   data: function data() {
     return {
-      wanted: {}
+      wanted: {},
+      wantedId: parseInt(this.$route.params.id),
+      commentContent: null
     };
   },
   mounted: function mounted() {
@@ -24,9 +28,15 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     getWanted: function getWanted() {
       var _this = this;
-      axios.get("/api/wanted/".concat(this.$route.params.id)).then(function (res) {
+      axios.get("/api/wanted/".concat(this.wantedId)).then(function (res) {
         _this.wanted = res.data.data;
         console.log(_this.wanted);
+      });
+    },
+    storeComment: function storeComment() {
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/auth/wanted/".concat(this.wantedId, "/comments"), {
+        wanted_id: this.wantedId,
+        content: this.commentContent
       });
     }
   }
@@ -73,31 +83,52 @@ var render = function render() {
     staticClass: "name"
   }, [_c("h2", [_vm._v(_vm._s(_vm.wanted.name))])]), _vm._v(" "), _c("div", {
     staticClass: "about"
-  }, [_c("p", [_vm._v(_vm._s(_vm.wanted.about))])])]) : _vm._e()]), _vm._v(" "), _vm._m(0)])])]);
-};
-var staticRenderFns = [function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("div", {
+  }, [_c("p", [_vm._v(_vm._s(_vm.wanted.about))])])]) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "comment-section"
-  }, [_c("div", [_vm._v("Відгуки:")]), _vm._v(" "), _c("div", {
-    staticClass: "comments-container"
-  }, [_c("div", {
-    staticClass: "comment"
-  }, [_vm._v("\n                        sdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdf\n                    ")])]), _vm._v(" "), _c("div", {
+  }, [_c("div", [_vm._v("Відгуки:")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c("div", {
     staticClass: "actions"
   }, [_c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.commentContent,
+      expression: "commentContent"
+    }],
     staticClass: "form-control ipt",
     attrs: {
       type: "text"
+    },
+    domProps: {
+      value: _vm.commentContent
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.commentContent = $event.target.value;
+      }
     }
   }), _vm._v(" "), _c("input", {
     staticClass: "tn btn btn-success",
     attrs: {
       type: "submit",
       value: "add"
+    },
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+        return _vm.storeComment.apply(null, arguments);
+      }
     }
-  })])]);
+  })])])])])]);
+};
+var staticRenderFns = [function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", {
+    staticClass: "comments-container"
+  }, [_c("div", {
+    staticClass: "comment"
+  }, [_vm._v("\n                        sdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdf\n                    ")])]);
 }];
 render._withStripped = true;
 

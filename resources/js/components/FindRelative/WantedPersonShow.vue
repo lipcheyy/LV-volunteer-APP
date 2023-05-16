@@ -28,7 +28,7 @@
                     </div>
                     <div class="actions">
                         <input type="text" v-model="commentContent" class="form-control ipt">
-                        <input type="submit" value="add" class="tn btn btn-success">
+                        <input type="submit" value="add" @click.prevent="storeComment" class="tn btn btn-success">
                     </div>
 
                 </div>
@@ -62,7 +62,10 @@ export default {
                 })
         },
         storeComment(){
-            api.post(`/api/auth/wanted/${this.wantedId}`)
+            api.post(`/api/auth/wanted/${this.wantedId}/comments`,{
+                wanted_id:this.wantedId,
+                content:this.commentContent
+            })
         }
     }
 }
