@@ -11,11 +11,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../api */ "./resources/js/api.js");
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "WantedPersonShow",
   data: function data() {
     return {
-      wanted: {}
+      wanted: {},
+      wantedId: parseInt(this.$route.params.id),
+      commentContent: null,
+      access_token: localStorage.getItem('access_token'),
+      userId: parseInt(localStorage.getItem('id')),
+      contentToEdit: null,
+      toEdit: null
     };
   },
   mounted: function mounted() {
@@ -24,9 +32,48 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     getWanted: function getWanted() {
       var _this = this;
-      axios.get("/api/wanted/".concat(this.$route.params.id)).then(function (res) {
+      axios.get("/api/wanted/".concat(this.wantedId)).then(function (res) {
         _this.wanted = res.data.data;
         console.log(_this.wanted);
+      });
+    },
+    storeComment: function storeComment() {
+      var _this2 = this;
+      if (this.access_token) {
+        _api__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/auth/wanted/".concat(this.wantedId, "/comments"), {
+          wanted_id: this.wantedId,
+          content: this.commentContent
+        }).then(function () {
+          _this2.getWanted();
+          _this2.commentContent = '';
+        });
+      } else {
+        this.$router.push({
+          name: 'user.login'
+        });
+      }
+    },
+    commentToEdit: function commentToEdit(id) {
+      return this.toEdit === id;
+    },
+    getCommentDataToEdit: function getCommentDataToEdit(id, content) {
+      this.toEdit = id;
+      this.contentToEdit = content;
+    },
+    update: function update(id) {
+      var _this3 = this;
+      this.toEdit = null;
+      console.log(id);
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].patch("/api/auth/wanted/".concat(this.wantedId, "/comments/").concat(id), {
+        content: this.contentToEdit
+      }).then(function () {
+        _this3.getWanted();
+      });
+    },
+    destroy: function destroy(id) {
+      var _this4 = this;
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("/api/auth/wanted/".concat(this.wantedId, "/comments/").concat(id)).then(function () {
+        _this4.getWanted();
       });
     }
   }
@@ -71,34 +118,109 @@ var render = function render() {
     staticClass: "fa-regular fa-user"
   }), _vm._v(" " + _vm._s(_vm.wanted.user.name))]), _vm._v(" "), _c("div", {
     staticClass: "name"
-  }, [_c("h2", [_vm._v(_vm._s(_vm.wanted.name))])]), _vm._v(" "), _c("div", {
+  }, [_c("h2", [_c("strong", [_vm._v(_vm._s(_vm.wanted.name))])])]), _vm._v(" "), _c("div", {
     staticClass: "about"
-  }, [_c("p", [_vm._v(_vm._s(_vm.wanted.about))])])]) : _vm._e()]), _vm._v(" "), _vm._m(0)])])]);
-};
-var staticRenderFns = [function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("div", {
+  }, [_c("p", [_vm._v(_vm._s(_vm.wanted.about))])])]) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "comment-section"
-  }, [_c("div", [_vm._v("Відгуки:")]), _vm._v(" "), _c("div", {
-    staticClass: "comments-container"
   }, [_c("div", {
-    staticClass: "comment"
-  }, [_vm._v("\n                        sdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdf\n                    ")])]), _vm._v(" "), _c("div", {
+    staticClass: "mb-2"
+  }, [_vm._v("Відгуки:")]), _vm._v(" "), _c("div", {
+    staticClass: "comments-container"
+  }, [_vm._l(_vm.wanted.comment, function (comment) {
+    return [_c("div", {
+      staticClass: "comment mb-2"
+    }, [_c("div", {
+      staticClass: "comment-data"
+    }, [_c("p", {
+      staticClass: "commentator"
+    }, [_c("i", [_vm._v(_vm._s(comment.commentator.name))])]), _vm._v(" "), _c("span", {
+      "class": _vm.commentToEdit(comment.id) ? "d-none" : ""
+    }, [_c("span", {}, [_vm._v(_vm._s(comment.content))])]), _vm._v(" "), _c("span", {
+      "class": _vm.commentToEdit(comment.id) ? "" : "d-none"
+    }, [_c("input", {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: _vm.contentToEdit,
+        expression: "contentToEdit"
+      }],
+      domProps: {
+        value: _vm.contentToEdit
+      },
+      on: {
+        input: function input($event) {
+          if ($event.target.composing) return;
+          _vm.contentToEdit = $event.target.value;
+        }
+      }
+    }), _vm._v(" "), _c("a", {
+      attrs: {
+        href: ""
+      },
+      on: {
+        click: function click($event) {
+          $event.preventDefault();
+          return _vm.update(comment.id);
+        }
+      }
+    }, [_vm._v("upd")])])]), _vm._v(" "), _c("div", {
+      staticClass: "comment-interactions"
+    }, [comment.commentator.id === _vm.userId ? [_c("div", {
+      on: {
+        click: function click($event) {
+          $event.preventDefault();
+          return _vm.destroy(comment.id);
+        }
+      }
+    }, [_c("i", {
+      staticClass: "fas fa-trash"
+    })]), _vm._v(" "), _c("div", {
+      on: {
+        click: function click($event) {
+          $event.preventDefault();
+          return _vm.getCommentDataToEdit(comment.id, comment.content);
+        }
+      }
+    }, [_c("i", {
+      staticClass: "fas fa-pencil"
+    })])] : _vm._e()], 2)])];
+  })], 2), _vm._v(" "), _c("div", {
     staticClass: "actions"
   }, [_c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.commentContent,
+      expression: "commentContent"
+    }],
     staticClass: "form-control ipt",
     attrs: {
       type: "text"
+    },
+    domProps: {
+      value: _vm.commentContent
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.commentContent = $event.target.value;
+      }
     }
   }), _vm._v(" "), _c("input", {
     staticClass: "tn btn btn-success",
     attrs: {
       type: "submit",
       value: "add"
+    },
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+        return _vm.storeComment.apply(null, arguments);
+      }
     }
-  })])]);
-}];
+  })])])])])]);
+};
+var staticRenderFns = [];
 render._withStripped = true;
 
 
@@ -120,7 +242,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nimg[data-v-679f7d70]{\n    width: 400px;\n    height: 500px;\n    border-radius: 10px;\n}\n.main[data-v-679f7d70]{\n    display: flex;\n    justify-content: center;\n}\n.ipt[data-v-679f7d70]{\n    width: 80%;\n    margin-right: 3px;\n}\n.info[data-v-679f7d70]{\n    min-height: 100px;\n    width: 100%;\n}\n.about[data-v-679f7d70]{\n    max-width: 400px;\n}\n.comment[data-v-679f7d70]{\n    border-radius: 10px;\n    border: 1px solid grey;\n    word-wrap: break-word;\n    padding: 5px;\n}\n.wanted[data-v-679f7d70]{\n    display: flex;\n    padding: 10px;\n    background-color: #dcdcdc;\n    border-radius: 10px;\n}\n.comment-section[data-v-679f7d70] {\n    position: relative;\n    height: 100%;\n    width: 420px;\n    padding: 0 15px 0 15px;\n    overflow-y: auto;\n}\n.actions[data-v-679f7d70]{\n    position: absolute;\n    bottom: 0;\n    display: flex;\n    width: 100%;\n}\n.about p[data-v-679f7d70]{\n    word-wrap: break-word;\n    padding: 10px;\n}\n.name[data-v-679f7d70]{\n    text-align: center;\n    margin-top: 10px;\n}\n.sub-container[data-v-679f7d70]{\n    display: flex;\n\n    flex-direction: column;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\np[data-v-679f7d70] {\n    margin: 0;\n}\nimg[data-v-679f7d70] {\n    width: 400px;\n    height: 500px;\n    border-radius: 10px;\n}\n.main[data-v-679f7d70] {\n    display: flex;\n    justify-content: center;\n}\n.commentator[data-v-679f7d70] {\n    font-weight: bold;\n}\n.ipt[data-v-679f7d70] {\n    width: 80%;\n    margin-right: 3px;\n}\n.info[data-v-679f7d70] {\n    min-height: 100px;\n    width: 100%;\n}\n.about[data-v-679f7d70] {\n    max-width: 400px;\n}\n.comment[data-v-679f7d70] {\n    border-radius: 10px;\n    border: 1px solid grey;\n    word-wrap: break-word;\n    padding: 5px;\n    display: flex;\n    justify-content: space-between;\n}\n.wanted[data-v-679f7d70] {\n    display: flex;\n    padding: 10px;\n    background-color: #dcdcdc;\n    border-radius: 10px;\n}\n.comment-interactions[data-v-679f7d70] {\n    display: flex;\n    gap: 10px;\n}\n.comment-section[data-v-679f7d70] {\n    position: relative;\n    height: 100%;\n    width: 420px;\n    padding: 0 15px 0 15px;\n    overflow-y: auto;\n}\n.actions[data-v-679f7d70] {\n    position: absolute;\n    bottom: 0;\n    display: flex;\n    width: 100%;\n}\n.about p[data-v-679f7d70] {\n    word-wrap: break-word;\n    padding: 10px;\n}\n.name[data-v-679f7d70] {\n    text-align: center;\n    margin-top: 10px;\n}\n.sub-container[data-v-679f7d70] {\n    display: flex;\n\n    flex-direction: column;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

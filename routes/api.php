@@ -73,6 +73,14 @@ Route::group([
             });
         });
         Route::group(['namespace' => 'Wanted', 'prefix' => 'wanted'], function () {
+            Route::group(['namespace' => 'Comment', 'prefix' => '{wanted}/comments'], function () {
+                Route::post('/','CommentController@store');
+                Route::patch('/{comment}','CommentController@update');
+                Route::delete('/{comment}','CommentController@destroy');
+            });
+            Route::get('/{wanted}','WantedController@show');
+        });
+        Route::group(['namespace' => 'Wanted', 'prefix' => 'wanted'], function () {
             Route::post('/','WantedController@store');
 
         });

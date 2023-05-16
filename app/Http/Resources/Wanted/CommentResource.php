@@ -2,11 +2,12 @@
 
 namespace App\Http\Resources\Wanted;
 
-use App\Http\Resources\Image\ImageResource;
 use App\Http\Resources\User\UserResource;
+use App\Models\User;
 use Illuminate\Http\Resources\Json\JsonResource;
+use function Symfony\Component\Translation\t;
 
-class WantedResource extends JsonResource
+class CommentResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,11 +19,8 @@ class WantedResource extends JsonResource
     {
         return [
             'id'=>$this->id,
-            'name'=>$this->name,
-            'about'=>$this->about,
-            'images'=>ImageResource::collection($this->images),
-            'user'=>new UserResource($this->user),
-            'comment'=>CommentResource::collection($this->comments)
+            'content'=>$this->content,
+            'commentator'=>new UserResource($this->user)
         ];
     }
 }

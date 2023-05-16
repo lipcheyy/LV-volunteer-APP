@@ -9,26 +9,46 @@
                         </template>
                     </div>
                     <div class="info" v-if="wanted.user">
-                        <div class="name"><i class="fa-regular fa-user"></i> {{wanted.user.name}}</div>
+                        <div class="name"><i class="fa-regular fa-user"></i> {{ wanted.user.name }}</div>
                         <div class="name">
-                            <h2>{{wanted.name}}</h2>
+                            <h2><strong>{{ wanted.name }}</strong></h2>
                         </div>
                         <div class="about">
-                            <p>{{wanted.about}}</p>
+                            <p>{{ wanted.about }}</p>
                         </div>
                     </div>
                 </div>
                 <div class="comment-section">
-                    <div>Відгуки:</div>
-                    <div class="comments-container">
-                        <div class="comment">
-                            sdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdf
-                        </div>
-
+                    <div class="mb-2">Відгуки:</div>
+                    <div class="comments-container ">
+                        <template v-for="comment in wanted.comment">
+                            <div class="comment mb-2">
+                                <div class="comment-data">
+                                    <p class="commentator"><i>{{ comment.commentator.name }}</i></p>
+                                    <span :class="commentToEdit(comment.id)?'d-none':''">
+                                         <span class="">{{ comment.content }}</span>
+                                    </span>
+                                    <span :class="commentToEdit(comment.id)?'':'d-none'">
+                                        <input v-model="contentToEdit">
+                                        <a href="" @click.prevent="update(comment.id)">upd</a>
+                                    </span>
+                                </div>
+                                <div class="comment-interactions">
+                                    <template v-if="comment.commentator.id===userId ">
+                                        <div @click.prevent="destroy(comment.id)">
+                                            <i class="fas fa-trash"></i>
+                                        </div>
+                                        <div @click.prevent="getCommentDataToEdit(comment.id,comment.content)">
+                                            <i class="fas fa-pencil"></i>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </template>
                     </div>
                     <div class="actions">
-                        <input type="text" class="form-control ipt">
-                        <input type="submit" value="add" class="tn btn btn-success">
+                        <input type="text" v-model="commentContent" class="form-control ipt">
+                        <input type="submit" value="add" @click.prevent="storeComment" class="tn btn btn-success">
                     </div>
 
                 </div>
@@ -39,11 +59,19 @@
 </template>
 
 <script>
+import api from "../../api";
+
 export default {
     name: "WantedPersonShow",
     data() {
         return {
-            wanted: {}
+            wanted: {},
+            wantedId: parseInt(this.$route.params.id),
+            commentContent: null,
+            access_token: localStorage.getItem('access_token'),
+            userId: parseInt(localStorage.getItem('id')),
+            contentToEdit:null,
+            toEdit: null,
         }
     },
     mounted() {
@@ -51,51 +79,111 @@ export default {
     },
     methods: {
         getWanted() {
-            axios.get(`/api/wanted/${this.$route.params.id}`)
+            axios.get(`/api/wanted/${this.wantedId}`)
                 .then(res => {
                     this.wanted = res.data.data
                     console.log(this.wanted);
                 })
+        },
+        storeComment() {
+            if (this.access_token) {
+                api.post(`/api/auth/wanted/${this.wantedId}/comments`, {
+                    wanted_id: this.wantedId,
+                    content: this.commentContent
+
+                })
+                    .then(() => {
+                        this.getWanted()
+                        this.commentContent = ''
+                    })
+            } else {
+                this.$router.push({name: 'user.login'})
+            }
+        },
+        commentToEdit(id) {
+            return this.toEdit === id
+        },
+        getCommentDataToEdit(id, content) {
+            this.toEdit = id
+            this.contentToEdit = content
+        },
+        update(id) {
+            this.toEdit = null
+            console.log(id);
+            api.patch(`/api/auth/wanted/${this.wantedId}/comments/${id}`,
+                {
+                    content: this.contentToEdit
+                })
+                .then(() => {
+                    this.getWanted()
+                })
+        },
+        destroy(id){
+            api.delete(`/api/auth/wanted/${this.wantedId}/comments/${id}`) .then(()=>{
+                this.getWanted()
+            })
         }
     }
 }
 </script>
 
 <style scoped>
-img{
+p {
+    margin: 0;
+}
+
+img {
     width: 400px;
     height: 500px;
     border-radius: 10px;
 }
-.main{
+
+.main {
     display: flex;
     justify-content: center;
 
 }
-.ipt{
+
+.commentator {
+    font-weight: bold;
+}
+
+.ipt {
     width: 80%;
     margin-right: 3px;
 }
-.info{
+
+.info {
     min-height: 100px;
     width: 100%;
 }
-.about{
+
+.about {
     max-width: 400px;
 }
-.comment{
+
+.comment {
     border-radius: 10px;
     border: 1px solid grey;
     word-wrap: break-word;
     padding: 5px;
+    display: flex;
+    justify-content: space-between;
 }
-.wanted{
+
+.wanted {
     display: flex;
     padding: 10px;
     background-color: #dcdcdc;
     border-radius: 10px;
 
 }
+
+.comment-interactions {
+    display: flex;
+    gap: 10px;
+}
+
 .comment-section {
     position: relative;
     height: 100%;
@@ -105,22 +193,24 @@ img{
 }
 
 
-.actions{
+.actions {
     position: absolute;
     bottom: 0;
     display: flex;
     width: 100%;
 }
-.about p{
+
+.about p {
     word-wrap: break-word;
     padding: 10px;
 }
-.name{
+
+.name {
     text-align: center;
     margin-top: 10px;
 }
 
-.sub-container{
+.sub-container {
     display: flex;
 
     flex-direction: column;
