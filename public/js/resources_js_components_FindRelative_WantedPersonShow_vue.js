@@ -21,7 +21,9 @@ __webpack_require__.r(__webpack_exports__);
       wantedId: parseInt(this.$route.params.id),
       commentContent: null,
       access_token: localStorage.getItem('access_token'),
-      userId: parseInt(localStorage.getItem('id'))
+      userId: parseInt(localStorage.getItem('id')),
+      contentToEdit: null,
+      toEdit: null
     };
   },
   mounted: function mounted() {
@@ -57,16 +59,17 @@ __webpack_require__.r(__webpack_exports__);
     getCommentDataToEdit: function getCommentDataToEdit(id, content) {
       this.toEdit = id;
       this.contentToEdit = content;
-    } // update(id) {
-    //     this.toEdit = null
-    //     api.patch(`/api/auth/posts/${this.id}/comments/${id}`,
-    //         {
-    //             content: this.contentToEdit
-    //         })
-    //         .then(res => {
-    //             this.getPost()
-    //         })
-    // },
+    },
+    update: function update(id) {
+      var _this3 = this;
+      this.toEdit = null;
+      console.log(id);
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].patch("/api/auth/wanted/".concat(this.wantedId, "/comments/").concat(id), {
+        content: this.contentToEdit
+      }).then(function () {
+        _this3.getWanted();
+      });
+    }
   }
 });
 
@@ -124,7 +127,37 @@ var render = function render() {
       staticClass: "comment-data"
     }, [_c("p", {
       staticClass: "commentator"
-    }, [_c("i", [_vm._v(_vm._s(comment.commentator.name))])]), _vm._v("\n                                " + _vm._s(comment.content) + "\n                            ")]), _vm._v(" "), _c("div", {
+    }, [_c("i", [_vm._v(_vm._s(comment.commentator.name))])]), _vm._v(" "), _c("span", {
+      "class": _vm.commentToEdit(comment.id) ? "d-none" : ""
+    }, [_c("span", {}, [_vm._v(_vm._s(comment.content))])]), _vm._v(" "), _c("span", {
+      "class": _vm.commentToEdit(comment.id) ? "" : "d-none"
+    }, [_c("input", {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: _vm.contentToEdit,
+        expression: "contentToEdit"
+      }],
+      domProps: {
+        value: _vm.contentToEdit
+      },
+      on: {
+        input: function input($event) {
+          if ($event.target.composing) return;
+          _vm.contentToEdit = $event.target.value;
+        }
+      }
+    }), _vm._v(" "), _c("a", {
+      attrs: {
+        href: ""
+      },
+      on: {
+        click: function click($event) {
+          $event.preventDefault();
+          return _vm.update(comment.id);
+        }
+      }
+    }, [_vm._v("upd")])])]), _vm._v(" "), _c("div", {
       staticClass: "comment-interactions"
     }, [comment.commentator.id === _vm.userId ? [_c("div", {
       on: {
@@ -202,7 +235,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\np[data-v-679f7d70]{\n    margin: 0;\n}\nimg[data-v-679f7d70] {\n    width: 400px;\n    height: 500px;\n    border-radius: 10px;\n}\n.main[data-v-679f7d70] {\n    display: flex;\n    justify-content: center;\n}\n.commentator[data-v-679f7d70]{\n    font-weight: bold;\n}\n.ipt[data-v-679f7d70] {\n    width: 80%;\n    margin-right: 3px;\n}\n.info[data-v-679f7d70] {\n    min-height: 100px;\n    width: 100%;\n}\n.about[data-v-679f7d70] {\n    max-width: 400px;\n}\n.comment[data-v-679f7d70] {\n    border-radius: 10px;\n    border: 1px solid grey;\n    word-wrap: break-word;\n    padding: 5px;\n    display: flex;\n    justify-content: space-between;\n}\n.wanted[data-v-679f7d70] {\n    display: flex;\n    padding: 10px;\n    background-color: #dcdcdc;\n    border-radius: 10px;\n}\n.comment-interactions[data-v-679f7d70]{\n    display: flex;\n    gap: 10px;\n}\n.comment-section[data-v-679f7d70] {\n    position: relative;\n    height: 100%;\n    width: 420px;\n    padding: 0 15px 0 15px;\n    overflow-y: auto;\n}\n.actions[data-v-679f7d70] {\n    position: absolute;\n    bottom: 0;\n    display: flex;\n    width: 100%;\n}\n.about p[data-v-679f7d70] {\n    word-wrap: break-word;\n    padding: 10px;\n}\n.name[data-v-679f7d70] {\n    text-align: center;\n    margin-top: 10px;\n}\n.sub-container[data-v-679f7d70] {\n    display: flex;\n\n    flex-direction: column;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\np[data-v-679f7d70] {\n    margin: 0;\n}\nimg[data-v-679f7d70] {\n    width: 400px;\n    height: 500px;\n    border-radius: 10px;\n}\n.main[data-v-679f7d70] {\n    display: flex;\n    justify-content: center;\n}\n.commentator[data-v-679f7d70] {\n    font-weight: bold;\n}\n.ipt[data-v-679f7d70] {\n    width: 80%;\n    margin-right: 3px;\n}\n.info[data-v-679f7d70] {\n    min-height: 100px;\n    width: 100%;\n}\n.about[data-v-679f7d70] {\n    max-width: 400px;\n}\n.comment[data-v-679f7d70] {\n    border-radius: 10px;\n    border: 1px solid grey;\n    word-wrap: break-word;\n    padding: 5px;\n    display: flex;\n    justify-content: space-between;\n}\n.wanted[data-v-679f7d70] {\n    display: flex;\n    padding: 10px;\n    background-color: #dcdcdc;\n    border-radius: 10px;\n}\n.comment-interactions[data-v-679f7d70] {\n    display: flex;\n    gap: 10px;\n}\n.comment-section[data-v-679f7d70] {\n    position: relative;\n    height: 100%;\n    width: 420px;\n    padding: 0 15px 0 15px;\n    overflow-y: auto;\n}\n.actions[data-v-679f7d70] {\n    position: absolute;\n    bottom: 0;\n    display: flex;\n    width: 100%;\n}\n.about p[data-v-679f7d70] {\n    word-wrap: break-word;\n    padding: 10px;\n}\n.name[data-v-679f7d70] {\n    text-align: center;\n    margin-top: 10px;\n}\n.sub-container[data-v-679f7d70] {\n    display: flex;\n\n    flex-direction: column;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

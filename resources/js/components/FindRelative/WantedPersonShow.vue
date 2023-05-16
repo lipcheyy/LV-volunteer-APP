@@ -11,7 +11,7 @@
                     <div class="info" v-if="wanted.user">
                         <div class="name"><i class="fa-regular fa-user"></i> {{ wanted.user.name }}</div>
                         <div class="name">
-                            <h2> <strong>{{ wanted.name }}</strong></h2>
+                            <h2><strong>{{ wanted.name }}</strong></h2>
                         </div>
                         <div class="about">
                             <p>{{ wanted.about }}</p>
@@ -24,8 +24,14 @@
                         <template v-for="comment in wanted.comment">
                             <div class="comment mb-2">
                                 <div class="comment-data">
-                                    <p class="commentator"><i>{{comment.commentator.name}}</i></p>
-                                    {{comment.content}}
+                                    <p class="commentator"><i>{{ comment.commentator.name }}</i></p>
+                                    <span :class="commentToEdit(comment.id)?'d-none':''">
+                                         <span class="">{{ comment.content }}</span>
+                                    </span>
+                                    <span :class="commentToEdit(comment.id)?'':'d-none'">
+                                        <input v-model="contentToEdit">
+                                        <a href="" @click.prevent="update(comment.id)">upd</a>
+                                    </span>
                                 </div>
                                 <div class="comment-interactions">
                                     <template v-if="comment.commentator.id===userId ">
@@ -63,7 +69,9 @@ export default {
             wantedId: parseInt(this.$route.params.id),
             commentContent: null,
             access_token: localStorage.getItem('access_token'),
-            userId:parseInt(localStorage.getItem('id'))
+            userId: parseInt(localStorage.getItem('id')),
+            contentToEdit:null,
+            toEdit: null,
         }
     },
     mounted() {
@@ -84,9 +92,9 @@ export default {
                     content: this.commentContent
 
                 })
-                    .then(()=>{
+                    .then(() => {
                         this.getWanted()
-                        this.commentContent=''
+                        this.commentContent = ''
                     })
             } else {
                 this.$router.push({name: 'user.login'})
@@ -99,24 +107,26 @@ export default {
             this.toEdit = id
             this.contentToEdit = content
         },
-        // update(id) {
-        //     this.toEdit = null
-        //     api.patch(`/api/auth/posts/${this.id}/comments/${id}`,
-        //         {
-        //             content: this.contentToEdit
-        //         })
-        //         .then(res => {
-        //             this.getPost()
-        //         })
-        // },
+        update(id) {
+            this.toEdit = null
+            console.log(id);
+            api.patch(`/api/auth/wanted/${this.wantedId}/comments/${id}`,
+                {
+                    content: this.contentToEdit
+                })
+                .then(() => {
+                    this.getWanted()
+                })
+        },
     }
 }
 </script>
 
 <style scoped>
-p{
+p {
     margin: 0;
 }
+
 img {
     width: 400px;
     height: 500px;
@@ -128,9 +138,11 @@ img {
     justify-content: center;
 
 }
-.commentator{
+
+.commentator {
     font-weight: bold;
 }
+
 .ipt {
     width: 80%;
     margin-right: 3px;
@@ -161,10 +173,12 @@ img {
     border-radius: 10px;
 
 }
-.comment-interactions{
+
+.comment-interactions {
     display: flex;
     gap: 10px;
 }
+
 .comment-section {
     position: relative;
     height: 100%;

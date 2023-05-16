@@ -16,4 +16,11 @@ class CommentController extends Controller
         Comment::create($data);
         return response()->json(['message'=>'success']);
     }
+    public function update($wantedId,Comment $comment){
+        $data=\request()->validate([
+            'content'=>'string'
+        ]);
+        $comment->update($data);
+        return response()->json(['message'=>'success']);
+    }
 }
