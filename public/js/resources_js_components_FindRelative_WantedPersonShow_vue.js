@@ -20,7 +20,8 @@ __webpack_require__.r(__webpack_exports__);
       wanted: {},
       wantedId: parseInt(this.$route.params.id),
       commentContent: null,
-      access_token: localStorage.getItem('access_token')
+      access_token: localStorage.getItem('access_token'),
+      userId: parseInt(localStorage.getItem('id'))
     };
   },
   mounted: function mounted() {
@@ -35,17 +36,37 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     storeComment: function storeComment() {
+      var _this2 = this;
       if (this.access_token) {
         _api__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/auth/wanted/".concat(this.wantedId, "/comments"), {
           wanted_id: this.wantedId,
           content: this.commentContent
+        }).then(function () {
+          _this2.getWanted();
+          _this2.commentContent = '';
         });
       } else {
         this.$router.push({
           name: 'user.login'
         });
       }
-    }
+    },
+    commentToEdit: function commentToEdit(id) {
+      return this.toEdit === id;
+    },
+    getCommentDataToEdit: function getCommentDataToEdit(id, content) {
+      this.toEdit = id;
+      this.contentToEdit = content;
+    } // update(id) {
+    //     this.toEdit = null
+    //     api.patch(`/api/auth/posts/${this.id}/comments/${id}`,
+    //         {
+    //             content: this.contentToEdit
+    //         })
+    //         .then(res => {
+    //             this.getPost()
+    //         })
+    // },
   }
 });
 
@@ -88,11 +109,42 @@ var render = function render() {
     staticClass: "fa-regular fa-user"
   }), _vm._v(" " + _vm._s(_vm.wanted.user.name))]), _vm._v(" "), _c("div", {
     staticClass: "name"
-  }, [_c("h2", [_vm._v(_vm._s(_vm.wanted.name))])]), _vm._v(" "), _c("div", {
+  }, [_c("h2", [_c("strong", [_vm._v(_vm._s(_vm.wanted.name))])])]), _vm._v(" "), _c("div", {
     staticClass: "about"
   }, [_c("p", [_vm._v(_vm._s(_vm.wanted.about))])])]) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "comment-section"
-  }, [_c("div", [_vm._v("Відгуки:")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c("div", {
+  }, [_c("div", {
+    staticClass: "mb-2"
+  }, [_vm._v("Відгуки:")]), _vm._v(" "), _c("div", {
+    staticClass: "comments-container"
+  }, [_vm._l(_vm.wanted.comment, function (comment) {
+    return [_c("div", {
+      staticClass: "comment mb-2"
+    }, [_c("div", {
+      staticClass: "comment-data"
+    }, [_c("p", {
+      staticClass: "commentator"
+    }, [_c("i", [_vm._v(_vm._s(comment.commentator.name))])]), _vm._v("\n                                " + _vm._s(comment.content) + "\n                            ")]), _vm._v(" "), _c("div", {
+      staticClass: "comment-interactions"
+    }, [comment.commentator.id === _vm.userId ? [_c("div", {
+      on: {
+        click: function click($event) {
+          $event.preventDefault();
+        }
+      }
+    }, [_c("i", {
+      staticClass: "fas fa-trash"
+    })]), _vm._v(" "), _c("div", {
+      on: {
+        click: function click($event) {
+          $event.preventDefault();
+          return _vm.getCommentDataToEdit(comment.id, comment.content);
+        }
+      }
+    }, [_c("i", {
+      staticClass: "fas fa-pencil"
+    })])] : _vm._e()], 2)])];
+  })], 2), _vm._v(" "), _c("div", {
     staticClass: "actions"
   }, [_c("input", {
     directives: [{
@@ -128,15 +180,7 @@ var render = function render() {
     }
   })])])])])]);
 };
-var staticRenderFns = [function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("div", {
-    staticClass: "comments-container"
-  }, [_c("div", {
-    staticClass: "comment"
-  }, [_vm._v("\n                        sdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdf\n                    ")])]);
-}];
+var staticRenderFns = [];
 render._withStripped = true;
 
 
@@ -158,7 +202,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nimg[data-v-679f7d70]{\n    width: 400px;\n    height: 500px;\n    border-radius: 10px;\n}\n.main[data-v-679f7d70]{\n    display: flex;\n    justify-content: center;\n}\n.ipt[data-v-679f7d70]{\n    width: 80%;\n    margin-right: 3px;\n}\n.info[data-v-679f7d70]{\n    min-height: 100px;\n    width: 100%;\n}\n.about[data-v-679f7d70]{\n    max-width: 400px;\n}\n.comment[data-v-679f7d70]{\n    border-radius: 10px;\n    border: 1px solid grey;\n    word-wrap: break-word;\n    padding: 5px;\n}\n.wanted[data-v-679f7d70]{\n    display: flex;\n    padding: 10px;\n    background-color: #dcdcdc;\n    border-radius: 10px;\n}\n.comment-section[data-v-679f7d70] {\n    position: relative;\n    height: 100%;\n    width: 420px;\n    padding: 0 15px 0 15px;\n    overflow-y: auto;\n}\n.actions[data-v-679f7d70]{\n    position: absolute;\n    bottom: 0;\n    display: flex;\n    width: 100%;\n}\n.about p[data-v-679f7d70]{\n    word-wrap: break-word;\n    padding: 10px;\n}\n.name[data-v-679f7d70]{\n    text-align: center;\n    margin-top: 10px;\n}\n.sub-container[data-v-679f7d70]{\n    display: flex;\n\n    flex-direction: column;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\np[data-v-679f7d70]{\n    margin: 0;\n}\nimg[data-v-679f7d70] {\n    width: 400px;\n    height: 500px;\n    border-radius: 10px;\n}\n.main[data-v-679f7d70] {\n    display: flex;\n    justify-content: center;\n}\n.commentator[data-v-679f7d70]{\n    font-weight: bold;\n}\n.ipt[data-v-679f7d70] {\n    width: 80%;\n    margin-right: 3px;\n}\n.info[data-v-679f7d70] {\n    min-height: 100px;\n    width: 100%;\n}\n.about[data-v-679f7d70] {\n    max-width: 400px;\n}\n.comment[data-v-679f7d70] {\n    border-radius: 10px;\n    border: 1px solid grey;\n    word-wrap: break-word;\n    padding: 5px;\n    display: flex;\n    justify-content: space-between;\n}\n.wanted[data-v-679f7d70] {\n    display: flex;\n    padding: 10px;\n    background-color: #dcdcdc;\n    border-radius: 10px;\n}\n.comment-interactions[data-v-679f7d70]{\n    display: flex;\n    gap: 10px;\n}\n.comment-section[data-v-679f7d70] {\n    position: relative;\n    height: 100%;\n    width: 420px;\n    padding: 0 15px 0 15px;\n    overflow-y: auto;\n}\n.actions[data-v-679f7d70] {\n    position: absolute;\n    bottom: 0;\n    display: flex;\n    width: 100%;\n}\n.about p[data-v-679f7d70] {\n    word-wrap: break-word;\n    padding: 10px;\n}\n.name[data-v-679f7d70] {\n    text-align: center;\n    margin-top: 10px;\n}\n.sub-container[data-v-679f7d70] {\n    display: flex;\n\n    flex-direction: column;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
