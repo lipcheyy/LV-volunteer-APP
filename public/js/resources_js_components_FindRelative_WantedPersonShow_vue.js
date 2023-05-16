@@ -19,7 +19,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       wanted: {},
       wantedId: parseInt(this.$route.params.id),
-      commentContent: null
+      commentContent: null,
+      access_token: localStorage.getItem('access_token')
     };
   },
   mounted: function mounted() {
@@ -34,10 +35,16 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     storeComment: function storeComment() {
-      _api__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/auth/wanted/".concat(this.wantedId, "/comments"), {
-        wanted_id: this.wantedId,
-        content: this.commentContent
-      });
+      if (this.access_token) {
+        _api__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/auth/wanted/".concat(this.wantedId, "/comments"), {
+          wanted_id: this.wantedId,
+          content: this.commentContent
+        });
+      } else {
+        this.$router.push({
+          name: 'user.login'
+        });
+      }
     }
   }
 });

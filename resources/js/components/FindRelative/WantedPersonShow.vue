@@ -47,7 +47,8 @@ export default {
         return {
             wanted: {},
             wantedId:parseInt(this.$route.params.id),
-            commentContent:null
+            commentContent:null,
+            access_token:localStorage.getItem('access_token')
         }
     },
     mounted() {
@@ -62,10 +63,12 @@ export default {
                 })
         },
         storeComment(){
-            api.post(`/api/auth/wanted/${this.wantedId}/comments`,{
-                wanted_id:this.wantedId,
-                content:this.commentContent
-            })
+           if (this.access_token){
+               api.post(`/api/auth/wanted/${this.wantedId}/comments`,{
+                   wanted_id:this.wantedId,
+                   content:this.commentContent
+               })
+           }else {this.$router.push({name:'user.login'})}
         }
     }
 }

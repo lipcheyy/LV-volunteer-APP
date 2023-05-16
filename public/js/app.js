@@ -5688,7 +5688,7 @@ route.beforeEach(function (to, from, next) {
   var access_token = localStorage.getItem('access_token');
   var user_role = localStorage.getItem('user_role');
   if (!access_token) {
-    if (to.name === 'user.login' || to.name === 'user.registration' || to.name === 'wanted.index') {
+    if (to.name === 'user.login' || to.name === 'user.registration' || to.name === 'wanted.index' || to.name === 'wanted.show') {
       return next();
     } else {
       return next({
