@@ -1,6 +1,10 @@
 <template>
     <div>
-
+        <select v-model="goalId">
+            <template v-for="goal in goals">
+                <option :value="goal.id">{{goal.title}}</option>
+            </template>
+        </select>
     </div>
 </template>
 
@@ -11,7 +15,8 @@ export default {
     name: "StartDonationForm",
     data(){
         return{
-            goals:1,
+            goals:null,
+            goalId:1
         }
     },
     mounted() {

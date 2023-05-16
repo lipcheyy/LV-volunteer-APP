@@ -17,7 +17,8 @@ __webpack_require__.r(__webpack_exports__);
   name: "StartDonationForm",
   data: function data() {
     return {
-      goals: 1
+      goals: null,
+      goalId: 1
     };
   },
   mounted: function mounted() {
@@ -50,7 +51,31 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div");
+  return _c("div", [_c("select", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.goalId,
+      expression: "goalId"
+    }],
+    on: {
+      change: function change($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+          return o.selected;
+        }).map(function (o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val;
+        });
+        _vm.goalId = $event.target.multiple ? $$selectedVal : $$selectedVal[0];
+      }
+    }
+  }, [_vm._l(_vm.goals, function (goal) {
+    return [_c("option", {
+      domProps: {
+        value: goal.id
+      }
+    }, [_vm._v(_vm._s(goal.title))])];
+  })], 2)]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
