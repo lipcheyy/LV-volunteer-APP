@@ -77,6 +77,11 @@ const route =new VueRouter({
             name:'map.index'
         },
         {
+            path:'/donations',
+            component:()=>import('./components/MakeDonation/StartDonationForm'),
+            name:'donation.index'
+        },
+        {
            path:'/wanted/:id/info',
            component:()=>import('./components/FindRelative/WantedPersonShow'),
            name:'wanted.show'

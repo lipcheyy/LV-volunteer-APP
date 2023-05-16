@@ -1,6 +1,7 @@
 <template>
     <div>
         <router-link v-if="userRole===0" :to="{name:'personal.role.apply'}" class="btn btn-primary">Подати заявку на отримання звання волонотера</router-link>
+        <router-link v-if="userRole===2" :to="{name:'donation.index'}" class="btn btn-primary">Почати збір</router-link>
     </div>
 </template>
 
