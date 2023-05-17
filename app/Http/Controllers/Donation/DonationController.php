@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Donation;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Donation\StoreRequest;
+use App\Http\Resources\Donation\DonationResource;
 use App\Models\Donation;
 use Illuminate\Http\Request;
 
@@ -13,5 +14,9 @@ class DonationController extends Controller
         $data=$request->validated();
         $data['user_id']=auth()->user()->id;
         Donation::create($data);
+    }
+    public function index(){
+        $donations=Donation::all();
+        return DonationResource::collection($donations);
     }
 }
