@@ -46,10 +46,15 @@ export default {
                     this.content=''
                     this.title='' })
         },
-        imageAdded(file){
+        imageAdded(file,Editor,cursorLocation,resetUploader){
             const data=new FormData()
             data.append('image',file)
             api.post('/api/auth/donations/images',data)
+                .then(res=>{
+                    const url=res.data.url
+                    Editor.insertEmbed(cursorLocation,'image',url)
+                    resetUploader()
+                })
             console.log(file);
         }
     }

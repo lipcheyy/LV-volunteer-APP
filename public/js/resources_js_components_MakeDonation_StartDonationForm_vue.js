@@ -49,10 +49,14 @@ __webpack_require__.r(__webpack_exports__);
         _this2.title = '';
       });
     },
-    imageAdded: function imageAdded(file) {
+    imageAdded: function imageAdded(file, Editor, cursorLocation, resetUploader) {
       var data = new FormData();
       data.append('image', file);
-      _api__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/auth/donations/images', data);
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/auth/donations/images', data).then(function (res) {
+        var url = res.data.url;
+        Editor.insertEmbed(cursorLocation, 'image', url);
+        resetUploader();
+      });
       console.log(file);
     }
   }
