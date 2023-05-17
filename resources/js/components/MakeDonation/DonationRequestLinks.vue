@@ -1,13 +1,63 @@
 <template>
-    <div>hi</div>
+    <div class="main-container">
+        <div class="donations-container" v-for="donation in donations">
+            <donation-template
+            :title="donation.title"
+            :content="donation.content"
+            :user="donation.user">
+            </donation-template>
+        </div>
+    </div>
 </template>
 
 <script>
+import api from "../../api";
+import DonationTemplate from "./DonationTemplate";
 export default {
-    name: "DonationRequestLinks"
+    name: "DonationRequestLinks",
+    components: {DonationTemplate},
+
+    data(){
+        return{
+            donations:null,
+            truncatedLength:20,
+            truncated:false
+        }
+    },
+    mounted() {
+        this.getDonations()
+    },
+    methods:{
+        getDonations(){
+            api.get('/api/auth/donations')
+                .then(res=>{
+                    this.donations=res.data.data
+                    console.log(this.donations);
+                })
+        }
+    }
 }
 </script>
 
 <style scoped>
+.main-container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    padding-top: 10px;
+    flex-wrap: wrap;
 
+}
+.donations-container{
+    padding: 30px;
+    width: 350px;
+    height: 350px;
+    border-radius: 10px;
+    background: rgba(208, 207, 207, 0.97);
+    margin-bottom: 40px ;
+    -webkit-box-shadow: 4px 24px 103px -19px rgba(117,117,117,1);
+    -moz-box-shadow: 4px 24px 103px -19px rgba(117,117,117,1);
+    box-shadow: 4px 24px 103px -19px rgba(117,117,117,1);
+}
 </style>

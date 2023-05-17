@@ -36,14 +36,17 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/auth/goals').then(function (res) {
         _this.goals = res.data;
-        console.log(_this.goals);
       });
     },
     store: function store() {
+      var _this2 = this;
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/auth/donations', {
         content: this.content,
         title: this.title,
         goal_id: this.goalId
+      }).then(function () {
+        _this2.content = '';
+        _this2.title = '';
       });
     }
   }

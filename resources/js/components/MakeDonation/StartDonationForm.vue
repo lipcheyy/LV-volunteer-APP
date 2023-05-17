@@ -36,12 +36,14 @@ export default {
             api.get('/api/auth/goals')
                 .then(res=>{
                     this.goals=res.data
-                    console.log(this.goals);
                 })
         },
         store(){
             api.post('/api/auth/donations',
                 {content:this.content,title:this.title,goal_id:this.goalId})
+                .then(()=>{
+                    this.content=''
+                    this.title='' })
         }
     }
 }

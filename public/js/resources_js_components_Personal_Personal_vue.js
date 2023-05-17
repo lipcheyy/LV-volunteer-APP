@@ -63,7 +63,7 @@ var render = function render() {
     staticClass: "btn btn-primary",
     attrs: {
       to: {
-        name: "donation.index"
+        name: "donation.start"
       }
     }
   }, [_vm._v("Почати збір")]) : _vm._e()], 1);
