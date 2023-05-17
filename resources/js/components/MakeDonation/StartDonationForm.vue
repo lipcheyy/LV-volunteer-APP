@@ -6,9 +6,12 @@
             </template>
         </select>
         <input type="text" v-model="title">
-        <vue-editor useCustomImageHandler @image-added="imageAdded"
-            v-model="content"></vue-editor>
         <input type="submit" value="add" @click.prevent="store">
+        <div>
+            <vue-editor class="editor" useCustomImageHandler @image-added="imageAdded"
+                        v-model="content"></vue-editor>
+        </div>
+
     </div>
 </template>
 
@@ -62,5 +65,12 @@ export default {
 </script>
 
 <style scoped>
-
+img{
+    width: 30px;
+    height: 30px;
+}
+.editor{
+    width: 500px;
+    height: 200px;
+}
 </style>

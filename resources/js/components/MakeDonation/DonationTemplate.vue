@@ -3,7 +3,7 @@
     <div>add by {{user.name}}</div>
     <div>title{{title}}</div>
     <div>
-        <span v-html="truncatedContent"></span>
+        <span v-html="resizeImage(truncatedContent)"></span>
         <span v-if="truncated"><a href="#">деталssьніше</a></span>
     </div>
 </div>
@@ -29,12 +29,31 @@ export default {
                 return this.content;
             }
         }
+    },
+    methods:{
+        resizeImage(content) {
+            const div = document.createElement('div');
+            div.innerHTML = content;
+
+            const images = div.querySelectorAll('img');
+            images.forEach(image => {
+                image.width = 300;
+                image.height = 200;
+            });
+
+            return div.innerHTML;
+        }
     }
+
 }
 </script>
 
 <style scoped>
 p{
     margin: 0;
+}
+img{
+    width: 100px;
+    height: 170px;
 }
 </style>
