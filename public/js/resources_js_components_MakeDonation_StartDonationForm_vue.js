@@ -48,6 +48,12 @@ __webpack_require__.r(__webpack_exports__);
         _this2.content = '';
         _this2.title = '';
       });
+    },
+    imageAdded: function imageAdded(file) {
+      var data = new FormData();
+      data.append('image', file);
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/auth/donations/images', data);
+      console.log(file);
     }
   }
 });
@@ -113,6 +119,12 @@ var render = function render() {
       }
     }
   }), _vm._v(" "), _c("vue-editor", {
+    attrs: {
+      useCustomImageHandler: ""
+    },
+    on: {
+      "image-added": _vm.imageAdded
+    },
     model: {
       value: _vm.content,
       callback: function callback($$v) {

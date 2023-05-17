@@ -84,6 +84,9 @@ Route::group([
             Route::get('/','GoalController@getGoals');
         });
         Route::group(['namespace' => 'Donation', 'prefix' => 'donations'], function () {
+            Route::group(['prefix'=>'images','namespace'=>'Image'],function (){
+                Route::post('/','StoreController');
+            });
             Route::post('/','DonationController@store');
             Route::get('/','DonationController@index');
         });

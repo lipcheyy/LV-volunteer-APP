@@ -6,7 +6,8 @@
             </template>
         </select>
         <input type="text" v-model="title">
-        <vue-editor v-model="content"></vue-editor>
+        <vue-editor useCustomImageHandler @image-added="imageAdded"
+            v-model="content"></vue-editor>
         <input type="submit" value="add" @click.prevent="store">
     </div>
 </template>
@@ -44,6 +45,12 @@ export default {
                 .then(()=>{
                     this.content=''
                     this.title='' })
+        },
+        imageAdded(file){
+            const data=new FormData()
+            data.append('image',file)
+            api.post('/api/auth/donations/images',data)
+            console.log(file);
         }
     }
 }
