@@ -1,8 +1,8 @@
 <template>
 <div>
     <div class="post-container">
-        <div>add by {{user.name}}</div>
-        <div>title{{title}}</div>
+        <div><i class="fas fa-user"></i>add by {{user.name}}</div>
+        <div><h1>{{title}}</h1></div>
         <div class="content-container">
             <span v-html="resizeImage(truncatedContent)"></span>
             <span v-if="truncated"><a href="#" @click.prevent="contentToggler">детальніше</a></span>
@@ -110,7 +110,7 @@ p{
     font-size: 26px;
     color: white;
 }
-.fas{
+.fa-heart{
     font-size: 26px;
     color: red;
 }

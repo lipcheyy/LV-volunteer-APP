@@ -9,7 +9,7 @@
                 <div class="about">
                     <p>{{truncatedAbout}} <router-link :to="{name:'wanted.show',params:{id:id}}" v-if="truncated">детальніше </router-link></p>
                 </div>
-                <router-link :to="{name:'wanted.show',params:{id:id}}" class="btn" v-if="!truncated">детальніше </router-link>
+
             </div>
         </div>
 

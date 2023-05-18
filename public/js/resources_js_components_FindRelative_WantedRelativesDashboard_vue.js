@@ -112,14 +112,26 @@ var render = function render() {
     return _c("div", {
       staticClass: "containers"
     }, [_vm._l(wanted.images, function (image) {
-      return [_c("wanted-template", {
+      return [_c("router-link", {
+        staticClass: "btn",
+        attrs: {
+          to: {
+            name: "wanted.show",
+            params: {
+              id: wanted.id
+            }
+          }
+        }
+      }, [_c("wanted-template", {
+        ref: "wanted",
+        refInFor: true,
         attrs: {
           name: wanted.name,
           about: wanted.about,
           url: image.url,
           id: wanted.id
         }
-      })];
+      })], 1)];
     })], 2);
   }), 0)]);
 };
@@ -166,17 +178,7 @@ var render = function render() {
         }
       }
     }
-  }, [_vm._v("детальніше ")]) : _vm._e()], 1)]), _vm._v(" "), !_vm.truncated ? _c("router-link", {
-    staticClass: "btn",
-    attrs: {
-      to: {
-        name: "wanted.show",
-        params: {
-          id: _vm.id
-        }
-      }
-    }
-  }, [_vm._v("детальніше ")]) : _vm._e()], 1)])]);
+  }, [_vm._v("детальніше ")]) : _vm._e()], 1)])])])]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -218,7 +220,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.main[data-v-5d79b12b]{\n    display: flex;\n    flex-wrap: wrap;\n    justify-content: space-around;\n}\n.containers[data-v-5d79b12b]{\n\n    margin-bottom: 40px;\n    border: 2px solid #b4b4b4;\n    border-radius: 10px;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.main[data-v-5d79b12b] {\n    display: flex;\n    flex-wrap: wrap;\n    justify-content: space-around;\n}\n.containers[data-v-5d79b12b] {\n\n    margin-bottom: 40px;\n    border: 2px solid #b4b4b4;\n    border-radius: 10px;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
