@@ -83,7 +83,7 @@ export default {
     display: flex;
     justify-content: space-around;
 }
-router-link{
+a{
     color:white;
     text-decoration: none;
 }

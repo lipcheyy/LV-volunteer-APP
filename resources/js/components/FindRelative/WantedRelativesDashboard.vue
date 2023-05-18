@@ -1,29 +1,32 @@
 <template>
     <div>
         <a href="" class="btn btn-primary" @click.prevent="findForm">find yout relative</a>
-        <div class="main">
-            <div class="filter">
-                <select v-model="region_id">
-                    <template v-for="region in regions">
-                        <option :value="region.id">
-                            {{region.title}}
-                        </option>
-                    </template>
-                </select>
-                <router-link :to="{name:'regions.index',params:{id:this.region_id}}">sort</router-link>
-            </div>
-            <div class="containers" v-for="wanted in wanteds">
-                <template v-for="image in wanted.images">
-                    <router-link :to="{name:'wanted.show',params:{id:wanted.id}}" class="btn">
-                        <wanted-template ref="wanted"
-                                         :name="wanted.name"
-                                         :about="wanted.about"
-                                         :url="image.url"
-                                         :id="wanted.id"
-                        >
-                        </wanted-template>
-                    </router-link>
+        <div class="filter">
+            <select v-model="region_id">
+                <template v-for="region in regions">
+                    <option :value="region.id">
+                        {{region.title}}
+                    </option>
                 </template>
+            </select>
+            <router-link :to="{name:'regions.index',params:{id:this.region_id}}">sort</router-link>
+        </div>
+        <div class="main">
+            <div class="content">
+
+                <div class="containers" v-for="wanted in wanteds">
+                    <template v-for="image in wanted.images">
+                        <router-link :to="{name:'wanted.show',params:{id:wanted.id}}" class="btn">
+                            <wanted-template ref="wanted"
+                                             :name="wanted.name"
+                                             :about="wanted.about"
+                                             :url="image.url"
+                                             :id="wanted.id"
+                            >
+                            </wanted-template>
+                        </router-link>
+                    </template>
+                </div>
             </div>
         </div>
 
@@ -76,6 +79,7 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+
 }
 
 .containers {

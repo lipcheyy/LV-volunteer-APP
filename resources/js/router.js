@@ -109,7 +109,7 @@ route.beforeEach((to,from,next)=>{
     const user_role=localStorage.getItem('user_role')
     if (!access_token){
         if (to.name==='user.login' || to.name==='user.registration'
-            ||to.name==='wanted.index'||to.name==='wanted.show'){
+            ||to.name==='wanted.index'||to.name==='wanted.show'||to.name==='map.index'){
             return next()
         }
         else {

@@ -1,7 +1,7 @@
 <template>
     <div>
         <user-create ref="create"></user-create>
-        <div class="mb-3">
+        <div class="mb-3 mt-2">
             search
             <input id="search-name" v-model="search_user" type="text" >
         </div>

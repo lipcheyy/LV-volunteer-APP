@@ -1,16 +1,15 @@
 <template>
-    <div>
+    <div class="main">
+        <h1>КАРТА ВОЛОНТЕРСЬКИХ ЦЕНТРІВ В УКРАЇНІ</h1>
         <div id="map"></div>
         <a href="#" @click.prevent="saveMarkers" v-if="user_role===2">save</a>
     </div>
 </template>
 
 <script>
-import MapComponent from "./MapComponent";
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet'
 import api from '../../api'
-import {toString} from "lodash";
 export default {
     name: "MapIndex",
     data(){
@@ -25,7 +24,7 @@ export default {
             user_role:parseInt(localStorage.getItem('user_role'))
         }
     },
-    components: {MapComponent},
+
     mounted() {
         let map=L.map('map').setView([48.6208, 22.2879],13)
         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -66,12 +65,10 @@ export default {
         },
         saveMarkers() {
             const coordinates = this.marker.map((marker) => marker.getLatLng());
-
             coordinates.forEach(coordinate=>{
                 this.lat=coordinate.lat
                 this.lng=coordinate.lng
             })
-            console.log(this.lat,this.lng);
             api.post('/api/auth/markers',
                 {lat:this.lat, lng:this.lng })
         },
@@ -93,6 +90,12 @@ export default {
 
 <style scoped>
     #map{
+        width: 1200px;
         height: 600px;
+    }
+    .main{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 </style>

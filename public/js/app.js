@@ -5728,7 +5728,7 @@ route.beforeEach(function (to, from, next) {
   var access_token = localStorage.getItem('access_token');
   var user_role = localStorage.getItem('user_role');
   if (!access_token) {
-    if (to.name === 'user.login' || to.name === 'user.registration' || to.name === 'wanted.index' || to.name === 'wanted.show') {
+    if (to.name === 'user.login' || to.name === 'user.registration' || to.name === 'wanted.index' || to.name === 'wanted.show' || to.name === 'map.index') {
       return next();
     } else {
       return next({
@@ -11010,7 +11010,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.header[data-v-2ac2c897]{\n    padding: 19px 20px;\n    background-color: black;\n    display: flex;\n    justify-content: space-around;\n}\nrouter-link[data-v-2ac2c897]{\n    color:white;\n    text-decoration: none;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.header[data-v-2ac2c897]{\n    padding: 19px 20px;\n    background-color: black;\n    display: flex;\n    justify-content: space-around;\n}\na[data-v-2ac2c897]{\n    color:white;\n    text-decoration: none;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

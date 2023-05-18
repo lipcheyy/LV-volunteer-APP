@@ -118,8 +118,6 @@ var render = function render() {
       }
     }
   }, [_vm._v("find yout relative")]), _vm._v(" "), _c("div", {
-    staticClass: "main"
-  }, [_c("div", {
     staticClass: "filter"
   }, [_c("select", {
     directives: [{
@@ -144,7 +142,7 @@ var render = function render() {
       domProps: {
         value: region.id
       }
-    }, [_vm._v("\n                        " + _vm._s(region.title) + "\n                    ")])];
+    }, [_vm._v("\n                    " + _vm._s(region.title) + "\n                ")])];
   })], 2), _vm._v(" "), _c("router-link", {
     attrs: {
       to: {
@@ -154,7 +152,11 @@ var render = function render() {
         }
       }
     }
-  }, [_vm._v("sort")])], 1), _vm._v(" "), _vm._l(_vm.wanteds, function (wanted) {
+  }, [_vm._v("sort")])], 1), _vm._v(" "), _c("div", {
+    staticClass: "main"
+  }, [_c("div", {
+    staticClass: "content"
+  }, _vm._l(_vm.wanteds, function (wanted) {
     return _c("div", {
       staticClass: "containers"
     }, [_vm._l(wanted.images, function (image) {
@@ -179,7 +181,7 @@ var render = function render() {
         }
       })], 1)];
     })], 2);
-  })], 2)]);
+  }), 0)])]);
 };
 var staticRenderFns = [];
 render._withStripped = true;

@@ -74,4 +74,10 @@ export default {
     -moz-box-shadow: 4px 24px 103px -19px rgba(117,117,117,1);
     box-shadow: 4px 24px 103px -19px rgba(117,117,117,1);
 }
+.donations-container:hover{
+    -webkit-box-shadow: 0px 4px 120px 12px rgba(66,0,66,1);
+    -moz-box-shadow: 0px 4px 120px 12px rgba(66,0,66,1);
+    box-shadow: 0px 4px 120px 12px rgba(66,0,66,1);
+    transition: 0.3s ease-in-out;
+}
 </style>
