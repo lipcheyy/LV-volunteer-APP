@@ -104,6 +104,9 @@ Route::group([
             Route::get('/userdata','DataController@data');
             Route::get('/likedPosts','DataController@liked');
         });
+        Route::group(['namespace' => 'Region', 'prefix' => 'regions'], function () {
+            Route::get('/','RegionController@index');
+        });
         Route::group(['namespace' => 'Marker', 'prefix' => '/markers'], function () {
             Route::post('/','MarkerController@store');
             Route::get('/','MarkerController@getMarkers');

@@ -8,6 +8,12 @@
         <div>
             <textarea v-model="about" class="form-control"></textarea>
         </div>
+        <div>
+            <select v-model="region_id" >
+                <template v-for="region in regions">
+                <option :value="region.id">{{region.title}}</option></template>
+            </select>
+        </div>
         <div ref="dropzone" class="p-4 bg-info"></div>
         <div>
             <input type="submit" class="btn btn-success" @click.prevent="store" value="add request">
@@ -24,7 +30,9 @@ export default {
         return{
             name:'',
             about:'',
-            dropzone:null
+            dropzone:null,
+            region_id:1,
+            regions:null
         }
     },
     mounted() {
@@ -36,6 +44,7 @@ export default {
                 autoProcessQueue:false
             }
         )
+        this.getRegions()
     },
     methods:{
         store(){
@@ -46,11 +55,18 @@ export default {
             })
             data.append('name',this.name)
             data.append('about',this.about)
+            data.append('region_id',this.region_id)
             api.post('/api/auth/wanted',data)
                 .then(res=>{
                     this.dropzone.removeAllFiles()
                     this.about=''
                     this.name=''
+                })
+        },
+        getRegions(){
+            api.get('/api/auth/regions')
+                .then(res=>{
+                    this.regions=res.data
                 })
         }
     }

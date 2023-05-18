@@ -21,7 +21,9 @@ __webpack_require__.r(__webpack_exports__);
     return {
       name: '',
       about: '',
-      dropzone: null
+      dropzone: null,
+      region_id: 1,
+      regions: null
     };
   },
   mounted: function mounted() {
@@ -30,6 +32,7 @@ __webpack_require__.r(__webpack_exports__);
       maxFiles: 1,
       autoProcessQueue: false
     });
+    this.getRegions();
   },
   methods: {
     store: function store() {
@@ -41,10 +44,17 @@ __webpack_require__.r(__webpack_exports__);
       });
       data.append('name', this.name);
       data.append('about', this.about);
+      data.append('region_id', this.region_id);
       _api__WEBPACK_IMPORTED_MODULE_1__["default"].post('/api/auth/wanted', data).then(function (res) {
         _this.dropzone.removeAllFiles();
         _this.about = '';
         _this.name = '';
+      });
+    },
+    getRegions: function getRegions() {
+      var _this2 = this;
+      _api__WEBPACK_IMPORTED_MODULE_1__["default"].get('/api/auth/regions').then(function (res) {
+        _this2.regions = res.data;
       });
     }
   }
@@ -105,7 +115,31 @@ var render = function render() {
         _vm.about = $event.target.value;
       }
     }
-  })]), _vm._v(" "), _c("div", {
+  })]), _vm._v(" "), _c("div", [_c("select", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.region_id,
+      expression: "region_id"
+    }],
+    on: {
+      change: function change($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+          return o.selected;
+        }).map(function (o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val;
+        });
+        _vm.region_id = $event.target.multiple ? $$selectedVal : $$selectedVal[0];
+      }
+    }
+  }, [_vm._l(_vm.regions, function (region) {
+    return [_c("option", {
+      domProps: {
+        value: region.id
+      }
+    }, [_vm._v(_vm._s(region.title))])];
+  })], 2)]), _vm._v(" "), _c("div", {
     ref: "dropzone",
     staticClass: "p-4 bg-info"
   }), _vm._v(" "), _c("div", [_c("input", {

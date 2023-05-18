@@ -26,7 +26,8 @@ class StoreRequest extends FormRequest
         return [
             'name'=>'required|string',
             'about'=>'required|string',
-            'images'=>'required'
+            'images'=>'required',
+            'region_id'=>'integer'
         ];
     }
 }
