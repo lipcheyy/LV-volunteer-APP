@@ -17,7 +17,11 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       userRole: parseInt(localStorage.getItem('user_role')),
-      username: null
+      username: null,
+      name: null,
+      password: null,
+      old_password: null,
+      password_confirm: null
     };
   },
   name: "Personal",
@@ -25,7 +29,13 @@ __webpack_require__.r(__webpack_exports__);
     // this.userdata()
   },
   methods: {
-    // userdata() {
+    updateUserData: function updateUserData() {
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].patch('/api/auth/user/update', {
+        password: this.password_confirm,
+        old_password: this.old_password,
+        password_confirm: this.password_confirm
+      });
+    } // userdata() {
     //     api.post('/api/auth/me')
     //         .then(res=>{
     //             const user =res.data
@@ -66,7 +76,93 @@ var render = function render() {
         name: "donation.start"
       }
     }
-  }, [_vm._v("Почати збір")]) : _vm._e()], 1);
+  }, [_vm._v("Почати збір")]) : _vm._e(), _vm._v("\n    Редагувати профіль\n    "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.name,
+      expression: "name"
+    }],
+    attrs: {
+      type: "text"
+    },
+    domProps: {
+      value: _vm.name
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.name = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.old_password,
+      expression: "old_password"
+    }],
+    attrs: {
+      type: "text"
+    },
+    domProps: {
+      value: _vm.old_password
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.old_password = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.password,
+      expression: "password"
+    }],
+    attrs: {
+      type: "text"
+    },
+    domProps: {
+      value: _vm.password
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.password = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.password_confirm,
+      expression: "password_confirm"
+    }],
+    attrs: {
+      type: "text"
+    },
+    domProps: {
+      value: _vm.password_confirm
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.password_confirm = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), _c("input", {
+    attrs: {
+      type: "submit"
+    },
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+        return _vm.updateUserData.apply(null, arguments);
+      }
+    }
+  })], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;

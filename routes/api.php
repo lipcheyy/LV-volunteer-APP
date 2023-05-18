@@ -104,6 +104,7 @@ Route::group([
             Route::post('/','VolunteerRoleController@store');
         });
         Route::group(['namespace' => 'User', 'prefix' => 'user'], function () {
+            Route::patch('/update','DataController@updateData');
             Route::get('/userdata','DataController@data');
             Route::get('/likedPosts','DataController@liked');
         });
