@@ -2,9 +2,10 @@
     <div class="main-container">
         <div class="donations-container" v-for="donation in donations">
             <donation-template
-            :title="donation.title"
-            :content="donation.content"
-            :user="donation.user">
+                :id="donation.id"
+                :title="donation.title"
+                :content="donation.content"
+                :user="donation.user">
             </donation-template>
         </div>
     </div>
@@ -51,6 +52,8 @@ export default {
 }
 .donations-container{
     padding: 30px;
+    display: flex;
+    justify-content: space-between;
     width: 350px;
     height: 350px;
     border-radius: 10px;

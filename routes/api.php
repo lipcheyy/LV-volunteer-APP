@@ -87,6 +87,9 @@ Route::group([
             Route::group(['prefix'=>'images','namespace'=>'Image'],function (){
                 Route::post('/','StoreController');
             });
+            Route::group(['namespace' => 'Like', 'prefix' => '/{donation}'], function () {
+                Route::post('/like','LikeController@store');
+            });
             Route::post('/','DonationController@store');
             Route::get('/','DonationController@index');
         });

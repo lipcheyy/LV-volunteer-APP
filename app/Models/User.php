@@ -22,6 +22,9 @@ class User extends Authenticatable implements JWTSubject
             self::ROLE_VOLUNTEER=>'Volunteer',
         ];
     }
+    public function likes(){
+        return $this->belongsToMany(Donation::class,'donation_user_likes','user_id','donation_id');
+    }
     /**
      * The attributes that are mass assignable.
      *
