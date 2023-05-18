@@ -65,8 +65,7 @@ export default {
         },
         getRegions(){
             api.get('/api/auth/regions')
-                .then(res=>{
-                    this.regions=res.data
+                .then(res=>{ this.regions=res.data
                 })
         }
     }

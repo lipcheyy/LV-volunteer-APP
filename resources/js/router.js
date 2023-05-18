@@ -90,6 +90,11 @@ const route =new VueRouter({
            path:'/wanted/:id/info',
            component:()=>import('./components/FindRelative/WantedPersonShow'),
            name:'wanted.show'
+        },
+        {
+            path:'/region/:id',
+            component:()=>import('./components/FindByRegion/FindByRegionIndex'),
+            name:'regions.index'
         }
     ]
 })

@@ -2,16 +2,6 @@
     <div>
         <a href="" class="btn btn-primary" @click.prevent="findForm">find yout relative</a>
         <div class="main">
-            <div class="filter">
-                <select v-model="region_id">
-                    <template v-for="region in regions">
-                        <option :value="region.id">
-                            {{region.title}}
-                        </option>
-                    </template>
-                </select>
-                <router-link :to="{name:'regions.index',params:{id:this.region_id}}">sort</router-link>
-            </div>
             <div class="containers" v-for="wanted in wanteds">
                 <template v-for="image in wanted.images">
                     <router-link :to="{name:'wanted.show',params:{id:wanted.id}}" class="btn">
@@ -32,40 +22,37 @@
 
 <script>
 import api from "../../api";
-import WantedTemplate from "./WantedTemplate";
-import {getWanteds} from '../../Scripts/Wanteds/getWanteds'
-
+import WantedTemplate from "../FindRelative/WantedTemplate";
 export default {
-    name: "WantedRelativesDashboard",
-    components: {
+    name: "FindByRegionIndex",
+    components:{
         WantedTemplate
     },
-
-    data() {
-        return {
-            wanteds: {},
-            regions:null,
-            region_id:1
+    data(){
+        return{
+            region_id:parseInt(this.$route.params.id),
+            wanteds:null,
+            regions:null
         }
     },
     mounted() {
-        getWanteds().then(res => {
-            this.wanteds = res;
-        });
-        this.getRegions()
+        this.getWanteds()
     },
-    methods: {
-        findForm() {
-            const access_token = localStorage.getItem('access_token')
-            return access_token ? this.$router.push({name: 'wanted.request'}) : this.$router.push({name: 'user.login'})
+    methods:{
+        getWanteds(){
+            api.get(`/api/auth/regions/${this.region_id}`)
+                .then(res=>{
+                    console.log(res.data);
+                    this.wanteds=res.data.data
+                })
         },
         getRegions(){
             api.get('/api/auth/regions')
                 .then(res=>{ this.regions=res.data
                 })
         }
-
     }
+
 }
 </script>
 
@@ -82,5 +69,4 @@ export default {
     border: 2px solid #b4b4b4;
     border-radius: 10px;
 }
-
 </style>

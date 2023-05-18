@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class LikeController extends Controller
 {
     public function store(Donation $donation){
-        auth()->user()->likes()->toggle($donation->id);
+        auth()->user()->likes()->syncWithoutDetaching([$donation->id]);
         return response()->json(['message'=>'likesd']);
     }
 }

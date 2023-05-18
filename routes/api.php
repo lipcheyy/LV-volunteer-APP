@@ -106,6 +106,7 @@ Route::group([
         });
         Route::group(['namespace' => 'Region', 'prefix' => 'regions'], function () {
             Route::get('/','RegionController@index');
+            Route::get('/{region}','RegionController@getWantedByRegion');
         });
         Route::group(['namespace' => 'Marker', 'prefix' => '/markers'], function () {
             Route::post('/','MarkerController@store');
