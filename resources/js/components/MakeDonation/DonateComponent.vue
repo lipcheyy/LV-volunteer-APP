@@ -23,9 +23,9 @@ export default {
         return {
             donation: null,
             id: parseInt(this.$route.params.id),
-            payerName: "",
-            cardNumber: "",
-            cardExpiration: ""
+            payerName: null,
+            cardNumber: null,
+            cardExpiration: null
         };
     },
     mounted() {
@@ -40,6 +40,10 @@ export default {
                 setTimeout(() => {
                     this.$Progress.finish();
                 }, 2500);
+                this.payerName=''
+                this.cardNumber=''
+                this.cardExpiration=''
+
             } else {
                 alert("Будь ласка, заповніть всі поля");
             }

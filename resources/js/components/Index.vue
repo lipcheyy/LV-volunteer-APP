@@ -1,6 +1,6 @@
 <template>
     <div >
-        <div style="margin-bottom: 10px">
+        <div style="margin-bottom: 10px" class="header">
             <router-link v-if="!access_token" :to="{name:'user.login'}">logn</router-link>
             <router-link v-if="!access_token" :to="{name:'user.registration'}">registration</router-link>
             <router-link v-if="access_token" :to="{name:'posts.index'}">posts</router-link>
@@ -77,5 +77,14 @@ export default {
 </script>
 
 <style scoped>
-
+.header{
+    padding: 19px 20px;
+    background-color: black;
+    display: flex;
+    justify-content: space-around;
+}
+router-link{
+    color:white;
+    text-decoration: none;
+}
 </style>

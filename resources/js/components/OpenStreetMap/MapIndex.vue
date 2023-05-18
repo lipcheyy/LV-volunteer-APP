@@ -1,7 +1,7 @@
 <template>
     <div>
         <div id="map"></div>
-        <a href="#" @click.prevent="saveMarkers">save</a>
+        <a href="#" @click.prevent="saveMarkers" v-if="user_role===2">save</a>
     </div>
 </template>
 
@@ -21,7 +21,8 @@ export default {
             lng:'',
             markerIconUrl: '',
             markerIconSize: [],
-            markerIconAnchor: []
+            markerIconAnchor: [],
+            user_role:parseInt(localStorage.getItem('user_role'))
         }
     },
     components: {MapComponent},
@@ -45,9 +46,11 @@ export default {
     },
     methods:{
         addNewMarker(click){
-            let marker = L.marker(click.latlng,{icon: this.createMarkerIcon()});
-            this.markers.addLayer(marker)
-            this.marker.push(marker);
+            if (this.user_role===2){
+                let marker = L.marker(click.latlng,{icon: this.createMarkerIcon()});
+                this.markers.addLayer(marker)
+                this.marker.push(marker);
+            }
         },
         createMarkerIcon() {
             return L.icon({
@@ -71,9 +74,6 @@ export default {
             console.log(this.lat,this.lng);
             api.post('/api/auth/markers',
                 {lat:this.lat, lng:this.lng })
-                .then((response) => {
-
-                });
         },
         getMarkers(){
             api.get('/api/auth/markers')
