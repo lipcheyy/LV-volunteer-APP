@@ -12,6 +12,8 @@
 
         <label for="about">Дайте коротку інформацію чому саме ви повинні отримати статус волонтера</label>
         <textarea v-model="about" id="about"></textarea>
+        <label for="card">Дайте коротку інформацію про кредитну картку</label>
+        <textarea v-model="card" id="card"></textarea>
 
         <label for="apply">Подати заявку на отримання статусу волонтера</label>
         <input class="btn-primary btn" @click.prevent="store" id="apply" value="подати ">
@@ -31,13 +33,14 @@ export default {
             surname:'',
             middlename:'',
             about:'',
+            card:null
         }
     },
     methods:{
         store(){
             api.post('/api/auth/volunteer-role-request',{
                 name:this.name, surname:this.surname,
-                middlename:this.middlename, about:this.about
+                middlename:this.middlename, about:this.about, card:this.card
             })
         }
     }

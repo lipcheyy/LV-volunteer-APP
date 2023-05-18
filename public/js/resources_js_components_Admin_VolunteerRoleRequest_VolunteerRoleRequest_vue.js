@@ -17,7 +17,8 @@ __webpack_require__.r(__webpack_exports__);
   name: "VolunteerRoleRequest",
   data: function data() {
     return {
-      requests: null
+      requests: null,
+      card: null
     };
   },
   mounted: function mounted() {
@@ -28,11 +29,23 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/auth/admin/volunteer').then(function (res) {
         _this.requests = res.data;
+        _this.card = res.data.card;
+        console.log(res.data);
       });
     },
-    approveStatus: function approveStatus(id) {
+    disapprove: function disapprove(id) {
+      var _this2 = this;
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("/api/auth/admin/volunteer/volunteer-statuses/".concat(id)).then(function () {
+        _this2.getRequests();
+      });
+    },
+    approveStatus: function approveStatus(id, card) {
+      var _this3 = this;
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].patch("/api/auth/admin/volunteer/".concat(id), {
-        role: 2
+        role: 2,
+        card: card
+      }).then(function () {
+        _this3.getRequests();
       });
     }
   }
@@ -58,12 +71,25 @@ var render = function render() {
     return _c("div", [_c("h3", [_vm._v(_vm._s("".concat(request.name, "  ").concat(request.surname, " ").concat(request.middlename)))]), _vm._v(" "), _c("p", [_vm._v(_vm._s(request.about))]), _vm._v(" "), _c("input", {
       staticClass: "btn btn-success",
       attrs: {
+        type: "submit",
         value: "approve"
       },
       on: {
         click: function click($event) {
           $event.preventDefault();
-          return _vm.approveStatus(request.id);
+          return _vm.approveStatus(request.user_id, request.card);
+        }
+      }
+    }), _vm._v(" "), _c("input", {
+      staticClass: "btn btn-danger",
+      attrs: {
+        type: "submit",
+        value: "disapprove"
+      },
+      on: {
+        click: function click($event) {
+          $event.preventDefault();
+          return _vm.disapprove(request.id);
         }
       }
     })]);

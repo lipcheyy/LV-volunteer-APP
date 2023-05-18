@@ -19,4 +19,7 @@ class DonationController extends Controller
         $donations=Donation::all();
         return DonationResource::collection($donations);
     }
+    public function getDonation(Donation $donation){
+        return new DonationResource($donation);
+    }
 }

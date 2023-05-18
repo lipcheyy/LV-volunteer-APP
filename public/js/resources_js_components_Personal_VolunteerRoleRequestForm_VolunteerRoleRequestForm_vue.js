@@ -20,7 +20,8 @@ __webpack_require__.r(__webpack_exports__);
       name: '',
       surname: '',
       middlename: '',
-      about: ''
+      about: '',
+      card: null
     };
   },
   methods: {
@@ -29,7 +30,8 @@ __webpack_require__.r(__webpack_exports__);
         name: this.name,
         surname: this.surname,
         middlename: this.middlename,
-        about: this.about
+        about: this.about,
+        card: this.card
       });
     }
   }
@@ -146,6 +148,29 @@ var render = function render() {
       input: function input($event) {
         if ($event.target.composing) return;
         _vm.about = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), _c("label", {
+    attrs: {
+      "for": "card"
+    }
+  }, [_vm._v("Дайте коротку інформацію про кредитну картку")]), _vm._v(" "), _c("textarea", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.card,
+      expression: "card"
+    }],
+    attrs: {
+      id: "card"
+    },
+    domProps: {
+      value: _vm.card
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.card = $event.target.value;
       }
     }
   }), _vm._v(" "), _c("label", {

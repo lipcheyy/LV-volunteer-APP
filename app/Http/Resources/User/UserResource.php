@@ -3,6 +3,7 @@
 namespace App\Http\Resources\User;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use function Symfony\Component\Translation\t;
 
 class UserResource extends JsonResource
 {
@@ -17,7 +18,8 @@ class UserResource extends JsonResource
         return [
             'id'=>$this->id,
             'name'=>$this->name,
-            'role'=>$this->role
+            'role'=>$this->role,
+            'card'=>$this->card
         ];
     }
 }

@@ -58,6 +58,8 @@ Route::group([
             Route::group(['namespace' => 'Volunteer', 'prefix' => 'volunteer'],function (){
                 Route::get('/','VolunteerController@index');
                 Route::patch('/{user}','VolunteerController@update');
+                Route::delete('/volunteer-statuses/{volunteerStatus}','VolunteerController@disapprove');
+
             });
             Route::group(['namespace'=>'User','prefix'=>'users'],function (){
                 Route::get('/','UsersController@index');
@@ -91,6 +93,7 @@ Route::group([
                 Route::post('/like','LikeController@store');
             });
             Route::post('/','DonationController@store');
+            Route::get('/{donation}','DonationController@getDonation');
             Route::get('/','DonationController@index');
         });
         Route::group(['namespace' => 'Wanted', 'prefix' => 'wanted'], function () {

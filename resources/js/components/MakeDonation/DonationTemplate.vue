@@ -1,5 +1,6 @@
 <template>
 <div>
+    <router-link :to="{name:'user.donate',params:{id:id}}">
     <div class="post-container">
         <div><i class="fas fa-user"></i>add by {{user.name}}</div>
         <div><h1>{{title}}</h1></div>
@@ -16,6 +17,7 @@
             </div>
         </div>
     </div>
+    </router-link>
 
 </div>
 </template>

@@ -174,7 +174,16 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_c("div", {
+  return _c("div", [_c("router-link", {
+    attrs: {
+      to: {
+        name: "user.donate",
+        params: {
+          id: _vm.id
+        }
+      }
+    }
+  }, [_c("div", {
     staticClass: "post-container"
   }, [_c("div", [_c("i", {
     staticClass: "fas fa-user"
@@ -211,7 +220,7 @@ var render = function render() {
         return _vm.toggleLike(_vm.id);
       }
     }
-  })])])])]);
+  })])])])])], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;

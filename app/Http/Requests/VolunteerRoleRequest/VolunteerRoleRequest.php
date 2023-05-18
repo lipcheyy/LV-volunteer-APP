@@ -28,6 +28,7 @@ class VolunteerRoleRequest extends FormRequest
             'surname'=>'required|string',
             'middlename'=>'required|string',
             'about'=>'required',
+            'card'=>'required',
             'user_id'=>'integer'
         ];
     }
