@@ -59,18 +59,20 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       truncatedLength: 20,
-      truncated: false
+      truncated: false,
+      fullContent: false
     };
   },
   computed: {
     truncatedContent: function truncatedContent() {
       var content = this.content.split(" ");
-      if (content.length > this.truncatedLength) {
+      if (this.fullContent) {
+        return this.content;
+      } else if (content.length > this.truncatedLength) {
         this.truncated = true;
         return content.slice(0, this.truncatedLength).join(" ");
-      } else {
-        return this.content;
       }
+      return this.content;
     }
   },
   methods: {
@@ -83,6 +85,9 @@ __webpack_require__.r(__webpack_exports__);
         image.height = 200;
       });
       return div.innerHTML;
+    },
+    contentToggler: function contentToggler() {
+      this.fullContent = !this.fullContent;
     }
   }
 });
@@ -144,8 +149,16 @@ var render = function render() {
   }), _vm._v(" "), _vm.truncated ? _c("span", [_c("a", {
     attrs: {
       href: "#"
+    },
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+        return _vm.contentToggler.apply(null, arguments);
+      }
     }
-  }, [_vm._v("деталssьніше")])]) : _vm._e()])]);
+  }, [_vm._v("детальніше")])]) : _vm._e()]), _vm._v(" "), _c("i", {
+    staticClass: "far fa-heart"
+  })]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -192,7 +205,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\np[data-v-5a9a1900]{\n    margin: 0;\n}\nimg[data-v-5a9a1900]{\n    width: 100px;\n    height: 170px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\np[data-v-5a9a1900]{\n    margin: 0;\n}\n.far[data-v-5a9a1900]{\n    width: 10px;\n    height: 15px;\n}\nimg[data-v-5a9a1900]{\n    width: 100px;\n    height: 170px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
