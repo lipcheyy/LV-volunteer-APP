@@ -6,6 +6,7 @@
                 :title="donation.title"
                 :content="donation.content"
                 :user="donation.user"
+                :likesCount="donation.likes_count"
                 :userLiked="userLiked">
             </donation-template>
         </div>

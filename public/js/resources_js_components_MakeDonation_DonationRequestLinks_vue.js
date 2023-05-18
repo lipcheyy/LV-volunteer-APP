@@ -67,7 +67,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "DonationTemplate",
-  props: ['title', 'content', 'user', 'id', 'userLiked'],
+  props: ['title', 'content', 'user', 'id', 'userLiked', 'likesCount'],
   data: function data() {
     return {
       truncatedLength: 33,
@@ -102,17 +102,17 @@ __webpack_require__.r(__webpack_exports__);
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/auth/donations/".concat(this.id, "/like"));
     },
     toggleLike: function toggleLike(id) {
+      var content = parseInt(document.querySelector(".likesCount-".concat(id)).textContent);
       if (this.userLiked.includes(id)) {
         var index = this.userLiked.indexOf(id);
         this.userLiked.splice(index, 1);
-        // content -= 1
-        // document.querySelector(`.likesCount-${id}`).textContent = content
+        content -= 1;
+        document.querySelector(".likesCount-".concat(id)).textContent = content;
       } else {
         this.userLiked.push(id);
-        // content += 1
-        // document.querySelector(`.likesCount-${id}`).textContent = content
+        content += 1;
+        document.querySelector(".likesCount-".concat(id)).textContent = content;
       }
-
       this.like();
     },
     contentToggler: function contentToggler() {
@@ -148,6 +148,7 @@ var render = function render() {
         title: donation.title,
         content: donation.content,
         user: donation.user,
+        likesCount: donation.likes_count,
         userLiked: _vm.userLiked
       }
     })], 1);
@@ -195,7 +196,9 @@ var render = function render() {
     staticClass: "footer"
   }, [_c("div", {
     staticClass: "heart-container"
-  }, [_c("i", {
+  }, [_c("span", {
+    "class": "likesCount-".concat(_vm.id)
+  }, [_vm._v(_vm._s(_vm.likesCount))]), _vm._v(" "), _c("i", {
     staticClass: "far fa-heart likeBtn",
     "class": {
       "fas fa-heart": _vm.userLiked.includes(_vm.id)

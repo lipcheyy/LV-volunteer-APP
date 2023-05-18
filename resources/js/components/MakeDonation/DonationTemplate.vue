@@ -9,6 +9,7 @@
         </div>
         <div class="footer">
             <div class="heart-container">
+                <span :class="`likesCount-${id}`">{{likesCount}}</span>
                 <i class="far fa-heart likeBtn"
                    @click.prevent="toggleLike(id)"
                    :class="{'fas fa-heart': userLiked.includes(id)}"></i>
@@ -23,7 +24,7 @@
 import api from '../../api'
 export default {
     name: "DonationTemplate",
-    props:['title','content','user','id','userLiked'],
+    props:['title','content','user','id','userLiked','likesCount'],
     data(){
         return{
             truncatedLength:33,
@@ -60,15 +61,16 @@ export default {
             api.post(`/api/auth/donations/${this.id}/like`)
         },
         toggleLike(id){
+            let content = parseInt(document.querySelector(`.likesCount-${id}`).textContent)
             if (this.userLiked.includes(id)) {
                 const index = this.userLiked.indexOf(id)
                 this.userLiked.splice(index, 1)
-                // content -= 1
-                // document.querySelector(`.likesCount-${id}`).textContent = content
+                content -= 1
+                document.querySelector(`.likesCount-${id}`).textContent = content
             } else {
                 this.userLiked.push(id)
-                // content += 1
-                // document.querySelector(`.likesCount-${id}`).textContent = content
+                content += 1
+                document.querySelector(`.likesCount-${id}`).textContent = content
             }
             this.like()
         },
