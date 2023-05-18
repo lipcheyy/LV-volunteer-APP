@@ -9,11 +9,15 @@ use Illuminate\Http\Request;
 
 class DataController extends Controller
 {
-    public function __invoke(DataRequest $request)
+    public function liked(){
+        return auth()->user()->likes;
+    }
+    public function data(DataRequest $request)
     {
         $data=$request->validated();
         $user=User::where('id',$data['id'])->first();
         return $user;
 
     }
+
 }

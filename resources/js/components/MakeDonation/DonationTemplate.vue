@@ -9,7 +9,9 @@
         </div>
         <div class="footer">
             <div class="heart-container">
-                <i class="heart far fa-heart" @click.prevent="like"></i>
+                <i class="far fa-heart likeBtn"
+                   @click.prevent="toggleLike(id)"
+                   :class="{'fas fa-heart': userLiked.includes(id)}"></i>
             </div>
         </div>
     </div>
@@ -21,7 +23,7 @@
 import api from '../../api'
 export default {
     name: "DonationTemplate",
-    props:['title','content','user','id'],
+    props:['title','content','user','id','userLiked'],
     data(){
         return{
             truncatedLength:33,
@@ -57,6 +59,19 @@ export default {
         like(){
             api.post(`/api/auth/donations/${this.id}/like`)
         },
+        toggleLike(id){
+            if (this.userLiked.includes(id)) {
+                const index = this.userLiked.indexOf(id)
+                this.userLiked.splice(index, 1)
+                // content -= 1
+                // document.querySelector(`.likesCount-${id}`).textContent = content
+            } else {
+                this.userLiked.push(id)
+                // content += 1
+                // document.querySelector(`.likesCount-${id}`).textContent = content
+            }
+            this.like()
+        },
         contentToggler(){
             this.fullContent = !this.fullContent;
         }
@@ -66,6 +81,9 @@ export default {
 </script>
 
 <style scoped>
+div{
+    color: white;
+}
 .content-container{
     max-height: 200px;
     overflow-y: auto;
@@ -84,9 +102,15 @@ export default {
 }
 p{
     margin: 0;
+    color: white;
 }
 .far{
     font-size: 26px;
+    color: white;
+}
+.fas{
+    font-size: 26px;
+    color: red;
 }
 img{
     width: 100px;

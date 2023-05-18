@@ -101,7 +101,8 @@ Route::group([
             Route::post('/','VolunteerRoleController@store');
         });
         Route::group(['namespace' => 'User', 'prefix' => 'user'], function () {
-            Route::post('/userdata','DataController');
+            Route::get('/userdata','DataController@data');
+            Route::get('/likedPosts','DataController@liked');
         });
         Route::group(['namespace' => 'Marker', 'prefix' => '/markers'], function () {
             Route::post('/','MarkerController@store');

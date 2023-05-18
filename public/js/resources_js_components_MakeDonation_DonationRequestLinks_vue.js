@@ -24,11 +24,13 @@ __webpack_require__.r(__webpack_exports__);
     return {
       donations: null,
       truncatedLength: 20,
-      truncated: false
+      truncated: false,
+      userLiked: []
     };
   },
   mounted: function mounted() {
     this.getDonations();
+    this.getUserLiked();
   },
   methods: {
     getDonations: function getDonations() {
@@ -36,6 +38,14 @@ __webpack_require__.r(__webpack_exports__);
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/auth/donations').then(function (res) {
         _this.donations = res.data.data;
         console.log(_this.donations);
+      });
+    },
+    getUserLiked: function getUserLiked() {
+      var _this2 = this;
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/auth/user/likedPosts').then(function (res) {
+        res.data.forEach(function (e) {
+          _this2.userLiked.push(e.id);
+        });
       });
     }
   }
@@ -57,7 +67,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "DonationTemplate",
-  props: ['title', 'content', 'user', 'id'],
+  props: ['title', 'content', 'user', 'id', 'userLiked'],
   data: function data() {
     return {
       truncatedLength: 33,
@@ -91,6 +101,20 @@ __webpack_require__.r(__webpack_exports__);
     like: function like() {
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/auth/donations/".concat(this.id, "/like"));
     },
+    toggleLike: function toggleLike(id) {
+      if (this.userLiked.includes(id)) {
+        var index = this.userLiked.indexOf(id);
+        this.userLiked.splice(index, 1);
+        // content -= 1
+        // document.querySelector(`.likesCount-${id}`).textContent = content
+      } else {
+        this.userLiked.push(id);
+        // content += 1
+        // document.querySelector(`.likesCount-${id}`).textContent = content
+      }
+
+      this.like();
+    },
     contentToggler: function contentToggler() {
       this.fullContent = !this.fullContent;
     }
@@ -123,7 +147,8 @@ var render = function render() {
         id: donation.id,
         title: donation.title,
         content: donation.content,
-        user: donation.user
+        user: donation.user,
+        userLiked: _vm.userLiked
       }
     })], 1);
   }), 0);
@@ -171,11 +196,14 @@ var render = function render() {
   }, [_c("div", {
     staticClass: "heart-container"
   }, [_c("i", {
-    staticClass: "heart far fa-heart",
+    staticClass: "far fa-heart likeBtn",
+    "class": {
+      "fas fa-heart": _vm.userLiked.includes(_vm.id)
+    },
     on: {
       click: function click($event) {
         $event.preventDefault();
-        return _vm.like.apply(null, arguments);
+        return _vm.toggleLike(_vm.id);
       }
     }
   })])])])]);
@@ -202,7 +230,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.main-container[data-v-4bd15bf0]{\n    width: 100%;\n    height: 100%;\n    display: flex;\n    justify-content: space-around;\n    padding-top: 10px;\n    flex-wrap: wrap;\n}\n.donations-container[data-v-4bd15bf0]{\n    padding: 30px;\n    display: flex;\n    justify-content: space-between;\n    width: 350px;\n    height: 350px;\n    border-radius: 10px;\n    background: rgba(208, 207, 207, 0.97);\n    margin-bottom: 40px ;\n    box-shadow: 4px 24px 103px -19px rgba(117,117,117,1);\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.main-container[data-v-4bd15bf0]{\n    width: 100%;\n    height: 100%;\n    display: flex;\n    justify-content: space-around;\n    padding-top: 10px;\n    flex-wrap: wrap;\n}\n.donations-container[data-v-4bd15bf0]{\n    padding: 30px;\n    display: flex;\n    justify-content: space-between;\n    width: 350px;\n    height: 350px;\n    border-radius: 10px;\n    background: black;\n    margin-bottom: 40px ;\n    box-shadow: 4px 24px 103px -19px rgba(117,117,117,1);\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -225,7 +253,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.content-container[data-v-5a9a1900]{\n    max-height: 200px;\n    overflow-y: auto;\n}\n.post-container[data-v-5a9a1900] {\n    display: flex;\n    flex-direction: column;\n    justify-content: space-between;\n    height: 100%;\n}\n.footer[data-v-5a9a1900] {\n    margin-top: auto;\n}\n.heart-container[data-v-5a9a1900]{\n    margin-top: auto;\n}\np[data-v-5a9a1900]{\n    margin: 0;\n}\n.far[data-v-5a9a1900]{\n    font-size: 26px;\n}\nimg[data-v-5a9a1900]{\n    width: 100px;\n    height: 170px;\n}\n\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\ndiv[data-v-5a9a1900]{\n    color: white;\n}\n.content-container[data-v-5a9a1900]{\n    max-height: 200px;\n    overflow-y: auto;\n}\n.post-container[data-v-5a9a1900] {\n    display: flex;\n    flex-direction: column;\n    justify-content: space-between;\n    height: 100%;\n}\n.footer[data-v-5a9a1900] {\n    margin-top: auto;\n}\n.heart-container[data-v-5a9a1900]{\n    margin-top: auto;\n}\np[data-v-5a9a1900]{\n    margin: 0;\n    color: white;\n}\n.far[data-v-5a9a1900]{\n    font-size: 26px;\n    color: white;\n}\n.fas[data-v-5a9a1900]{\n    font-size: 26px;\n    color: red;\n}\nimg[data-v-5a9a1900]{\n    width: 100px;\n    height: 170px;\n}\n\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

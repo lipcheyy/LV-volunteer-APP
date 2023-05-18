@@ -5,7 +5,8 @@
                 :id="donation.id"
                 :title="donation.title"
                 :content="donation.content"
-                :user="donation.user">
+                :user="donation.user"
+                :userLiked="userLiked">
             </donation-template>
         </div>
     </div>
@@ -22,11 +23,13 @@ export default {
         return{
             donations:null,
             truncatedLength:20,
-            truncated:false
+            truncated:false,
+            userLiked:[]
         }
     },
     mounted() {
         this.getDonations()
+        this.getUserLiked()
     },
     methods:{
         getDonations(){
@@ -35,7 +38,14 @@ export default {
                     this.donations=res.data.data
                     console.log(this.donations);
                 })
-        }
+        },getUserLiked(){
+            api.get('/api/auth/user/likedPosts')
+                .then(res=>{
+                    res.data.forEach(e=>{
+                        this.userLiked.push(e.id)
+                    })
+                })
+        },
     }
 }
 </script>
@@ -57,7 +67,7 @@ export default {
     width: 350px;
     height: 350px;
     border-radius: 10px;
-    background: rgba(208, 207, 207, 0.97);
+    background: black;
     margin-bottom: 40px ;
     -webkit-box-shadow: 4px 24px 103px -19px rgba(117,117,117,1);
     -moz-box-shadow: 4px 24px 103px -19px rgba(117,117,117,1);
