@@ -60,8 +60,10 @@ export default {
             return access_token ? this.$router.push({name: 'wanted.request'}) : this.$router.push({name: 'user.login'})
         },
         getRegions(){
+            this.$Progress.start()
             api.get('/api/auth/regions')
                 .then(res=>{ this.regions=res.data
+                    this.$Progress.finish()
                 })
         }
 

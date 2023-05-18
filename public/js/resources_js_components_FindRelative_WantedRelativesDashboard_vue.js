@@ -47,8 +47,10 @@ __webpack_require__.r(__webpack_exports__);
     },
     getRegions: function getRegions() {
       var _this2 = this;
+      this.$Progress.start();
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/auth/regions').then(function (res) {
         _this2.regions = res.data;
+        _this2.$Progress.finish();
       });
     }
   }
