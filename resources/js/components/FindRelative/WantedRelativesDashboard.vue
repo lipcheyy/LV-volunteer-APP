@@ -1,15 +1,18 @@
 <template>
     <div>
-        <a href="" class="btn btn-primary" @click.prevent="findForm">find yout relative</a>
+
         <div class="filter">
-            <select v-model="region_id">
-                <template v-for="region in regions">
-                    <option :value="region.id">
-                        {{region.title}}
-                    </option>
-                </template>
-            </select>
-            <router-link :to="{name:'regions.index',params:{id:this.region_id}}">sort</router-link>
+            <a href="" class="btn btn-outline-primary" @click.prevent="findForm">find your relative</a>
+            <div class="filter-items">
+                <select v-model="region_id">
+                    <template v-for="region in regions">
+                        <option :value="region.id">
+                            {{region.title}}
+                        </option>
+                    </template>
+                </select>
+                <router-link :to="{name:'regions.index',params:{id:this.region_id}}" class="btn btn-outline-success">sort</router-link>
+            </div>
         </div>
         <div class="main">
             <div class="content">
@@ -63,7 +66,7 @@ export default {
         },
         getRegions(){
             this.$Progress.start()
-            api.get('/api/auth/regions')
+            axios.get('/api/regions')
                 .then(res=>{ this.regions=res.data
                     this.$Progress.finish()
                 })
@@ -80,12 +83,31 @@ export default {
     justify-content: space-around;
 
 }
-
+.filter-items{
+    display: flex;
+    gap: 5px;
+}
+.filter{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
 .containers {
-
+    background-color: #494949;
     margin-bottom: 40px;
     border: 2px solid #b4b4b4;
     border-radius: 10px;
+    -webkit-box-shadow: 4px 24px 103px -19px rgba(117,117,117,1);
+    -moz-box-shadow: 4px 24px 103px -19px rgba(117,117,117,1);
+    box-shadow: 4px 24px 103px -19px rgba(117,117,117,1);
+}
+.containers:hover{
+    webkit-box-shadow: 0px 4px 120px 12px rgba(66,0,66,1);
+    -moz-box-shadow: 0px 4px 120px 12px rgba(66,0,66,1);
+    box-shadow: 0px 4px 120px 12px rgba(66,0,66,1);
+    transition: 0.3s ease-in-out;
 }
 
 </style>

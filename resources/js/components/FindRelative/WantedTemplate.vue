@@ -9,7 +9,7 @@
                 <div class="about">
                     <p>{{truncatedAbout}} <router-link :to="{name:'wanted.show',params:{id:id}}" v-if="truncated">детальніше </router-link></p>
                 </div>
-
+                <div v-for="(count,value) in comment_count">{{value+': '+count}}</div>
             </div>
         </div>
 
@@ -19,7 +19,7 @@
 <script>
 export default {
     name: "WantedTemplate",
-    props:['name','url','about','id'],
+    props:['name','url','about','id','comment_count'],
     data() {
         return {
             truncatedLength: 25,
@@ -41,23 +41,18 @@ export default {
 </script>
 
 <style scoped>
-/*img{*/
-/*    max-width: 347px;*/
-/*    max-height: 350px;*/
-/*    width: auto;*/
-/*    height: auto;*/
-/*    border-radius: 10px 10px 0 0;*/
-/*    object-fit: cover;*/
-/*}*/
-
+div{
+    color: white;
+    text-align: center;
+}
 img{
-    width: 347px;
+    width: 500px;
     max-height: 350px;
     border-radius: 10px 10px 0 0;
     object-fit: cover;
 }
 .about{
-    max-width: 350px;
+    max-width: 500px;
 }
 .info, .about {
     display: flex;

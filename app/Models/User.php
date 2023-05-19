@@ -25,6 +25,9 @@ class User extends Authenticatable implements JWTSubject
     public function likes(){
         return $this->belongsToMany(Donation::class,'donation_user_likes','user_id','donation_id');
     }
+    public function findRequest(){
+        return $this->hasMany(Wanted::class);
+    }
     /**
      * The attributes that are mass assignable.
      *

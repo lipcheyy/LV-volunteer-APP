@@ -33,6 +33,12 @@ class DataController extends Controller
         };
         User::where('email',$email)->update(['password'=>$data['password']]);
     }
+    public function updateUsername(){
+        $data=\request()->validate(['name'=>'string']);
+        $user=auth()->user();
+        $user->update(['name'=>$data['name']]);
+        return response()->json(['message'=>'success']);
+    }
 
 
 }

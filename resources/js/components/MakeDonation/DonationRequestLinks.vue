@@ -68,7 +68,7 @@ export default {
     width: 350px;
     height: 350px;
     border-radius: 10px;
-    background: black;
+    background: #494949;
     margin-bottom: 40px ;
     -webkit-box-shadow: 4px 24px 103px -19px rgba(117,117,117,1);
     -moz-box-shadow: 4px 24px 103px -19px rgba(117,117,117,1);

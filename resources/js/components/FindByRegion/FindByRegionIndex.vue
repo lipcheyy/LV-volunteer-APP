@@ -1,6 +1,5 @@
 <template>
     <div>
-        <a href="" class="btn btn-primary" @click.prevent="findForm">find yout relative</a>
         <div class="main">
             <div class="containers" v-for="wanted in wanteds">
                 <template v-for="image in wanted.images">
@@ -40,7 +39,7 @@ export default {
     },
     methods:{
         getWanteds(){
-            api.get(`/api/auth/regions/${this.region_id}`)
+            axios.get(`/api/regions/${this.region_id}`)
                 .then(res=>{
                     console.log(res.data);
                     this.wanteds=res.data.data
@@ -60,13 +59,22 @@ export default {
 .main {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+   flex-direction: column;
+    align-items: center;
 }
-
 .containers {
-
+    background-color: #494949;
     margin-bottom: 40px;
     border: 2px solid #b4b4b4;
     border-radius: 10px;
+    -webkit-box-shadow: 4px 24px 103px -19px rgba(117,117,117,1);
+    -moz-box-shadow: 4px 24px 103px -19px rgba(117,117,117,1);
+    box-shadow: 4px 24px 103px -19px rgba(117,117,117,1);
+}
+.containers:hover {
+    webkit-box-shadow: 0px 4px 120px 12px rgba(66, 0, 66, 1);
+    -moz-box-shadow: 0px 4px 120px 12px rgba(66, 0, 66, 1);
+    box-shadow: 0px 4px 120px 12px rgba(66, 0, 66, 1);
+    transition: 0.3s ease-in-out;
 }
 </style>

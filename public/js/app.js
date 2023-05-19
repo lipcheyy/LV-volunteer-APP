@@ -5320,7 +5320,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       access_token: null,
-      user_role: null
+      user_role: null,
+      siu: 'suuui'
     };
   },
   mounted: function mounted() {
@@ -5344,6 +5345,7 @@ __webpack_require__.r(__webpack_exports__);
           var user = res.data;
           localStorage.setItem('user_role', user.role);
           localStorage.setItem('id', user.id);
+          localStorage.setItem('username', user.name);
           _this.user_role = parseInt(user.role);
         });
       }
@@ -5730,7 +5732,7 @@ route.beforeEach(function (to, from, next) {
   var access_token = localStorage.getItem('access_token');
   var user_role = localStorage.getItem('user_role');
   if (!access_token) {
-    if (to.name === 'user.login' || to.name === 'user.registration' || to.name === 'wanted.index' || to.name === 'wanted.show' || to.name === 'map.index') {
+    if (to.name === 'user.login' || to.name === 'user.registration' || to.name === 'wanted.index' || to.name === 'wanted.show' || to.name === 'map.index' || to.name === 'regions.index') {
       return next();
     } else {
       return next({

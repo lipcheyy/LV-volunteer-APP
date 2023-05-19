@@ -32,7 +32,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     getWanted: function getWanted() {
       var _this = this;
-      axios.get("/api/wanted/".concat(this.wantedId)).then(function (res) {
+      axios.get("/api/wanteds/".concat(this.wantedId)).then(function (res) {
         _this.wanted = res.data.data;
         console.log(_this.wanted);
       });
@@ -97,7 +97,7 @@ var render = function render() {
     _c = _vm._self._c;
   return _c("div", [_c("div", {
     staticClass: "main"
-  }, [_c("div", {
+  }, [_vm.wanted ? _c("div", {
     staticClass: "wanted"
   }, [_c("div", {
     staticClass: "sub-container"
@@ -120,7 +120,7 @@ var render = function render() {
     staticClass: "name"
   }, [_c("h2", [_c("strong", [_vm._v(_vm._s(_vm.wanted.name))])])]), _vm._v(" "), _c("div", {
     staticClass: "about"
-  }, [_c("p", [_vm._v(_vm._s(_vm.wanted.about))])])]) : _vm._e()]), _vm._v(" "), _c("div", {
+  }, [_c("p", [_vm._v(_vm._s(_vm.wanted.about))])])]) : _vm._e()]), _vm._v(" "), _vm.wanted ? _c("div", {
     staticClass: "comment-section"
   }, [_c("div", {
     staticClass: "mb-2"
@@ -218,7 +218,7 @@ var render = function render() {
         return _vm.storeComment.apply(null, arguments);
       }
     }
-  })])])])])]);
+  })])]) : _vm._e()]) : _vm._e()])]);
 };
 var staticRenderFns = [];
 render._withStripped = true;

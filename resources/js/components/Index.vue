@@ -25,7 +25,8 @@ export default {
     data(){
         return{
             access_token:null,
-            user_role:null
+            user_role:null,
+            siu:'suuui'
         }
     },
     mounted() {
@@ -49,6 +50,7 @@ export default {
                         const user =res.data
                         localStorage.setItem('user_role',user.role)
                         localStorage.setItem('id',user.id)
+                        localStorage.setItem('username',user.name)
                         this.user_role=parseInt(user.role)
                     })
             }

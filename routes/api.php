@@ -27,9 +27,13 @@ Route::group(['namespace'=>'Admin'],function (){
         Route::get('/','PostController@index');
     });
 });
-Route::group(['namespace' => 'Wanted', 'prefix' => 'wanted'], function () {
+Route::group(['namespace' => 'Wanted', 'prefix' => 'wanteds'], function () {
     Route::get('/','WantedController@index');
     Route::get('/{wanted}','WantedController@show');
+});
+Route::group(['namespace' => 'Region', 'prefix' => 'regions'], function () {
+    Route::get('/','RegionController@index');
+    Route::get('/{region}','RegionController@getWantedByRegion');
 });
 Route::group([
 
@@ -80,7 +84,8 @@ Route::group([
                 Route::patch('/{comment}','CommentController@update');
                 Route::delete('/{comment}','CommentController@destroy');
             });
-            Route::get('/{wanted}','WantedController@show');
+            Route::get('/user','WantedController@getUsersRequests');
+            Route::post('/','WantedController@store');
         });
         Route::group(['namespace' => 'Goal', 'prefix' => 'goals'], function () {
             Route::get('/','GoalController@getGoals');
@@ -96,22 +101,17 @@ Route::group([
             Route::get('/{donation}','DonationController@getDonation');
             Route::get('/','DonationController@index');
         });
-        Route::group(['namespace' => 'Wanted', 'prefix' => 'wanted'], function () {
-            Route::post('/','WantedController@store');
 
-        });
         Route::group(['namespace'=>'VolunteerRoleRequest','prefix'=>'volunteer-role-request'],function (){
             Route::post('/','VolunteerRoleController@store');
         });
         Route::group(['namespace' => 'User', 'prefix' => 'user'], function () {
             Route::patch('/update','DataController@updateData');
+            Route::patch('/update/name','DataController@updateUsername');
             Route::get('/userdata','DataController@data');
             Route::get('/likedPosts','DataController@liked');
         });
-        Route::group(['namespace' => 'Region', 'prefix' => 'regions'], function () {
-            Route::get('/','RegionController@index');
-            Route::get('/{region}','RegionController@getWantedByRegion');
-        });
+
         Route::group(['namespace' => 'Marker', 'prefix' => '/markers'], function () {
             Route::post('/','MarkerController@store');
             Route::get('/','MarkerController@getMarkers');

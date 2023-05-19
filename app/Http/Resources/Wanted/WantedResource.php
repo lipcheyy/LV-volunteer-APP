@@ -22,7 +22,8 @@ class WantedResource extends JsonResource
             'about'=>$this->about,
             'images'=>ImageResource::collection($this->images),
             'user'=>new UserResource($this->user),
-            'comment'=>CommentResource::collection($this->comments)
+            'comment'=>CommentResource::collection($this->comments),
+            'comments_count'=>$this->comments_count
         ];
     }
 }

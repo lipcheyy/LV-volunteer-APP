@@ -17,6 +17,10 @@ class WantedController extends Controller
         $wanteds=Wanted::where('approved',true)->get();
         return WantedResource::collection($wanteds);
     }
+    public function getUsersRequests(){
+        $user_requests=auth()->user()->findRequest()->orderByDesc('id')->get();
+        return WantedResource::collection($user_requests);
+    }
     public function store(StoreRequest $request){
         $data=$request->validated();
         $images=$data['images'];

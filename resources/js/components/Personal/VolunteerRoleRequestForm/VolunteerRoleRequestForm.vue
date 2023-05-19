@@ -1,26 +1,30 @@
 <template>
-<div>
-    <div class="d-flex flex-column gap-4 w-50">
-        <label for="firstname">Ім'я:</label>
-        <input v-model="name" type="text" id="firstname">
+    <div class="container">
+        <div class="form-container">
+            <div class="d-flex flex-column gap-4">
+                <label for="firstname" class="form-label">Ім'я:</label>
+                <input v-model="name" type="text" id="firstname" class="form-control">
 
-        <label for="surname">Прізвище:</label>
-        <input v-model="surname" type="text" id="surname">
+                <label for="surname" class="form-label">Прізвище:</label>
+                <input v-model="surname" type="text" id="surname" class="form-control">
 
-        <label for="middlename">По батькові:</label>
-        <input v-model="middlename" type="text" id="middlename">
+                <label for="middlename" class="form-label">По батькові:</label>
+                <input v-model="middlename" type="text" id="middlename" class="form-control">
 
-        <label for="about">Дайте коротку інформацію чому саме ви повинні отримати статус волонтера</label>
-        <textarea v-model="about" id="about"></textarea>
-        <label for="card">Дайте коротку інформацію про кредитну картку</label>
-        <textarea v-model="card" id="card"></textarea>
+                <label for="about" class="form-label">Дайте коротку інформацію чому саме ви повинні отримати статус волонтера</label>
+                <textarea v-model="about" id="about" class="form-control"></textarea>
 
-        <label for="apply">Подати заявку на отримання статусу волонтера</label>
-        <input class="btn-primary btn" @click.prevent="store" id="apply" value="подати ">
+                <label for="card" class="form-label">Дайте інформацію про кредитну картку</label>
+                <input  type="text" v-model="card" id="card" class="form-control">
 
+                <label for="apply" class="form-label">Подати заявку на отримання статусу волонтера</label>
+                <input class="btn btn-outline-info" @click.prevent="store" id="apply" value="Подати">
+            </div>
+        </div>
     </div>
-</div>
 </template>
+
+
 
 <script>
 import api from "../../../api";
@@ -48,5 +52,41 @@ export default {
 </script>
 
 <style scoped>
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.form-container {
+    background-color: #494949;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+}
+
+.form-label {
+    color: #fff;
+}
+
+.form-control {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.btn {
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: none;
+    color: #fff;
+    background-color: #007bff;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
 
 </style>

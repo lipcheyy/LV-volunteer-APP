@@ -16,7 +16,7 @@ class DonationController extends Controller
         Donation::create($data);
     }
     public function index(){
-        $donations=Donation::all();
+        $donations = Donation::orderBy('likes_count', 'desc')->get();
         return DonationResource::collection($donations);
     }
     public function getDonation(Donation $donation){

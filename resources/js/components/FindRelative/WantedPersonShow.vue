@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="main">
-            <div class="wanted">
+            <div class="wanted" v-if="wanted">
                 <div class="sub-container">
                     <div class="image">
                         <template v-for="image in wanted.images">
@@ -18,7 +18,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="comment-section">
+                <div class="comment-section" v-if="wanted">
                     <div class="mb-2">Відгуки:</div>
                     <div class="comments-container ">
                         <template v-for="comment in wanted.comment">
@@ -79,7 +79,7 @@ export default {
     },
     methods: {
         getWanted() {
-            axios.get(`/api/wanted/${this.wantedId}`)
+            axios.get(`/api/wanteds/${this.wantedId}`)
                 .then(res => {
                     this.wanted = res.data.data
                     console.log(this.wanted);

@@ -1,55 +1,77 @@
 <template>
     <div>
-        <router-link v-if="userRole===0" :to="{name:'personal.role.apply'}" class="btn btn-primary">Подати заявку на отримання звання волонотера</router-link>
-        <router-link v-if="userRole===2" :to="{name:'donation.start'}" class="btn btn-primary">Почати збір</router-link>
-        Редагувати профіль
-        <input type="text" v-model="name">
-        <input type="text" v-model="old_password">
-        <input type="text" v-model="password">
-        <input type="text" v-model="password_confirm">
-        <input type="submit" @click.prevent="updateUserData">
+        <div class="user">
+            <div class="rounded-circle">
+                <i class="fa-regular fa-user"></i>
+
+            </div>
+            <p>{{username}}</p>
+        </div>
+        <div class="btns">
+            <router-link v-if="userRole===2" :to="{name:'donation.start'}" class="btn btn-primary start">Почати збір</router-link>
+            <router-link v-if="userRole===0" :to="{name:'personal.role.apply'}" class="btn btn-outline-primary apply">Подати заявку на отримання звання волонотера</router-link>
+            <div class="main-btns">
+                <a href="" class="btn btn-outline-info" @click.prevent="my_requests=true, changeUserData=false">Мої оголошення</a>
+                <a href="" class="btn btn-outline-info" @click.prevent="my_requests=false, changeUserData=true">Редагування даних</a>
+            </div>
+        </div>
+        <change-user-data v-if="changeUserData" class="mt-3"></change-user-data>
+        <my-requests v-if="my_requests" class="mt-3"></my-requests>
     </div>
 </template>
 
 <script>
 import api from "../../api";
+import myRequests from "./MyRequests";
+import changeUserData from "./ChangeUserData";
 export default {
-    data(){
-        return{
-            userRole:parseInt(localStorage.getItem('user_role')),
-            username:null,
-            name:null,
-            password:null,
-            old_password:null,
-            password_confirm:null
-        }
+    components:{
+        changeUserData,
+        myRequests
     },
     name: "Personal",
-    mounted() {
-        // this.userdata()
-    },
-    methods:{
-        updateUserData(){
-            api.patch('/api/auth/user/update',{
-                password:this.password_confirm,
-                old_password:this.old_password,
-                password_confirm:this.password_confirm,
+    data(){
+        return{
+            username:localStorage.getItem('username'),
+            changeUserData:false,
+            my_requests:true,
+            userRole:parseInt(localStorage.getItem('user_role')),
 
-            })
         }
-        // userdata() {
-        //     api.post('/api/auth/me')
-        //         .then(res=>{
-        //             const user =res.data
-        //             localStorage.setItem('user_role',user.role)
-        //             this.userRole=parseInt(user.role)
-        //         })
-        // },
     },
+    mounted() {
+    },
+
 
 }
 </script>
 
 <style scoped>
-
+.fa-user{
+    font-size: 40px;
+}
+.rounded-circle{
+    padding: 20px;
+    border: 4px solid black;
+    display: flex;
+    justify-content: center;
+    width: 90px;
+}
+.user{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.btns{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+.start,.apply{
+}
+.main-btns{
+    display: flex;
+    gap: 10px;
+}
 </style>
