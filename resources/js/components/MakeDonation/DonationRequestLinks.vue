@@ -62,7 +62,7 @@ export default {
 
 }
 .donations-container{
-    padding: 30px;
+    padding: 20px;
     display: flex;
     justify-content: space-between;
     width: 350px;

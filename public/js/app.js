@@ -5398,49 +5398,51 @@ var render = function render() {
         name: "user.login"
       }
     }
-  }, [_vm._v("logn")]) : _vm._e(), _vm._v(" "), !_vm.access_token ? _c("router-link", {
+  }, [_vm._v("Авторизація")]) : _vm._e(), _vm._v(" "), !_vm.access_token ? _c("router-link", {
     attrs: {
       to: {
         name: "user.registration"
       }
     }
-  }, [_vm._v("registration")]) : _vm._e(), _vm._v(" "), _vm.access_token ? _c("router-link", {
+  }, [_vm._v("Реєстрація")]) : _vm._e(), _vm._v(" "), _vm.access_token ? _c("router-link", {
     attrs: {
       to: {
         name: "posts.index"
       }
     }
-  }, [_vm._v("posts")]) : _vm._e(), _vm._v(" "), _vm.access_token ? _c("router-link", {
+  }, [_vm._v("Новини")]) : _vm._e(), _vm._v(" "), _vm.access_token ? _c("router-link", {
     attrs: {
       to: {
         name: "personal.page"
       }
     }
-  }, [_vm._v("personal")]) : _vm._e(), _vm._v(" "), _vm.access_token ? _c("router-link", {
+  }, [_c("i", {
+    staticClass: "fas fa-user"
+  })]) : _vm._e(), _vm._v(" "), _vm.access_token ? _c("router-link", {
     attrs: {
       to: {
         name: "donation.index"
       }
     }
-  }, [_vm._v("Донати")]) : _vm._e(), _vm._v(" "), _c("router-link", {
+  }, [_vm._v("Донати")]) : _vm._e(), _vm._v(" "), _vm.access_token ? _c("router-link", {
     attrs: {
       to: {
         name: "map.index"
       }
     }
-  }, [_vm._v("map")]), _vm._v(" "), _c("router-link", {
+  }, [_vm._v("Карта")]) : _vm._e(), _vm._v(" "), _c("router-link", {
     attrs: {
       to: {
         name: "wanted.index"
       }
     }
-  }, [_vm._v("wanted")]), _vm._v(" "), _vm.access_token && _vm.user_role === 1 ? _c("router-link", {
+  }, [_vm._v("Шукай Зниклих")]), _vm._v(" "), _vm.access_token && _vm.user_role === 1 ? _c("router-link", {
     attrs: {
       to: {
         name: "admin.statistic"
       }
     }
-  }, [_vm._v("admin")]) : _vm._e(), _vm._v(" "), _vm.access_token ? _c("a", {
+  }, [_vm._v("Адмін Панель")]) : _vm._e(), _vm._v(" "), _vm.access_token ? _c("a", {
     attrs: {
       href: "#"
     },

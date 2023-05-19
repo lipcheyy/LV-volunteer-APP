@@ -13,7 +13,6 @@
         </div>
         <div class="main">
             <div class="content">
-
                 <div class="containers" v-for="wanted in wanteds">
                     <template v-for="image in wanted.images">
                         <router-link :to="{name:'wanted.show',params:{id:wanted.id}}" class="btn">

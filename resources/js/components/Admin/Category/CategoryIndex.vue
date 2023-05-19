@@ -1,9 +1,8 @@
 <template>
     <div>
-        <p>category main page</p>
-
         <create-component ref="test"></create-component>
-
+        <div class="row justify-content-center">
+            <div class="col-auto table-con">
         <table class="table">
             <thead>
                 <tr>
@@ -26,11 +25,13 @@
                 <tr :class="categoryToEdit(category.id)?'':'d-none'">
                     <td>{{category.id}}</td>
                     <td><input v-model="title" type="text" class="form-control" ></td>
-                    <td><a href="#" @click.prevent="update(category.id)">update</a></td>
+                    <td><a href="#" @click.prevent="update(category.id)"><i class="fa-solid fa-pen-to-square"></i></a></td>
                 </tr>
             </template>
             </tbody>
         </table>
+            </div>
+            </div>
     </div>
 </template>
 
@@ -83,5 +84,13 @@ export default {
 </script>
 
 <style scoped>
-
+.table-con{
+    width: 40%;
+}
+.fa-pencil, .fa-pen-to-square{
+    color: green;
+}
+.fa-trash{
+    color: red;
+}
 </style>

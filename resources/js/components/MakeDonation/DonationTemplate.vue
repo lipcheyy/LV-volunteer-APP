@@ -85,6 +85,10 @@ export default {
 </script>
 
 <style scoped>
+a{
+    color: white;
+    text-decoration: none;
+}
 div{
     color: white;
 }
@@ -102,7 +106,10 @@ div{
     margin-top: auto;
 }
 .heart-container{
-    margin-top: auto;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 p{
     margin: 0;
