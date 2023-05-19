@@ -1,25 +1,38 @@
 <template>
-    <div class="w-25 d-flex gap-4 flex-column">
-        name of wanted person
-        <div>
-            <input v-model="name" type="text" class="form-control">
-        </div>
-        write about person
-        <div>
-            <textarea v-model="about" class="form-control"></textarea>
-        </div>
-        <div>
-            <select v-model="region_id" >
-                <template v-for="region in regions">
-                <option :value="region.id">{{region.title}}</option></template>
-            </select>
-        </div>
-        <div ref="dropzone" class="p-4 bg-info"></div>
-        <div>
-            <input type="submit" class="btn btn-success" @click.prevent="store" value="add request">
+    <div class="container">
+        <div class="form-container">
+            <div class="d-flex flex-column gap-4">
+                <label for="name">ПІБ</label>
+                <div>
+                    <input v-model="name" type="text" id="name" class="form-control">
+                </div>
+
+                <label for="about">Додайте опис про людину(характерні риси і тому подібне):</label>
+                <div>
+                    <textarea v-model="about" id="about" class="form-control"></textarea>
+                </div>
+
+                <label for="region">Виберіть регіон:</label>
+                <div>
+                    <select v-model="region_id" class="form-control">
+                        <template v-for="region in regions">
+                            <option :value="region.id">{{ region.title }}</option>
+                        </template>
+                    </select>
+                </div>
+
+                <div ref="dropzone" class="dropzoone">
+                    Перетягніть сюди фото, або виберіть
+                </div>
+
+                <div>
+                    <input type="submit" class="btn btn-success" @click.prevent="store" value="Зробити запит">
+                </div>
+            </div>
         </div>
     </div>
 </template>
+
 
 <script>
 import Dropzone from 'dropzone'
@@ -72,6 +85,66 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+div{
+    color: white;
+}
+.form-container {
+    width: 400px;
+    padding: 20px;
+    background-color: #494949;
+    border-radius: 10px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.dz-details,.dz-success-mark,.dz-error-mark{
+    display: none;
+}
+
+.dropzoone {
+    border: 2px dashed #ccc;
+    background-color: #f8f8f8;
+    min-height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-weight: bold;
+    color: #888;
+}
+
+.dropzoone:hover {
+    border-color: #666;
+}
+
+
+
+.btn {
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+.btn-success {
+    background-color: #28a745;
+}
+
+.btn:hover {
+    opacity: 0.8;
+}
 
 </style>

@@ -48,7 +48,6 @@ export default {
         getRequests(){
             api.get('/api/auth/wanted/user').then(res=>{
                 this.wanteds=res.data.data
-                console.log(this.wanteds);
             })
         },
         getRegions(){
@@ -56,7 +55,6 @@ export default {
             axios.get('/api/regions')
                 .then(res=>{ this.regions=res.data
                     this.$Progress.finish()
-                    console.log(this.regions);
                 })
         }
 
@@ -71,6 +69,7 @@ export default {
     justify-content: space-around;
 }
 .containers {
+    background-color: #494949;
     margin-bottom: 40px;
     border: 2px solid #b4b4b4;
     border-radius: 10px;

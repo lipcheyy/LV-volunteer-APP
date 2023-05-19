@@ -18,7 +18,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="comment-section" v-if="wanted">
+                <div v-if="!access_token" class="non-auth">Допоможіть знайти!Додайте відгук якщо вам відома інформація про людину
+                    <a href="#" class="btn btn-primary">Відгук</a></div>
+
+                <div class="comment-section" v-if="access_token">
                     <div class="mb-2">Відгуки:</div>
                     <div class="comments-container ">
                         <template v-for="comment in wanted.comment">
@@ -30,7 +33,7 @@
                                     </span>
                                     <span :class="commentToEdit(comment.id)?'':'d-none'">
                                         <input v-model="contentToEdit">
-                                        <a href="" @click.prevent="update(comment.id)">upd</a>
+                                        <a href="" @click.prevent="update(comment.id)" class="btn btn-outline-success">Оновити</a>
                                     </span>
                                 </div>
                                 <div class="comment-interactions">
@@ -157,7 +160,16 @@ img {
     min-height: 100px;
     width: 100%;
 }
-
+.non-auth{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    border: 4px solid black;
+    border-radius: 5px;
+    height: 15%;
+    margin-left:10px ;
+}
 .about {
     max-width: 400px;
 }

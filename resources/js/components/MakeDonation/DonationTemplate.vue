@@ -1,23 +1,26 @@
 <template>
 <div>
-    <router-link :to="{name:'user.donate',params:{id:id}}">
+
     <div class="post-container">
+        <router-link :to="{name:'user.donate',params:{id:id}}">
         <div><i class="fas fa-user"></i>add by {{user.name}}</div>
         <div><h1>{{title}}</h1></div>
         <div class="content-container">
             <span v-html="resizeImage(truncatedContent)"></span>
             <span v-if="truncated"><a href="#" @click.prevent="contentToggler">детальніше</a></span>
         </div>
+        </router-link>
         <div class="footer">
             <div class="heart-container">
                 <span :class="`likesCount-${id}`">{{likesCount}}</span>
                 <i class="far fa-heart likeBtn"
                    @click.prevent="toggleLike(id)"
-                   :class="{'fas fa-heart': userLiked.includes(id)}"></i>
+                   :class="{'fas fa-heart active': userLiked.includes(id)}"></i>
             </div>
+            <div v-if="user.id===user_id" @click.prevent="update(id)"><i class="fas fa-trash"></i></div>
         </div>
     </div>
-    </router-link>
+
 
 </div>
 </template>
@@ -31,9 +34,11 @@ export default {
         return{
             truncatedLength:33,
             truncated:false,
-            fullContent:false
+            fullContent:false,
+            user_id:parseInt(localStorage.getItem('id'))
         }
     },
+
     computed: {
         truncatedContent() {
             const content = this.content.split(" ");
@@ -76,6 +81,11 @@ export default {
             }
             this.like()
         },
+        update(id){
+            if (confirm('Ви впевнені що хочете завершити збір?')) {
+                api.patch(`/api/auth/donations/${id}`, {is_active: 0})
+            }
+        },
         contentToggler(){
             this.fullContent = !this.fullContent;
         }
@@ -102,24 +112,31 @@ div{
     justify-content: space-between;
     height: 100%;
 }
+.fa-trash{color: red}
 .footer {
     margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .heart-container{
-    margin-top: 10px;
     display: flex;
     align-items: center;
     gap: 10px;
+}
+.fas-trash{
+    color: red;
 }
 p{
     margin: 0;
     color: white;
 }
+
 .far{
     font-size: 26px;
     color: white;
 }
-.fa-heart{
+.active{
     font-size: 26px;
     color: red;
 }

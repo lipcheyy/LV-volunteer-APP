@@ -120,7 +120,14 @@ var render = function render() {
     staticClass: "name"
   }, [_c("h2", [_c("strong", [_vm._v(_vm._s(_vm.wanted.name))])])]), _vm._v(" "), _c("div", {
     staticClass: "about"
-  }, [_c("p", [_vm._v(_vm._s(_vm.wanted.about))])])]) : _vm._e()]), _vm._v(" "), _vm.wanted ? _c("div", {
+  }, [_c("p", [_vm._v(_vm._s(_vm.wanted.about))])])]) : _vm._e()]), _vm._v(" "), !_vm.access_token ? _c("div", {
+    staticClass: "non-auth"
+  }, [_vm._v("Допоможіть знайти!Додайте відгук якщо вам відома інформація про людину\n                "), _c("a", {
+    staticClass: "btn btn-primary",
+    attrs: {
+      href: "#"
+    }
+  }, [_vm._v("Відгук")])]) : _vm._e(), _vm._v(" "), _vm.access_token ? _c("div", {
     staticClass: "comment-section"
   }, [_c("div", {
     staticClass: "mb-2"
@@ -154,6 +161,7 @@ var render = function render() {
         }
       }
     }), _vm._v(" "), _c("a", {
+      staticClass: "btn btn-outline-success",
       attrs: {
         href: ""
       },
@@ -163,7 +171,7 @@ var render = function render() {
           return _vm.update(comment.id);
         }
       }
-    }, [_vm._v("upd")])])]), _vm._v(" "), _c("div", {
+    }, [_vm._v("Оновити")])])]), _vm._v(" "), _c("div", {
       staticClass: "comment-interactions"
     }, [comment.commentator.id === _vm.userId ? [_c("div", {
       on: {
@@ -242,7 +250,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\np[data-v-679f7d70] {\n    margin: 0;\n}\nimg[data-v-679f7d70] {\n    width: 400px;\n    height: 500px;\n    border-radius: 10px;\n}\n.main[data-v-679f7d70] {\n    display: flex;\n    justify-content: center;\n}\n.commentator[data-v-679f7d70] {\n    font-weight: bold;\n}\n.ipt[data-v-679f7d70] {\n    width: 80%;\n    margin-right: 3px;\n}\n.info[data-v-679f7d70] {\n    min-height: 100px;\n    width: 100%;\n}\n.about[data-v-679f7d70] {\n    max-width: 400px;\n}\n.comment[data-v-679f7d70] {\n    border-radius: 10px;\n    border: 1px solid grey;\n    word-wrap: break-word;\n    padding: 5px;\n    display: flex;\n    justify-content: space-between;\n}\n.wanted[data-v-679f7d70] {\n    display: flex;\n    padding: 10px;\n    background-color: #dcdcdc;\n    border-radius: 10px;\n}\n.comment-interactions[data-v-679f7d70] {\n    display: flex;\n    gap: 10px;\n}\n.comment-section[data-v-679f7d70] {\n    position: relative;\n    height: 100%;\n    width: 420px;\n    padding: 0 15px 0 15px;\n    overflow-y: auto;\n}\n.actions[data-v-679f7d70] {\n    position: absolute;\n    bottom: 0;\n    display: flex;\n    width: 100%;\n}\n.about p[data-v-679f7d70] {\n    word-wrap: break-word;\n    padding: 10px;\n}\n.name[data-v-679f7d70] {\n    text-align: center;\n    margin-top: 10px;\n}\n.sub-container[data-v-679f7d70] {\n    display: flex;\n\n    flex-direction: column;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\np[data-v-679f7d70] {\n    margin: 0;\n}\nimg[data-v-679f7d70] {\n    width: 400px;\n    height: 500px;\n    border-radius: 10px;\n}\n.main[data-v-679f7d70] {\n    display: flex;\n    justify-content: center;\n}\n.commentator[data-v-679f7d70] {\n    font-weight: bold;\n}\n.ipt[data-v-679f7d70] {\n    width: 80%;\n    margin-right: 3px;\n}\n.info[data-v-679f7d70] {\n    min-height: 100px;\n    width: 100%;\n}\n.non-auth[data-v-679f7d70]{\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    padding: 10px;\n    border: 4px solid black;\n    border-radius: 5px;\n    height: 15%;\n    margin-left:10px ;\n}\n.about[data-v-679f7d70] {\n    max-width: 400px;\n}\n.comment[data-v-679f7d70] {\n    border-radius: 10px;\n    border: 1px solid grey;\n    word-wrap: break-word;\n    padding: 5px;\n    display: flex;\n    justify-content: space-between;\n}\n.wanted[data-v-679f7d70] {\n    display: flex;\n    padding: 10px;\n    background-color: #dcdcdc;\n    border-radius: 10px;\n}\n.comment-interactions[data-v-679f7d70] {\n    display: flex;\n    gap: 10px;\n}\n.comment-section[data-v-679f7d70] {\n    position: relative;\n    height: 100%;\n    width: 420px;\n    padding: 0 15px 0 15px;\n    overflow-y: auto;\n}\n.actions[data-v-679f7d70] {\n    position: absolute;\n    bottom: 0;\n    display: flex;\n    width: 100%;\n}\n.about p[data-v-679f7d70] {\n    word-wrap: break-word;\n    padding: 10px;\n}\n.name[data-v-679f7d70] {\n    text-align: center;\n    margin-top: 10px;\n}\n.sub-container[data-v-679f7d70] {\n    display: flex;\n\n    flex-direction: column;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

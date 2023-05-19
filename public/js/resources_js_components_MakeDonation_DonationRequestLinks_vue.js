@@ -72,7 +72,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       truncatedLength: 33,
       truncated: false,
-      fullContent: false
+      fullContent: false,
+      user_id: parseInt(localStorage.getItem('id'))
     };
   },
   computed: {
@@ -114,6 +115,13 @@ __webpack_require__.r(__webpack_exports__);
         document.querySelector(".likesCount-".concat(id)).textContent = content;
       }
       this.like();
+    },
+    update: function update(id) {
+      if (confirm('Ви впевнені що хочете завершити збір?')) {
+        _api__WEBPACK_IMPORTED_MODULE_0__["default"].patch("/api/auth/donations/".concat(id), {
+          is_active: 0
+        });
+      }
     },
     contentToggler: function contentToggler() {
       this.fullContent = !this.fullContent;
@@ -174,7 +182,9 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_c("router-link", {
+  return _c("div", [_c("div", {
+    staticClass: "post-container"
+  }, [_c("router-link", {
     attrs: {
       to: {
         name: "user.donate",
@@ -183,8 +193,6 @@ var render = function render() {
         }
       }
     }
-  }, [_c("div", {
-    staticClass: "post-container"
   }, [_c("div", [_c("i", {
     staticClass: "fas fa-user"
   }), _vm._v("add by " + _vm._s(_vm.user.name))]), _vm._v(" "), _c("div", [_c("h1", [_vm._v(_vm._s(_vm.title))])]), _vm._v(" "), _c("div", {
@@ -203,7 +211,7 @@ var render = function render() {
         return _vm.contentToggler.apply(null, arguments);
       }
     }
-  }, [_vm._v("детальніше")])]) : _vm._e()]), _vm._v(" "), _c("div", {
+  }, [_vm._v("детальніше")])]) : _vm._e()])]), _vm._v(" "), _c("div", {
     staticClass: "footer"
   }, [_c("div", {
     staticClass: "heart-container"
@@ -212,7 +220,7 @@ var render = function render() {
   }, [_vm._v(_vm._s(_vm.likesCount))]), _vm._v(" "), _c("i", {
     staticClass: "far fa-heart likeBtn",
     "class": {
-      "fas fa-heart": _vm.userLiked.includes(_vm.id)
+      "fas fa-heart active": _vm.userLiked.includes(_vm.id)
     },
     on: {
       click: function click($event) {
@@ -220,7 +228,16 @@ var render = function render() {
         return _vm.toggleLike(_vm.id);
       }
     }
-  })])])])])], 1);
+  })]), _vm._v(" "), _vm.user.id === _vm.user_id ? _c("div", {
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+        return _vm.update(_vm.id);
+      }
+    }
+  }, [_c("i", {
+    staticClass: "fas fa-trash"
+  })]) : _vm._e()])], 1)]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -267,7 +284,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\na[data-v-5a9a1900]{\n    color: white;\n    text-decoration: none;\n}\ndiv[data-v-5a9a1900]{\n    color: white;\n}\n.content-container[data-v-5a9a1900]{\n    max-height: 200px;\n    overflow-y: auto;\n}\n.post-container[data-v-5a9a1900] {\n    display: flex;\n    flex-direction: column;\n    justify-content: space-between;\n    height: 100%;\n}\n.footer[data-v-5a9a1900] {\n    margin-top: auto;\n}\n.heart-container[data-v-5a9a1900]{\n    margin-top: 10px;\n    display: flex;\n    align-items: center;\n    gap: 10px;\n}\np[data-v-5a9a1900]{\n    margin: 0;\n    color: white;\n}\n.far[data-v-5a9a1900]{\n    font-size: 26px;\n    color: white;\n}\n.fa-heart[data-v-5a9a1900]{\n    font-size: 26px;\n    color: red;\n}\nimg[data-v-5a9a1900]{\n    width: 100px;\n    height: 170px;\n}\n\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\na[data-v-5a9a1900]{\n    color: white;\n    text-decoration: none;\n}\ndiv[data-v-5a9a1900]{\n    color: white;\n}\n.content-container[data-v-5a9a1900]{\n    max-height: 200px;\n    overflow-y: auto;\n}\n.post-container[data-v-5a9a1900] {\n    display: flex;\n    flex-direction: column;\n    justify-content: space-between;\n    height: 100%;\n}\n.fa-trash[data-v-5a9a1900]{color: red}\n.footer[data-v-5a9a1900] {\n    margin-top: auto;\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n}\n.heart-container[data-v-5a9a1900]{\n    display: flex;\n    align-items: center;\n    gap: 10px;\n}\n.fas-trash[data-v-5a9a1900]{\n    color: red;\n}\np[data-v-5a9a1900]{\n    margin: 0;\n    color: white;\n}\n.far[data-v-5a9a1900]{\n    font-size: 26px;\n    color: white;\n}\n.active[data-v-5a9a1900]{\n    font-size: 26px;\n    color: red;\n}\nimg[data-v-5a9a1900]{\n    width: 100px;\n    height: 170px;\n}\n\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

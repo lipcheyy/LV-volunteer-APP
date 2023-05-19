@@ -79,13 +79,18 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_c("select", {
+  return _c("div", {
+    staticClass: "container"
+  }, [_c("div", {
+    staticClass: "form-container"
+  }, [_vm._v("\n        Оберіть категорію\n        "), _c("select", {
     directives: [{
       name: "model",
       rawName: "v-model",
       value: _vm.goalId,
       expression: "goalId"
     }],
+    staticClass: "form-control mb-3",
     on: {
       change: function change($event) {
         var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
@@ -103,13 +108,14 @@ var render = function render() {
         value: goal.id
       }
     }, [_vm._v(_vm._s(goal.title))])];
-  })], 2), _vm._v(" "), _c("input", {
+  })], 2), _vm._v("\n        Додайте короткий заголовок\n        "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
       value: _vm.title,
       expression: "title"
     }],
+    staticClass: "form-control",
     attrs: {
       type: "text"
     },
@@ -122,18 +128,7 @@ var render = function render() {
         _vm.title = $event.target.value;
       }
     }
-  }), _vm._v(" "), _c("input", {
-    attrs: {
-      type: "submit",
-      value: "add"
-    },
-    on: {
-      click: function click($event) {
-        $event.preventDefault();
-        return _vm.store.apply(null, arguments);
-      }
-    }
-  }), _vm._v(" "), _c("div", [_c("vue-editor", {
+  }), _vm._v(" "), _c("div", [_vm._v("\n            Опишіть цілі донату\n            "), _c("vue-editor", {
     staticClass: "editor",
     attrs: {
       useCustomImageHandler: ""
@@ -148,7 +143,19 @@ var render = function render() {
       },
       expression: "content"
     }
-  })], 1)]);
+  })], 1), _vm._v(" "), _c("input", {
+    staticClass: "mt-2 btn btn-outline-info",
+    attrs: {
+      type: "submit",
+      value: "Почати збір"
+    },
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+        return _vm.store.apply(null, arguments);
+      }
+    }
+  })])]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -2134,7 +2141,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nimg[data-v-6a7f2658]{\n    width: 30px;\n    height: 30px;\n}\n.editor[data-v-6a7f2658]{\n    width: 500px;\n    height: 200px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nimg[data-v-6a7f2658]{\n    width: 30px;\n    height: 30px;\n}\n.editor[data-v-6a7f2658]{\n   color: white;\n}\n.container[data-v-6a7f2658] {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.form-container[data-v-6a7f2658] {\n    background-color: #C6D9D95E;\n    padding: 20px;\n    border-radius: 10px;\n    width: 80%;\n}\n.form-control[data-v-6a7f2658] {\n    width: 100%;\n    padding: 8px;\n    border-radius: 4px;\n    border: 1px solid #ccc;\n}\n.btn[data-v-6a7f2658] {\n    padding: 8px 16px;\n    border-radius: 4px;\n    border: none;\n    color: #fff;\n    background-color: #007bff;\n}\n.btn[data-v-6a7f2658]:hover {\n    background-color: #0056b3;\n}\n.editor[data-v-6a7f2658] {\n    margin-top: 20px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

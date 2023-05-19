@@ -59,10 +59,13 @@ export default {
     justify-content: space-around;
 }
 .containers{
-
+    background-color: black;
     margin-bottom: 40px;
     border: 2px solid #b4b4b4;
     border-radius: 10px;
+    padding-bottom: 20px;
 }
-
+.approve{
+    margin-left: 20px;
+}
 </style>

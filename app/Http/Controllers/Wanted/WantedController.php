@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Storage;
 class WantedController extends Controller
 {
     public function index(){
-        $wanteds=Wanted::where('approved',true)->get();
+        $wanteds=Wanted::where('approved',true)->orderByDesc('id')->get();
         return WantedResource::collection($wanteds);
     }
     public function getUsersRequests(){

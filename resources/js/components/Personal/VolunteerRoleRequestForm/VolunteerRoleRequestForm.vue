@@ -18,7 +18,7 @@
                 <input  type="text" v-model="card" id="card" class="form-control">
 
                 <label for="apply" class="form-label">Подати заявку на отримання статусу волонтера</label>
-                <input class="btn btn-outline-info" @click.prevent="store" id="apply" value="Подати">
+                <input type="submit" class="btn btn-outline-info" @click.prevent="store" id="apply" value="Подати">
             </div>
         </div>
     </div>
@@ -46,6 +46,7 @@ export default {
                 name:this.name, surname:this.surname,
                 middlename:this.middlename, about:this.about, card:this.card
             })
+                .then(this.$router.push({name:'personal.page'}))
         }
     }
 }

@@ -99,6 +99,7 @@ Route::group([
             });
             Route::post('/','DonationController@store');
             Route::get('/{donation}','DonationController@getDonation');
+            Route::patch('/{donation}','DonationController@closeDonation');
             Route::get('/','DonationController@index');
         });
 

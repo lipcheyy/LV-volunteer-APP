@@ -122,7 +122,7 @@ route.beforeEach((to,from,next)=>{
     if (user_role!=='1'){
         if (to.name==='admin.statistic'){
             return next({
-                name:'personal.page'
+                name:''
             })
         }
     }

@@ -32,7 +32,9 @@ __webpack_require__.r(__webpack_exports__);
         middlename: this.middlename,
         about: this.about,
         card: this.card
-      });
+      }).then(this.$router.push({
+        name: 'personal.page'
+      }));
     }
   }
 });
@@ -196,6 +198,7 @@ var render = function render() {
   }, [_vm._v("Подати заявку на отримання статусу волонтера")]), _vm._v(" "), _c("input", {
     staticClass: "btn btn-outline-info",
     attrs: {
+      type: "submit",
       id: "apply",
       value: "Подати"
     },
