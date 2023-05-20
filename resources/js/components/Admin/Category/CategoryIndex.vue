@@ -54,9 +54,10 @@ export default {
     },
     methods: {
         getCategories() {
-            api.get('/api/auth/admin/category')
+            api.get('/api/auth/goals')
                 .then(res => {
-                    this.data=res.data.data
+                    this.data=res.data
+                    console.log(res);
                 })
         },
         getCategoryDataToEdit(id,title){
@@ -68,13 +69,13 @@ export default {
         },
         update(id){
             this.toEdit=null
-            api.patch(`/api/auth/admin/category/${id}`,{title:this.title})
+            api.patch(`/api/auth/goals/${id}`,{title:this.title})
                 .then(res=>{
                     this.getCategories()
                 })
         },
         destroy(id){
-            api.delete(`/api/auth/admin/category/${id}`)
+            api.delete(`/api/auth/goals/${id}`)
                 .then(res=>{
                     this.getCategories()
                 })

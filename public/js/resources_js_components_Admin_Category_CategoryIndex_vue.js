@@ -33,8 +33,9 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     getCategories: function getCategories() {
       var _this = this;
-      _api__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/auth/admin/category').then(function (res) {
-        _this.data = res.data.data;
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/auth/goals').then(function (res) {
+        _this.data = res.data;
+        console.log(res);
       });
     },
     getCategoryDataToEdit: function getCategoryDataToEdit(id, title) {
@@ -47,7 +48,7 @@ __webpack_require__.r(__webpack_exports__);
     update: function update(id) {
       var _this2 = this;
       this.toEdit = null;
-      _api__WEBPACK_IMPORTED_MODULE_0__["default"].patch("/api/auth/admin/category/".concat(id), {
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].patch("/api/auth/goals/".concat(id), {
         title: this.title
       }).then(function (res) {
         _this2.getCategories();
@@ -55,7 +56,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     destroy: function destroy(id) {
       var _this3 = this;
-      _api__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("/api/auth/admin/category/".concat(id)).then(function (res) {
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("/api/auth/goals/".concat(id)).then(function (res) {
         _this3.getCategories();
       });
     }
@@ -86,16 +87,12 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     create: function create() {
       var _this = this;
-      _api__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/auth/admin/category', {
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/auth/goals', {
         title: this.title
       }).then(function (res) {
         _this.title = '';
         _this.$parent.getCategories();
       });
-    },
-    backcall: function backcall() {
-      console.log('siiiuiii');
-      ;
     }
   }
 });

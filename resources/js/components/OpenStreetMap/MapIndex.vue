@@ -89,6 +89,9 @@ export default {
 
 
 <style scoped>
+div{
+    color: black;
+}
     #map{
         width: 1200px;
         height: 600px;

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\DataRequest;
 use App\Http\Requests\User\UpdateDataRequest;
+use App\Http\Resources\Donation\DonationResource;
 use App\Http\Resources\User\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -19,6 +20,10 @@ class DataController extends Controller
     {$data=$request->validated();
         $user=User::where('id',$data['id'])->first();
         return $user;
+    }
+    public function getUsersOwnDonations(){
+        $users_donations=auth()->user()->donations;
+        return DonationResource::collection($users_donations);
     }
     public function updateData(UpdateDataRequest $request){
         $data=$request->validated();

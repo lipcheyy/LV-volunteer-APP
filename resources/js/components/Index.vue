@@ -4,12 +4,12 @@
             <router-link v-if="!access_token" :to="{name:'user.login'}">Авторизація</router-link>
             <router-link v-if="!access_token" :to="{name:'user.registration'}">Реєстрація</router-link>
             <router-link v-if="access_token" :to="{name:'posts.index'}">Новини</router-link>
-            <router-link v-if="access_token" :to="{name:'personal.page'}"><i class="fas fa-user"></i></router-link>
             <router-link v-if="access_token" :to="{name:'donation.index'}">Донати</router-link>
             <router-link v-if="access_token" :to="{name:'map.index'}">Карта</router-link>
             <router-link  :to="{name:'wanted.index'}">Шукай Зниклих</router-link>
             <router-link v-if="access_token && user_role===1" :to="{name:'admin.statistic'}">Адмін Панель</router-link>
-            <a href="#" v-if="access_token" @click.prevent="logout">logout</a>
+            <router-link v-if="access_token" :to="{name:'personal.page'}"><i class="fas fa-user"></i></router-link>
+            <a href="#" v-if="access_token" @click.prevent="logout"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
         </div>
 
         <router-view></router-view>
@@ -89,4 +89,5 @@ a{
     color:white;
     text-decoration: none;
 }
+
 </style>

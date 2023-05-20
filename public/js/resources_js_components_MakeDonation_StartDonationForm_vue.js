@@ -47,6 +47,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function () {
         _this2.content = '';
         _this2.title = '';
+        alert('Дякуємо! Ваш збір опубліковано');
       });
     },
     imageAdded: function imageAdded(file, Editor, cursorLocation, resetUploader) {
@@ -2141,7 +2142,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nimg[data-v-6a7f2658]{\n    width: 30px;\n    height: 30px;\n}\n.editor[data-v-6a7f2658]{\n   color: white;\n}\n.container[data-v-6a7f2658] {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.form-container[data-v-6a7f2658] {\n    background-color: #C6D9D95E;\n    padding: 20px;\n    border-radius: 10px;\n    width: 80%;\n}\n.form-control[data-v-6a7f2658] {\n    width: 100%;\n    padding: 8px;\n    border-radius: 4px;\n    border: 1px solid #ccc;\n}\n.btn[data-v-6a7f2658] {\n    padding: 8px 16px;\n    border-radius: 4px;\n    border: none;\n    color: #fff;\n    background-color: #007bff;\n}\n.btn[data-v-6a7f2658]:hover {\n    background-color: #0056b3;\n}\n.editor[data-v-6a7f2658] {\n    margin-top: 20px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nimg[data-v-6a7f2658]{\n    width: 30px;\n    height: 30px;\n}\n.container[data-v-6a7f2658] {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.form-container[data-v-6a7f2658] {\n    background-color: #C6D9D95E;\n    padding: 20px;\n    border-radius: 10px;\n    width: 80%;\n}\n.form-control[data-v-6a7f2658] {\n    width: 100%;\n    padding: 8px;\n    border-radius: 4px;\n    border: 1px solid #ccc;\n}\n.btn[data-v-6a7f2658] {\n    padding: 8px 16px;\n    border-radius: 4px;\n    border: none;\n    color: #fff;\n    background-color: #007bff;\n}\n.btn[data-v-6a7f2658]:hover {\n    background-color: #0056b3;\n}\n.editor[data-v-6a7f2658] {\n    margin-top: 20px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

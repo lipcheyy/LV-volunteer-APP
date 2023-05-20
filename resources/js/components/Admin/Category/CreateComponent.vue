@@ -20,15 +20,12 @@ export default {
     },
     methods:{
         create(){
-            api.post('/api/auth/admin/category',{title:this.title})
+            api.post('/api/auth/goals',{title:this.title})
                 .then(res=>{
                     this.title=''
                     this.$parent.getCategories();
                 })
         },
-        backcall(){
-            console.log('siiiuiii');;
-        }
     }
 }
 </script>

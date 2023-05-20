@@ -50,7 +50,8 @@ export default {
                 {content:this.content,title:this.title,goal_id:this.goalId})
                 .then(()=>{
                     this.content=''
-                    this.title='' })
+                    this.title=''
+                    alert('Дякуємо! Ваш збір опубліковано')})
         },
         imageAdded(file,Editor,cursorLocation,resetUploader){
             const data=new FormData()
@@ -71,9 +72,6 @@ export default {
 img{
     width: 30px;
     height: 30px;
-}
-.editor{
-   color: white;
 }
 .container {
     display: flex;

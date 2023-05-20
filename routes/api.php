@@ -88,6 +88,9 @@ Route::group([
             Route::post('/','WantedController@store');
         });
         Route::group(['namespace' => 'Goal', 'prefix' => 'goals'], function () {
+            Route::post('/','GoalController@store');
+            Route::patch('/{goal}','GoalController@update');
+            Route::delete('/{goal}','GoalController@destroy');
             Route::get('/','GoalController@getGoals');
         });
         Route::group(['namespace' => 'Donation', 'prefix' => 'donations'], function () {
@@ -111,6 +114,7 @@ Route::group([
             Route::patch('/update/name','DataController@updateUsername');
             Route::get('/userdata','DataController@data');
             Route::get('/likedPosts','DataController@liked');
+            Route::get('/own-donations','DonationController@getUsersOwnDonations');
         });
 
         Route::group(['namespace' => 'Marker', 'prefix' => '/markers'], function () {

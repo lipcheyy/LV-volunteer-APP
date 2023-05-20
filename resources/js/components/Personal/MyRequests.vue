@@ -2,7 +2,7 @@
     <div>
         <div class="main">
             <div class="content">
-                <div class="containers" v-for="wanted in wanteds">
+                <div class="containers" v-if="wanteds" v-for="wanted in wanteds">
                     <template v-for="image in wanted.images">
                         <router-link :to="{name:'wanted.show',params:{id:wanted.id}}" class="btn">
                             <wanted-template ref="wanted"
@@ -16,6 +16,10 @@
                         </router-link>
                     </template>
                 </div>
+                <template v-if="wanteds.length===0">
+                    <div>Наразі, у вас немає активних пошуків</div>
+                    <img src="storage/icons/unworked-website-3123512-2619678.webp" alt="">
+                </template>
             </div>
         </div>
 

@@ -196,7 +196,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#map[data-v-431b9d01]{\n    width: 1200px;\n    height: 600px;\n}\n.main[data-v-431b9d01]{\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\ndiv[data-v-431b9d01]{\n    color: black;\n}\n#map[data-v-431b9d01]{\n        width: 1200px;\n        height: 600px;\n}\n.main[data-v-431b9d01]{\n        display: flex;\n        flex-direction: column;\n        align-items: center;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

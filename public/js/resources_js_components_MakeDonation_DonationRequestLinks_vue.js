@@ -193,9 +193,11 @@ var render = function render() {
         }
       }
     }
-  }, [_c("div", [_c("i", {
+  }, [_c("div", {
+    staticClass: "creator"
+  }, [_c("i", {
     staticClass: "fas fa-user"
-  }), _vm._v("add by " + _vm._s(_vm.user.name))]), _vm._v(" "), _c("div", [_c("h1", [_vm._v(_vm._s(_vm.title))])]), _vm._v(" "), _c("div", {
+  }), _vm._v(" " + _vm._s(_vm.user.name))]), _vm._v(" "), _c("div", [_c("h1", [_vm._v(_vm._s(_vm.title))])]), _vm._v(" "), _c("div", {
     staticClass: "content-container"
   }, [_c("span", {
     domProps: {
@@ -284,7 +286,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\na[data-v-5a9a1900]{\n    color: white;\n    text-decoration: none;\n}\ndiv[data-v-5a9a1900]{\n    color: white;\n}\n.content-container[data-v-5a9a1900]{\n    max-height: 200px;\n    overflow-y: auto;\n}\n.post-container[data-v-5a9a1900] {\n    display: flex;\n    flex-direction: column;\n    justify-content: space-between;\n    height: 100%;\n}\n.fa-trash[data-v-5a9a1900]{color: red}\n.footer[data-v-5a9a1900] {\n    margin-top: auto;\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n}\n.heart-container[data-v-5a9a1900]{\n    display: flex;\n    align-items: center;\n    gap: 10px;\n}\n.fas-trash[data-v-5a9a1900]{\n    color: red;\n}\np[data-v-5a9a1900]{\n    margin: 0;\n    color: white;\n}\n.far[data-v-5a9a1900]{\n    font-size: 26px;\n    color: white;\n}\n.active[data-v-5a9a1900]{\n    font-size: 26px;\n    color: red;\n}\nimg[data-v-5a9a1900]{\n    width: 100px;\n    height: 170px;\n}\n\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\na[data-v-5a9a1900]{\n    color: white;\n    text-decoration: none;\n}\ndiv[data-v-5a9a1900]{\n    color: white;\n}\n.content-container[data-v-5a9a1900]{\n    max-height: 200px;\n    overflow-y: auto;\n}\n.creator[data-v-5a9a1900]{\n    padding: 10px;\n    background-color: red;\n    width: 40%;\n}\n.post-container[data-v-5a9a1900] {\n    display: flex;\n    flex-direction: column;\n    justify-content: space-between;\n    height: 100%;\n}\n.fa-trash[data-v-5a9a1900]{color: red}\n.footer[data-v-5a9a1900] {\n    margin-top: auto;\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n}\n.heart-container[data-v-5a9a1900]{\n    display: flex;\n    align-items: center;\n    gap: 10px;\n}\n.fas-trash[data-v-5a9a1900]{\n    color: red;\n}\np[data-v-5a9a1900]{\n    margin: 0;\n    color: white;\n}\n.far[data-v-5a9a1900]{\n    font-size: 26px;\n    color: white;\n}\n.active[data-v-5a9a1900]{\n    font-size: 26px;\n    color: red;\n}\nimg[data-v-5a9a1900]{\n    width: 100px;\n    height: 170px;\n}\n\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

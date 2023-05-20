@@ -3,7 +3,7 @@
 
     <div class="post-container">
         <router-link :to="{name:'user.donate',params:{id:id}}">
-        <div><i class="fas fa-user"></i>add by {{user.name}}</div>
+        <div class="creator"><i class="fas fa-user"></i> {{user.name}}</div>
         <div><h1>{{title}}</h1></div>
         <div class="content-container">
             <span v-html="resizeImage(truncatedContent)"></span>
@@ -105,6 +105,11 @@ div{
 .content-container{
     max-height: 200px;
     overflow-y: auto;
+}
+.creator{
+    padding: 10px;
+    background-color: red;
+    width: 40%;
 }
 .post-container {
     display: flex;

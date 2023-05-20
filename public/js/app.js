@@ -5415,14 +5415,6 @@ var render = function render() {
   }, [_vm._v("Новини")]) : _vm._e(), _vm._v(" "), _vm.access_token ? _c("router-link", {
     attrs: {
       to: {
-        name: "personal.page"
-      }
-    }
-  }, [_c("i", {
-    staticClass: "fas fa-user"
-  })]) : _vm._e(), _vm._v(" "), _vm.access_token ? _c("router-link", {
-    attrs: {
-      to: {
         name: "donation.index"
       }
     }
@@ -5444,7 +5436,15 @@ var render = function render() {
         name: "admin.statistic"
       }
     }
-  }, [_vm._v("Адмін Панель")]) : _vm._e(), _vm._v(" "), _vm.access_token ? _c("a", {
+  }, [_vm._v("Адмін Панель")]) : _vm._e(), _vm._v(" "), _vm.access_token ? _c("router-link", {
+    attrs: {
+      to: {
+        name: "personal.page"
+      }
+    }
+  }, [_c("i", {
+    staticClass: "fas fa-user"
+  })]) : _vm._e(), _vm._v(" "), _vm.access_token ? _c("a", {
     attrs: {
       href: "#"
     },
@@ -5454,7 +5454,9 @@ var render = function render() {
         return _vm.logout.apply(null, arguments);
       }
     }
-  }, [_vm._v("logout")]) : _vm._e()], 1), _vm._v(" "), _c("router-view")], 1);
+  }, [_c("i", {
+    staticClass: "fa-solid fa-arrow-right-from-bracket"
+  })]) : _vm._e()], 1), _vm._v(" "), _c("router-view")], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -11014,7 +11016,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.header[data-v-2ac2c897]{\n    padding: 19px 20px;\n    background-color: black;\n    display: flex;\n    justify-content: space-around;\n}\na[data-v-2ac2c897]{\n    color:white;\n    text-decoration: none;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.header[data-v-2ac2c897]{\n    padding: 19px 20px;\n    background-color: black;\n    display: flex;\n    justify-content: space-around;\n}\na[data-v-2ac2c897]{\n    color:white;\n    text-decoration: none;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
