@@ -73,11 +73,13 @@ export default {
                 {lat:this.lat, lng:this.lng })
         },
         getMarkers(){
+            this.$Progress.start()
             api.get('/api/auth/markers')
                 .then(res=>{
                     res.data.forEach(mark=>{
                         let markes=L.marker([mark.lat,mark.lng], {icon: this.createMarkerIcon()});
                         this.markers.addLayer(markes)
+                        this.$Progress.finish()
                     })
                 })
         }

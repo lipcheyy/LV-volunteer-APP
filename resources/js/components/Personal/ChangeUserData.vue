@@ -31,8 +31,15 @@ export default {
             response:null,
         }
     },
+    mounted() {
+        this.$Progress.start()
+        setTimeout(()=>{
+            this.$Progress.finish()
+        },500)
+    },
     methods:{
         updateUserData(){
+            this.$Progress.start()
             api.patch('/api/auth/user/update',{
                 password:this.password_confirm,
                 old_password:this.old_password,
@@ -43,21 +50,16 @@ export default {
                 this.password = ''
                 this.old_password = ''
                 this.password_confirm = ''
+                this.$Progress.finish()
             })
         },
         updateUsername(){
+            this.$Progress.start()
             api.patch('/api/auth/user/update/name',{
                 name:this.name,
-            }) .then(()=>{this.name=''})
+            }) .then(()=>{this.name=''
+                this.$Progress.finish()})
         }
-        // userdata() {
-        //     api.post('/api/auth/me')
-        //         .then(res=>{
-        //             const user =res.data
-        //             localStorage.setItem('user_role',user.role)
-        //             this.userRole=parseInt(user.role)
-        //         })
-        // },
     },
 }
 </script>

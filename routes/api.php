@@ -86,6 +86,7 @@ Route::group([
             });
             Route::get('/user','WantedController@getUsersRequests');
             Route::post('/','WantedController@store');
+            Route::delete('/{wanted}','WantedController@destroy');
         });
         Route::group(['namespace' => 'Goal', 'prefix' => 'goals'], function () {
             Route::post('/','GoalController@store');

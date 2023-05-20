@@ -17,6 +17,15 @@ class WantedController extends Controller
         $wanteds=Wanted::where('approved',true)->orderByDesc('id')->get();
         return WantedResource::collection($wanteds);
     }
+    public function destroy(Wanted $wanted){
+        $wanted_images=$wanted->images;
+        foreach ($wanted_images as $image){
+            Storage::disk('public')->delete($image->path);
+            $wanted->images()->delete();
+        }
+        $wanted->delete();
+        return response()->json(['message'=>'deleted']);
+    }
     public function getUsersRequests(){
         $user_requests=auth()->user()->findRequest()->orderByDesc('id')->get();
         return WantedResource::collection($user_requests);

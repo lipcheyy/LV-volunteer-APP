@@ -81,9 +81,10 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     getPosts: function getPosts() {
       var _this = this;
+      this.$Progress.start();
       axios.get('/api').then(function (res) {
         _this.posts = res.data;
-        console.log(_this.posts);
+        _this.$Progress.finish();
       });
     }
   }

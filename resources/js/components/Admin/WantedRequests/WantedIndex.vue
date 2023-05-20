@@ -8,6 +8,7 @@
                         :about="wanted.about"
                         :url="image.url"
                         :id="wanted.id"
+
                     >
                     </wanted-template>
                     <div class="approve btn btn-success" @click.prevent="approveRequest(wanted.id)">approve</div>

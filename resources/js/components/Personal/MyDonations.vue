@@ -42,9 +42,11 @@ export default {
     },
     methods: {
         getDonations() {
+            this.$Progress.start()
             api.get('/api/auth/donations')
                 .then(res => {
                     this.donations = res.data.data
+                    this.$Progress.finish()
                 })
         }, getUserLiked() {
             api.get('/api/auth/user/likedPosts')

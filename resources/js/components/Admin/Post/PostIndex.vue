@@ -27,11 +27,11 @@ export default {
     },
     methods:{
         getPosts(){
+            this.$Progress.start()
             axios.get('/api')
                 .then(res=>{
                     this.posts=res.data
-                    console.log(this.posts);
-
+                    this.$Progress.finish()
                 })
         }
     }

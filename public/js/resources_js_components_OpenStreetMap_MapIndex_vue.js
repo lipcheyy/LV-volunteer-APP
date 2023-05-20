@@ -87,12 +87,14 @@ __webpack_require__.r(__webpack_exports__);
     },
     getMarkers: function getMarkers() {
       var _this3 = this;
+      this.$Progress.start();
       _api__WEBPACK_IMPORTED_MODULE_2__["default"].get('/api/auth/markers').then(function (res) {
         res.data.forEach(function (mark) {
           var markes = leaflet__WEBPACK_IMPORTED_MODULE_1___default().marker([mark.lat, mark.lng], {
             icon: _this3.createMarkerIcon()
           });
           _this3.markers.addLayer(markes);
+          _this3.$Progress.finish();
         });
       });
     }

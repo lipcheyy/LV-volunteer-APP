@@ -15,20 +15,23 @@
             </div>
         </div>
         <div class="main">
-            <div class="content">
+            <div class="content" v-if="wanteds.length!==0">
                 <div class="containers" v-for="wanted in wanteds">
                     <template v-for="image in wanted.images">
-                        <router-link :to="{name:'wanted.show',params:{id:wanted.id}}" class="btn">
                             <wanted-template ref="wanted"
                                              :name="wanted.name"
                                              :about="wanted.about"
                                              :url="image.url"
                                              :id="wanted.id"
+                                             :user="wanted.user"
                             >
                             </wanted-template>
-                        </router-link>
                     </template>
                 </div>
+            </div>
+            <div v-if="wanteds.length===0" class="mt-5">
+                <div>Наразі в даному регіоні заявок не знайдено</div>
+                <div><img src="storage/icons/unworked-website-3123512-2619678.webp" alt=""></div>
             </div>
         </div>
 
@@ -72,9 +75,11 @@ export default {
                 })
         },
         getWantedsByRegion(id){
+            this.$Progress.start()
             axios.get(`/api/regions/${id}`)
                 .then(res=>{
                     this.wanteds=null
+                    this.$Progress.finish()
                     this.wanteds=res.data.data
                 })
         },

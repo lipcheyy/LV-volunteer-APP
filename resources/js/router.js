@@ -92,11 +92,6 @@ const route =new VueRouter({
            name:'wanted.show'
         },
         {
-            path:'/region/:id',
-            component:()=>import('./components/FindByRegion/FindByRegionIndex'),
-            name:'regions.index'
-        },
-        {
             path:'/donate/:id',
             component:()=>import('./components/MakeDonation/DonateComponent'),
             name:'user.donate'

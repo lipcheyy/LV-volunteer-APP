@@ -11,14 +11,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../api */ "./resources/js/api.js");
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "WantedTemplate",
-  props: ['name', 'url', 'about', 'id', 'comment_count'],
+  props: ['name', 'url', 'about', 'id', 'comment_count', 'user'],
   data: function data() {
     return {
       truncatedLength: 25,
-      truncated: false
+      truncated: false,
+      user_id: parseInt(localStorage.getItem('id'))
     };
+  },
+  methods: {
+    destroy: function destroy(id) {
+      var _this = this;
+      if (confirm('Завершити пошук?')) {
+        _api__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("/api/auth/wanted/".concat(id)).then(function () {
+          return _this.$parent.getWanteds();
+        });
+      }
+    }
   },
   computed: {
     truncatedAbout: function truncatedAbout() {
@@ -136,35 +149,39 @@ __webpack_require__.r(__webpack_exports__);
       response: null
     };
   },
+  mounted: function mounted() {
+    var _this = this;
+    this.$Progress.start();
+    setTimeout(function () {
+      _this.$Progress.finish();
+    }, 500);
+  },
   methods: {
     updateUserData: function updateUserData() {
-      var _this = this;
+      var _this2 = this;
+      this.$Progress.start();
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].patch('/api/auth/user/update', {
         password: this.password_confirm,
         old_password: this.old_password,
         password_confirm: this.password_confirm
       }).then(function (res) {
-        _this.response = res.data.error;
-        _this.password = '';
-        _this.old_password = '';
-        _this.password_confirm = '';
+        _this2.response = res.data.error;
+        _this2.password = '';
+        _this2.old_password = '';
+        _this2.password_confirm = '';
+        _this2.$Progress.finish();
       });
     },
     updateUsername: function updateUsername() {
-      var _this2 = this;
+      var _this3 = this;
+      this.$Progress.start();
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].patch('/api/auth/user/update/name', {
         name: this.name
       }).then(function () {
-        _this2.name = '';
+        _this3.name = '';
+        _this3.$Progress.finish();
       });
-    } // userdata() {
-    //     api.post('/api/auth/me')
-    //         .then(res=>{
-    //             const user =res.data
-    //             localStorage.setItem('user_role',user.role)
-    //             this.userRole=parseInt(user.role)
-    //         })
-    // },
+    }
   }
 });
 
@@ -204,8 +221,10 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     getDonations: function getDonations() {
       var _this = this;
+      this.$Progress.start();
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/auth/donations').then(function (res) {
         _this.donations = res.data.data;
+        _this.$Progress.finish();
       });
     },
     getUserLiked: function getUserLiked() {
@@ -330,6 +349,16 @@ var render = function render() {
     staticClass: "main"
   }, [_c("div", {
     staticClass: "co"
+  }, [_c("router-link", {
+    staticClass: "btn",
+    attrs: {
+      to: {
+        name: "wanted.show",
+        params: {
+          id: _vm.id
+        }
+      }
+    }
   }, [_c("img", {
     attrs: {
       src: _vm.url
@@ -340,7 +369,7 @@ var render = function render() {
     staticClass: "name"
   }, [_c("h3", [_vm._v(_vm._s(_vm.name))])]), _vm._v(" "), _c("div", {
     staticClass: "about"
-  }, [_c("p", [_vm._v(_vm._s(_vm.truncatedAbout) + " "), _vm.truncated ? _c("router-link", {
+  }, [_c("p", [_vm._v(_vm._s(_vm.truncatedAbout) + "\n                        "), _vm.truncated ? _c("router-link", {
     attrs: {
       to: {
         name: "wanted.show",
@@ -349,9 +378,17 @@ var render = function render() {
         }
       }
     }
-  }, [_vm._v("детальніше ")]) : _vm._e()], 1)]), _vm._v(" "), _vm._l(_vm.comment_count, function (count, value) {
+  }, [_vm._v("детальніше\n                        ")]) : _vm._e()], 1)]), _vm._v(" "), _vm._l(_vm.comment_count, function (count, value) {
     return _c("div", [_vm._v(_vm._s(value + ": " + count))]);
-  })], 2)])]);
+  })], 2)])], 1), _vm._v(" "), _vm.user && _vm.user.id === _vm.user_id ? _c("div", {
+    staticClass: "button btn btn-outline-danger",
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+        return _vm.destroy(_vm.id);
+      }
+    }
+  }, [_vm._v("\n        завершити пошук\n    ")]) : _vm._e()]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -797,7 +834,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\ndiv[data-v-8ca96110]{\n    color: white;\n    text-align: center;\n}\nimg[data-v-8ca96110]{\n    width: 500px;\n    max-height: 350px;\n    border-radius: 10px 10px 0 0;\n    -o-object-fit: cover;\n       object-fit: cover;\n}\n.about[data-v-8ca96110]{\n    max-width: 500px;\n}\n.info[data-v-8ca96110], .about[data-v-8ca96110] {\n    display: flex;\n    flex-direction: column;\n}\n.main[data-v-8ca96110]{\n    height: auto;\n}\n.about p[data-v-8ca96110]{\n    word-wrap: break-word;\n    padding: 10px;\n}\n.name[data-v-8ca96110]{\n    text-align: center;\n    margin-top: 10px;\n}\n.btn[data-v-8ca96110]{\n    width: 100px;\n    padding: 10px 5px;\n    background-color: deepskyblue;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\ndiv[data-v-8ca96110] {\n    color: white;\n    text-align: center;\n}\nimg[data-v-8ca96110] {\n    width: 500px;\n    max-height: 350px;\n    border-radius: 10px 10px 0 0;\n    -o-object-fit: cover;\n       object-fit: cover;\n}\n.about[data-v-8ca96110] {\n    max-width: 500px;\n}\n.info[data-v-8ca96110], .about[data-v-8ca96110] {\n    display: flex;\n    flex-direction: column;\n}\n.main[data-v-8ca96110] {\n    height: auto;\n    flex-direction: column;\n    padding-bottom: 20px;\n}\n.about p[data-v-8ca96110] {\n    word-wrap: break-word;\n    padding: 10px;\n}\n.name[data-v-8ca96110] {\n    text-align: center;\n    margin-top: 10px;\n}\n.button[data-v-8ca96110]{\n    width: 150px;\n    margin: 0 auto;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

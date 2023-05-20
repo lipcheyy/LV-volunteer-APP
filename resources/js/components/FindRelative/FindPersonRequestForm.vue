@@ -61,6 +61,7 @@ export default {
     },
     methods:{
         store(){
+            this.$Progress.start()
             const images=this.dropzone.getAcceptedFiles();
             const data=new FormData()
             images.forEach(image=>{
@@ -74,6 +75,7 @@ export default {
                     this.dropzone.removeAllFiles()
                     this.about=''
                     this.name=''
+                    this.$Progress.finish()
                 })
         },
         getRegions(){

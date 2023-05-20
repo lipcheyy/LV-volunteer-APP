@@ -51,10 +51,12 @@ export default {
     },
     methods:{
         getDonations(){
+            this.$Progress.start()
             api.get('/api/auth/donations')
                 .then(res=>{
                     this.donations=res.data.data
                     console.log(this.donations);
+                    this.$Progress.finish()
                 })
         },getUserLiked(){
             api.get('/api/auth/user/likedPosts')

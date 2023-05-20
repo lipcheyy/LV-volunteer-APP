@@ -38,9 +38,11 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     getDonations: function getDonations() {
       var _this = this;
+      this.$Progress.start();
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/auth/donations').then(function (res) {
         _this.donations = res.data.data;
         console.log(_this.donations);
+        _this.$Progress.finish();
       });
     },
     getUserLiked: function getUserLiked() {

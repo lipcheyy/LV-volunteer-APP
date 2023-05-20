@@ -37,6 +37,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     store: function store() {
       var _this = this;
+      this.$Progress.start();
       var images = this.dropzone.getAcceptedFiles();
       var data = new FormData();
       images.forEach(function (image) {
@@ -49,6 +50,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.dropzone.removeAllFiles();
         _this.about = '';
         _this.name = '';
+        _this.$Progress.finish();
       });
     },
     getRegions: function getRegions() {
