@@ -22,15 +22,18 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      donations: null,
+      donations: {},
       truncatedLength: 20,
       truncated: false,
-      userLiked: []
+      userLiked: [],
+      goals: null,
+      goal_id: 1
     };
   },
   mounted: function mounted() {
     this.getDonations();
     this.getUserLiked();
+    this.getGoals();
   },
   methods: {
     getDonations: function getDonations() {
@@ -46,6 +49,19 @@ __webpack_require__.r(__webpack_exports__);
         res.data.forEach(function (e) {
           _this2.userLiked.push(e.id);
         });
+      });
+    },
+    getGoals: function getGoals() {
+      var _this3 = this;
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/auth/goals').then(function (res) {
+        _this3.goals = res.data;
+      });
+    },
+    getDonationByGoal: function getDonationByGoal(id) {
+      var _this4 = this;
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/auth/goals/get-related-donations/".concat(id)).then(function (res) {
+        _this4.donations = null;
+        _this4.donations = res.data.data;
       });
     }
   }
@@ -145,10 +161,48 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", {
+  return _c("div", [_c("div", {
+    staticClass: "filter"
+  }, [_c("select", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.goal_id,
+      expression: "goal_id"
+    }],
+    on: {
+      change: function change($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+          return o.selected;
+        }).map(function (o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val;
+        });
+        _vm.goal_id = $event.target.multiple ? $$selectedVal : $$selectedVal[0];
+      }
+    }
+  }, _vm._l(_vm.goals, function (goal) {
+    return _c("option", {
+      domProps: {
+        value: goal.id
+      }
+    }, [_vm._v(_vm._s(goal.title))]);
+  }), 0), _vm._v(" "), _c("input", {
+    staticClass: "btn btn-outline-success",
+    attrs: {
+      type: "submit",
+      value: "Сортувати"
+    },
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+        return _vm.getDonationByGoal(_vm.goal_id);
+      }
+    }
+  })]), _vm._v(" "), _c("div", {
     staticClass: "main-container"
-  }, _vm._l(_vm.donations, function (donation) {
-    return _c("div", {
+  }, [_vm._l(_vm.donations, function (donation) {
+    return _vm.donations.length !== 0 ? _c("div", {
       staticClass: "donations-container"
     }, [_c("donation-template", {
       attrs: {
@@ -159,10 +213,21 @@ var render = function render() {
         likesCount: donation.likes_count,
         userLiked: _vm.userLiked
       }
-    })], 1);
-  }), 0);
+    })], 1) : _vm._e();
+  }), _vm._v(" "), _vm.donations.length === 0 ? _c("div", {
+    staticClass: "mt-5"
+  }, [_c("div", [_vm._v("По даному запиту нічого не знайдено")]), _vm._v(" "), _vm._m(0)]) : _vm._e()], 2)]);
 };
-var staticRenderFns = [];
+var staticRenderFns = [function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", [_c("img", {
+    attrs: {
+      src: "storage/icons/unworked-website-3123512-2619678.webp",
+      alt: ""
+    }
+  })]);
+}];
 render._withStripped = true;
 
 
@@ -263,7 +328,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.main-container[data-v-4bd15bf0]{\n    width: 100%;\n    height: 100%;\n    display: flex;\n    justify-content: space-around;\n    padding-top: 10px;\n    flex-wrap: wrap;\n}\n.donations-container[data-v-4bd15bf0]{\n    padding: 20px;\n    display: flex;\n    justify-content: space-between;\n    width: 350px;\n    height: 350px;\n    border-radius: 10px;\n    background: #494949;\n    margin-bottom: 40px ;\n    box-shadow: 4px 24px 103px -19px rgba(117,117,117,1);\n}\n.donations-container[data-v-4bd15bf0]:hover{\n    box-shadow: 0px 4px 120px 12px rgba(66,0,66,1);\n    transition: 0.3s ease-in-out;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.main-container[data-v-4bd15bf0]{\n    width: 100%;\n    height: 100%;\n    display: flex;\n    justify-content: space-around;\n    padding-top: 10px;\n    flex-wrap: wrap;\n}\n.filter[data-v-4bd15bf0]{\n    display: flex;\n    align-items: center;\n    gap: 10px;\n    flex-direction: column;\n    margin-bottom: 10px;\n}\n.donations-container[data-v-4bd15bf0]{\n    padding: 20px;\n    display: flex;\n    justify-content: space-between;\n    width: 350px;\n    height: 350px;\n    border-radius: 10px;\n    background: #494949;\n    margin-bottom: 40px ;\n    box-shadow: 4px 24px 103px -19px rgba(117,117,117,1);\n}\n.donations-container[data-v-4bd15bf0]:hover{\n    box-shadow: 0px 4px 120px 12px rgba(66,0,66,1);\n    transition: 0.3s ease-in-out;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

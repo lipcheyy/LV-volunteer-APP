@@ -92,6 +92,7 @@ Route::group([
             Route::patch('/{goal}','GoalController@update');
             Route::delete('/{goal}','GoalController@destroy');
             Route::get('/','GoalController@getGoals');
+            Route::get('/get-related-donations/{goal}','GoalController@getDonations');
         });
         Route::group(['namespace' => 'Donation', 'prefix' => 'donations'], function () {
             Route::group(['prefix'=>'images','namespace'=>'Image'],function (){

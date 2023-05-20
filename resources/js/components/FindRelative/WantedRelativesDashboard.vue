@@ -11,7 +11,7 @@
                         </option>
                     </template>
                 </select>
-                <router-link :to="{name:'regions.index',params:{id:this.region_id}}" class="btn btn-outline-success">sort</router-link>
+                <a class="btn btn-outline-success" @click.prevent="getWantedsByRegion(region_id)">sort</a>
             </div>
         </div>
         <div class="main">
@@ -70,7 +70,14 @@ export default {
                 .then(res=>{ this.regions=res.data
                     this.$Progress.finish()
                 })
-        }
+        },
+        getWantedsByRegion(id){
+            axios.get(`/api/regions/${id}`)
+                .then(res=>{
+                    this.wanteds=null
+                    this.wanteds=res.data.data
+                })
+        },
 
     }
 }

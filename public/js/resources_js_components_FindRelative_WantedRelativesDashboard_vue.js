@@ -52,6 +52,13 @@ __webpack_require__.r(__webpack_exports__);
         _this2.regions = res.data;
         _this2.$Progress.finish();
       });
+    },
+    getWantedsByRegion: function getWantedsByRegion(id) {
+      var _this3 = this;
+      axios.get("/api/regions/".concat(id)).then(function (res) {
+        _this3.wanteds = null;
+        _this3.wanteds = res.data.data;
+      });
     }
   }
 });
@@ -145,17 +152,15 @@ var render = function render() {
         value: region.id
       }
     }, [_vm._v("\n                        " + _vm._s(region.title) + "\n                    ")])];
-  })], 2), _vm._v(" "), _c("router-link", {
+  })], 2), _vm._v(" "), _c("a", {
     staticClass: "btn btn-outline-success",
-    attrs: {
-      to: {
-        name: "regions.index",
-        params: {
-          id: this.region_id
-        }
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+        return _vm.getWantedsByRegion(_vm.region_id);
       }
     }
-  }, [_vm._v("sort")])], 1)]), _vm._v(" "), _c("div", {
+  }, [_vm._v("sort")])])]), _vm._v(" "), _c("div", {
     staticClass: "main"
   }, [_c("div", {
     staticClass: "content"
