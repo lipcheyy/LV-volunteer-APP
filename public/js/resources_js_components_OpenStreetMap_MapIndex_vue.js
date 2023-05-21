@@ -125,6 +125,7 @@ var render = function render() {
       id: "map"
     }
   }), _vm._v(" "), _vm.user_role === 2 ? _c("a", {
+    staticClass: "btn btn-success mt-2",
     attrs: {
       href: "#"
     },
@@ -134,7 +135,7 @@ var render = function render() {
         return _vm.saveMarkers.apply(null, arguments);
       }
     }
-  }, [_vm._v("save")]) : _vm._e()]);
+  }, [_vm._v("Зберегти")]) : _vm._e()]);
 };
 var staticRenderFns = [];
 render._withStripped = true;

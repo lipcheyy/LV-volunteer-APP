@@ -1,10 +1,10 @@
 <template>
     <div class="vidget-container">
-        <router-link class="vidget" :to="{name:'category.index'}">Categories</router-link>
-        <router-link class="vidget" :to="{name:'user.index'}">users</router-link>
-        <router-link  class="vidget" :to="{name:'post.create'}">post</router-link>
-        <router-link class="vidget" :to="{name:'admin.wanted'}">wanted approve requests</router-link>
-        <router-link class="vidget" :to="{name:'admin.status.request'}">requests</router-link>
+        <router-link class="vidget" :to="{name:'category.index'}">Категорії</router-link>
+        <router-link class="vidget" :to="{name:'user.index'}">Користувачі</router-link>
+        <router-link  class="vidget" :to="{name:'post.create'}">Новини</router-link>
+        <router-link class="vidget" :to="{name:'admin.wanted'}">Запити на розміщення оголошень про зниклих</router-link>
+        <router-link class="vidget" :to="{name:'admin.status.request'}">Запити на отримання статусу волонтера</router-link>
     </div>
 </template>
 

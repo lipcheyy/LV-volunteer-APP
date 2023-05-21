@@ -33,18 +33,20 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     store: function store() {
+      var _this = this;
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/auth/admin/posts', {
         title: this.title,
         content: this.content,
         category_id: this.category_id
       }).then(function (res) {
-        console.log(res);
+        _this.title = '';
+        _this.content = '';
       });
     },
     getCategories: function getCategories() {
-      var _this = this;
+      var _this2 = this;
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/auth/admin/category').then(function (res) {
-        _this.categories = res.data.data;
+        _this2.categories = res.data.data;
       });
     }
   }

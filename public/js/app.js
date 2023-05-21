@@ -5491,7 +5491,6 @@ api.interceptors.request.use(function (config) {
   console.log('siu');
 });
 //endrequest
-
 //on response
 api.interceptors.response.use(function (config) {
   if (localStorage.getItem('access_token')) {
@@ -5514,7 +5513,6 @@ api.interceptors.response.use(function (config) {
 
   //console.log(error.response.status);
   if (error.response.status) {
-    localStorage.clear();
     _router__WEBPACK_IMPORTED_MODULE_1__["default"].push({
       name: 'user.login'
     });
@@ -5728,7 +5726,7 @@ route.beforeEach(function (to, from, next) {
   var access_token = localStorage.getItem('access_token');
   var user_role = localStorage.getItem('user_role');
   if (!access_token) {
-    if (to.name === 'user.login' || to.name === 'user.registration' || to.name === 'wanted.index' || to.name === 'wanted.show' || to.name === 'map.index' || to.name === 'regions.index') {
+    if (to.name === 'user.login' || to.name === 'user.registration' || to.name === 'wanted.index' || to.name === 'wanted.show' || to.name === 'map.index' || to.name === 'regions.index' || to.name === 'posts.index') {
       return next();
     } else {
       return next({

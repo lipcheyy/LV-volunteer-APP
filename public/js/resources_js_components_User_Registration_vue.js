@@ -36,8 +36,7 @@ __webpack_require__.r(__webpack_exports__);
           name: 'personal.page'
         });
       })["catch"](function (error) {
-        _this.error = error.response.data.message;
-        //this.error=error.response.data.errors.password[0];
+        _this.error = error.response.data.errors.name[0];
       });
     }
   }
@@ -178,7 +177,7 @@ var render = function render() {
       }
     }
   }, [_vm._v("Register")]), _vm._v(" "), _vm.error ? _c("p", {
-    staticClass: "text-danger"
+    staticClass: "alert alert-danger mt-2"
   }, [_vm._v(_vm._s(this.error))]) : _vm._e()]);
 };
 var staticRenderFns = [];
@@ -203,7 +202,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.registration-form[data-v-02ea7b42] {\n    max-width: 400px;\n    margin: 0 auto;\n}\n.registration-form h2[data-v-02ea7b42] {\n    text-align: center;\n}\n.registration-form .form-group[data-v-02ea7b42] {\n    margin-bottom: 1.5rem;\n}\n.registration-form label[data-v-02ea7b42] {\n    display: block;\n    margin-bottom: 0.5rem;\n}\n.registration-form input[type=\"text\"][data-v-02ea7b42],\n.registration-form input[type=\"email\"][data-v-02ea7b42],\n.registration-form input[type=\"password\"][data-v-02ea7b42] {\n    width: 100%;\n    padding: 0.5rem;\n    font-size: 1rem;\n    border-radius: 0.25rem;\n    border: 1px solid #ced4da;\n}\n.registration-form button[type=\"submit\"][data-v-02ea7b42] {\n    display: block;\n    width: 100%;\n    padding: 0.5rem;\n    font-size: 1rem;\n    border-radius: 0.25rem;\n    background-color: #007bff;\n    border: none;\n    color: #fff;\n    cursor: pointer;\n}\n.registration-form button[type=\"submit\"][data-v-02ea7b42]:hover {\n    background-color: #0069d9;\n}\n.registration-form .text-danger[data-v-02ea7b42] {\n    margin-top: 0.5rem;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.registration-form[data-v-02ea7b42] {\n    color: white;\n    max-width: 400px;\n    margin: 0 auto;\n    background: radial-gradient(black, transparent);\n    padding: 20px;\n    border-radius: 10px;\n    box-shadow: 4px 24px 103px -19px rgba(117, 117, 117, 1);\n}\n.alert[data-v-02ea7b42]{\n    text-align: center;\n}\n.registration-form[data-v-02ea7b42]:hover{\n    box-shadow: 4px 24px 103px -19px rgb(82, 42, 42);\n}\n.registration-form h2[data-v-02ea7b42] {\n    text-align: center;\n}\n.registration-form .form-group[data-v-02ea7b42] {\n    margin-bottom: 1.5rem;\n}\n.registration-form label[data-v-02ea7b42] {\n    display: block;\n    margin-bottom: 0.5rem;\n}\n.registration-form input[type=\"text\"][data-v-02ea7b42],\n.registration-form input[type=\"email\"][data-v-02ea7b42],\n.registration-form input[type=\"password\"][data-v-02ea7b42] {\n    width: 100%;\n    padding: 0.5rem;\n    font-size: 1rem;\n    border-radius: 0.25rem;\n    border: 1px solid #ced4da;\n}\n.registration-form button[type=\"submit\"][data-v-02ea7b42] {\n    display: block;\n    width: 100%;\n    padding: 0.5rem;\n    font-size: 1rem;\n    border-radius: 0.25rem;\n    background-color: #007bff;\n    border: none;\n    color: #fff;\n    cursor: pointer;\n}\n.registration-form button[type=\"submit\"][data-v-02ea7b42]:hover {\n    background-color: #0069d9;\n}\n.registration-form .text-danger[data-v-02ea7b42] {\n    margin-top: 0.5rem;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

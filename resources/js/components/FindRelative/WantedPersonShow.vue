@@ -51,7 +51,7 @@
                     </div>
                     <div class="actions">
                         <input type="text" v-model="commentContent" class="form-control ipt">
-                        <input type="submit" value="add" @click.prevent="storeComment" class="tn btn btn-success">
+                        <input type="submit" value="Залишити відгук" @click.prevent="storeComment" class="tn btn btn-success">
                     </div>
 
                 </div>
@@ -152,7 +152,7 @@ img {
 }
 
 .ipt {
-    width: 80%;
+    width: 73%;
     margin-right: 3px;
 }
 
@@ -199,7 +199,7 @@ img {
 .comment-section {
     position: relative;
     height: 100%;
-    width: 420px;
+    width: 500px;
     padding: 0 15px 0 15px;
     overflow-y: auto;
 }

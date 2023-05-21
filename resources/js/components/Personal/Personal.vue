@@ -12,7 +12,7 @@
             <router-link v-if="userRole===0" :to="{name:'personal.role.apply'}" class="btn btn-outline-primary apply">Подати заявку на отримання звання волонотера</router-link>
             <div class="main-btns">
                 <a href="" class="btn btn-outline-info" @click.prevent="my_requests=true, changeUserData=false, my_donations=false">Мої оголошення</a>
-                <a href="" class="btn btn-outline-info" @click.prevent="my_requests=false, changeUserData=false, my_donations=true">Мої збори</a>
+                <a v-if="userRole===2" href="" class="btn btn-outline-info" @click.prevent="my_requests=false,  changeUserData=false, my_donations=true">Мої збори</a>
                 <a href="" class="btn btn-outline-info" @click.prevent="my_requests=false, changeUserData=true, my_donations=false">Редагування даних</a>
             </div>
         </div>

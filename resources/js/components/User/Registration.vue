@@ -18,7 +18,7 @@
             <input type="password" v-model="password_confirm" class="form-control" id="password_confirm">
         </div>
         <button @click.prevent="storeUser" class="btn btn-primary">Register</button>
-        <p v-if="error" class="text-danger">{{ this.error }}</p>
+        <p v-if="error" class="alert alert-danger mt-2">{{ this.error }}</p>
     </div>
 </template>
 
@@ -49,8 +49,7 @@ export default {
                 })
                 .catch(
                     error=>{
-                        this.error=error.response.data.message
-                        //this.error=error.response.data.errors.password[0];
+                        this.error=error.response.data.errors.name[0]
                     }
                 )
         }
@@ -60,8 +59,24 @@ export default {
 </script>
 <style scoped>
 .registration-form {
+    color: white;
     max-width: 400px;
     margin: 0 auto;
+    background: radial-gradient(black, transparent);
+    padding: 20px;
+    border-radius: 10px;
+    -webkit-box-shadow: 4px 24px 103px -19px rgba(117, 117, 117, 1);
+    -moz-box-shadow: 4px 24px 103px -19px rgba(117, 117, 117, 1);
+    box-shadow: 4px 24px 103px -19px rgba(117, 117, 117, 1);
+}
+.alert{
+    text-align: center;
+}
+.registration-form:hover{
+    -webkit-box-shadow: 4px 24px 103px -19px rgba(117, 117, 117, 1);
+    -moz-box-shadow: 4px 24px 103px -19px rgba(117, 117, 117, 1);
+    box-shadow: 4px 24px 103px -19px rgb(82, 42, 42);
+
 }
 .registration-form h2 {
     text-align: center;

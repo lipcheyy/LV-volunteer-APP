@@ -151,7 +151,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.login-container[data-v-2c3c8e30] {\n    max-width: 400px;\n    margin: 0 auto;\n    text-align: center;\n}\n.login-title[data-v-2c3c8e30] {\n    margin-bottom: 1.5rem;\n}\n.form-group[data-v-2c3c8e30] {\n    margin-bottom: 1rem;\n}\n.error-message[data-v-2c3c8e30] {\n    color: red;\n    margin-top: 1rem;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.login-container[data-v-2c3c8e30] {\n    color: white;\n    max-width: 400px;\n    margin: 0 auto;\n    text-align: center;\n    background: radial-gradient(black, transparent);\n    padding: 20px;\n    border-radius: 10px;\n    box-shadow: 4px 24px 103px -19px rgba(117, 117, 117, 1);\n}\n.login-container[data-v-2c3c8e30]:hover{\n    box-shadow: 4px 24px 103px -19px rgb(82, 42, 42);\n}\n.login-title[data-v-2c3c8e30] {\n    margin-bottom: 1.5rem;\n}\n.form-group[data-v-2c3c8e30] {\n    margin-bottom: 1rem;\n}\n.error-message[data-v-2c3c8e30] {\n    color: red;\n    margin-top: 1rem;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

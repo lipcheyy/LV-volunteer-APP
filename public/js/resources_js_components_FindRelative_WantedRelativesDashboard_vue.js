@@ -141,7 +141,7 @@ var render = function render() {
         return _vm.findForm.apply(null, arguments);
       }
     }
-  }, [_vm._v("find your relative")]), _vm._v(" "), _c("div", {
+  }, [_vm._v("Подай заявку на пошук своїх зниклих родичів!")]), _vm._v(" "), _c("div", {
     staticClass: "filter-items"
   }, [_c("select", {
     directives: [{
@@ -175,7 +175,7 @@ var render = function render() {
         return _vm.getWantedsByRegion(_vm.region_id);
       }
     }
-  }, [_vm._v("sort")])])]), _vm._v(" "), _c("div", {
+  }, [_vm._v("Фільтрувати")])])]), _vm._v(" "), _c("div", {
     staticClass: "main"
   }, [_vm.wanteds.length !== 0 ? _c("div", {
     staticClass: "content"

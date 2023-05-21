@@ -13,11 +13,8 @@ api.interceptors.request.use(config => {
     console.log('siu');
 })
 //endrequest
-
 //on response
 api.interceptors.response.use(config => {
-
-
     if (localStorage.getItem('access_token')) {
 
         config.headers.authorization = `Bearer ${localStorage.getItem('access_token')}`
@@ -43,7 +40,6 @@ api.interceptors.response.use(config => {
 
     //console.log(error.response.status);
     if (error.response.status) {
-        localStorage.clear()
         router.push({name: 'user.login'})
     }
 })

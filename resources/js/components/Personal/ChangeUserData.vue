@@ -3,8 +3,8 @@
 
     <div class="change-name">
         Редагувати профіль
-        <input type="text" class="form-control" v-model="name">
-        <input type="submit" class="btn btn-outline-info" value="Оновити ім'я" @click.prevent="updateUsername">
+        <input type="text" class="form-control" v-model="name" placeholder="Старе ім'я">
+        <input type="submit" class="btn btn-outline-info" value="Оновити ім'я"  @click.prevent="updateUsername">
     </div>
     <div class="password-form">
         Змінити пароль

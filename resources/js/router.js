@@ -105,7 +105,7 @@ route.beforeEach((to,from,next)=>{
     if (!access_token){
         if (to.name==='user.login' || to.name==='user.registration'
             ||to.name==='wanted.index'||to.name==='wanted.show'||to.name==='map.index'
-            || to.name==='regions.index'){
+            || to.name==='regions.index' || to.name==='posts.index'){
             return next()
         }
         else {

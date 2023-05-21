@@ -2,7 +2,7 @@
     <div class="main">
         <h1>КАРТА ВОЛОНТЕРСЬКИХ ЦЕНТРІВ В УКРАЇНІ</h1>
         <div id="map"></div>
-        <a href="#" @click.prevent="saveMarkers" v-if="user_role===2">save</a>
+        <a href="#" @click.prevent="saveMarkers" class="btn btn-success mt-2" v-if="user_role===2">Зберегти</a>
     </div>
 </template>
 

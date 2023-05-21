@@ -2,7 +2,7 @@
     <div>
 
         <div class="filter">
-            <a href="" class="btn btn-outline-primary" @click.prevent="findForm">find your relative</a>
+            <a href="" class="btn btn-outline-primary" @click.prevent="findForm">Подай заявку на пошук своїх зниклих родичів!</a>
             <div class="filter-items">
                 <select v-model="region_id">
                     <template v-for="region in regions">
@@ -11,7 +11,7 @@
                         </option>
                     </template>
                 </select>
-                <a class="btn btn-outline-success" @click.prevent="getWantedsByRegion(region_id)">sort</a>
+                <a class="btn btn-outline-success" @click.prevent="getWantedsByRegion(region_id)">Фільтрувати</a>
             </div>
         </div>
         <div class="main">

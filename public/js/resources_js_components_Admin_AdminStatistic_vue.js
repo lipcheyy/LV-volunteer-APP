@@ -40,35 +40,35 @@ var render = function render() {
         name: "category.index"
       }
     }
-  }, [_vm._v("Categories")]), _vm._v(" "), _c("router-link", {
+  }, [_vm._v("Категорії")]), _vm._v(" "), _c("router-link", {
     staticClass: "vidget",
     attrs: {
       to: {
         name: "user.index"
       }
     }
-  }, [_vm._v("users")]), _vm._v(" "), _c("router-link", {
+  }, [_vm._v("Користувачі")]), _vm._v(" "), _c("router-link", {
     staticClass: "vidget",
     attrs: {
       to: {
         name: "post.create"
       }
     }
-  }, [_vm._v("post")]), _vm._v(" "), _c("router-link", {
+  }, [_vm._v("Новини")]), _vm._v(" "), _c("router-link", {
     staticClass: "vidget",
     attrs: {
       to: {
         name: "admin.wanted"
       }
     }
-  }, [_vm._v("wanted approve requests")]), _vm._v(" "), _c("router-link", {
+  }, [_vm._v("Запити на розміщення оголошень про зниклих")]), _vm._v(" "), _c("router-link", {
     staticClass: "vidget",
     attrs: {
       to: {
         name: "admin.status.request"
       }
     }
-  }, [_vm._v("requests")])], 1);
+  }, [_vm._v("Запити на отримання статусу волонтера")])], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;

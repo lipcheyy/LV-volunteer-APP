@@ -4,7 +4,7 @@
             <select v-model="goal_id">
                 <option v-for="goal in goals" :value="goal.id">{{goal.title}}</option>
             </select>
-            <input type="submit" value="Сортувати" class="btn btn-outline-success" @click.prevent="getDonationByGoal(goal_id)">
+            <input type="submit" value="Фільтрувати" class="btn btn-outline-success" @click.prevent="getDonationByGoal(goal_id)">
         </div>
         <div class="main-container" >
             <div class="donations-container" v-for="donation in donations"
@@ -101,7 +101,7 @@ export default {
     display: flex;
     justify-content: space-between;
     width: 350px;
-    height: 350px;
+    height: 480px;
     border-radius: 10px;
     background: #494949;
     margin-bottom: 40px ;

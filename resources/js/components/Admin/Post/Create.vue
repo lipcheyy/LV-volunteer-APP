@@ -48,7 +48,8 @@ export default {
                 category_id: this.category_id
             })
                 .then(res => {
-                    console.log(res);
+                    this.title=''
+                    this.content=''
                 })
         },
         getCategories() {

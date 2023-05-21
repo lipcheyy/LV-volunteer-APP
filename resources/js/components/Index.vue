@@ -3,7 +3,7 @@
         <div style="margin-bottom: 10px" class="header">
             <router-link v-if="!access_token" :to="{name:'user.login'}">Авторизація</router-link>
             <router-link v-if="!access_token" :to="{name:'user.registration'}">Реєстрація</router-link>
-            <router-link v-if="access_token" :to="{name:'posts.index'}">Новини</router-link>
+            <router-link  :to="{name:'posts.index'}">Новини</router-link>
             <router-link v-if="access_token" :to="{name:'donation.index'}">Донати</router-link>
             <router-link v-if="access_token" :to="{name:'map.index'}">Карта</router-link>
             <router-link  :to="{name:'wanted.index'}">Шукай Зниклих</router-link>

@@ -16,7 +16,7 @@ class PostController extends Controller
         return $data;
     }
     public function index(){
-        $posts=Post::all();
+        $posts=Post::orderByDesc('id')->get();
         return $posts;
     }
 }
