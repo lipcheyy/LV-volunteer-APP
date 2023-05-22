@@ -41,7 +41,6 @@
 <script>
 import api from "../../api";
 import WantedTemplate from "./WantedTemplate";
-import {getWanteds} from '../../Scripts/Wanteds/getWanteds'
 
 export default {
     name: "WantedRelativesDashboard",
@@ -57,9 +56,7 @@ export default {
         }
     },
     mounted() {
-        getWanteds().then(res => {
-            this.wanteds = res;
-        });
+        this.getWanteds()
         this.getRegions()
     },
     methods: {
@@ -73,6 +70,12 @@ export default {
                 .then(res=>{ this.regions=res.data
                     this.$Progress.finish()
                 })
+        },
+        getWanteds(){
+            axios.get('/api/wanteds')
+                .then(res => {
+                    this.wanteds=res.data.data
+                });
         },
         getWantedsByRegion(id){
             this.$Progress.start()

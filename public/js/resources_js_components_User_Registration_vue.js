@@ -176,7 +176,7 @@ var render = function render() {
         return _vm.storeUser.apply(null, arguments);
       }
     }
-  }, [_vm._v("Register")]), _vm._v(" "), _vm.error ? _c("p", {
+  }, [_vm._v("Зареєструватися")]), _vm._v(" "), _vm.error ? _c("p", {
     staticClass: "alert alert-danger mt-2"
   }, [_vm._v(_vm._s(this.error))]) : _vm._e()]);
 };

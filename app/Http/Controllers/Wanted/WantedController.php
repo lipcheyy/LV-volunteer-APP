@@ -27,7 +27,7 @@ class WantedController extends Controller
         return response()->json(['message'=>'deleted']);
     }
     public function getUsersRequests(){
-        $user_requests=auth()->user()->findRequest()->orderByDesc('id')->get();
+        $user_requests=auth()->user()->findRequest()->where('approved',1)->orderByDesc('id')->get();
         return WantedResource::collection($user_requests);
     }
     public function store(StoreRequest $request){

@@ -9,7 +9,7 @@
             <label for="password">Password</label>
             <input type="password" v-model="password" class="form-control" id="password">
         </div>
-        <button type="submit" @click.prevent="login" class="btn btn-primary">Log in</button>
+        <button type="submit" @click.prevent="login" class="btn btn-primary">Вхід</button>
         <p v-if="error" class="error-message">{{error}}</p>
     </div>
 </template>

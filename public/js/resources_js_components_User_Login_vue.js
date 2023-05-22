@@ -125,7 +125,7 @@ var render = function render() {
         return _vm.login.apply(null, arguments);
       }
     }
-  }, [_vm._v("Log in")]), _vm._v(" "), _vm.error ? _c("p", {
+  }, [_vm._v("Вхід")]), _vm._v(" "), _vm.error ? _c("p", {
     staticClass: "error-message"
   }, [_vm._v(_vm._s(_vm.error))]) : _vm._e()]);
 };

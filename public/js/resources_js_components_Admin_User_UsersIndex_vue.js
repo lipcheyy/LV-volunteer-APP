@@ -160,7 +160,7 @@ var render = function render() {
     _c = _vm._self._c;
   return _c("div", {
     staticClass: "create_container"
-  }, [_vm._v("\n    login\n    "), _c("input", {
+  }, [_vm._v("\n    Логін\n    "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -180,7 +180,7 @@ var render = function render() {
         _vm.name = $event.target.value;
       }
     }
-  }), _vm._v("\n    email\n    "), _c("input", {
+  }), _vm._v("\n    Пошта\n    "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -200,7 +200,7 @@ var render = function render() {
         _vm.email = $event.target.value;
       }
     }
-  }), _vm._v("\n    pass\n    "), _c("input", {
+  }), _vm._v("\n    Пароль\n    "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -220,7 +220,7 @@ var render = function render() {
         _vm.password = $event.target.value;
       }
     }
-  }), _vm._v("\n    passs_conf\n    "), _c("input", {
+  }), _vm._v("\n    Підтвердження паролю\n    "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -269,7 +269,7 @@ var render = function render() {
     staticClass: "btn btn-success",
     attrs: {
       type: "submit",
-      value: "add new"
+      value: "Створити"
     },
     on: {
       click: function click($event) {

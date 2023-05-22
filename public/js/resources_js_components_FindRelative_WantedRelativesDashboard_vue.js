@@ -13,8 +13,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../api */ "./resources/js/api.js");
 /* harmony import */ var _WantedTemplate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./WantedTemplate */ "./resources/js/components/FindRelative/WantedTemplate.vue");
-/* harmony import */ var _Scripts_Wanteds_getWanteds__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Scripts/Wanteds/getWanteds */ "./resources/js/Scripts/Wanteds/getWanteds.js");
-
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -30,10 +28,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    var _this = this;
-    (0,_Scripts_Wanteds_getWanteds__WEBPACK_IMPORTED_MODULE_2__.getWanteds)().then(function (res) {
-      _this.wanteds = res;
-    });
+    this.getWanteds();
     this.getRegions();
   },
   methods: {
@@ -46,11 +41,17 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     getRegions: function getRegions() {
-      var _this2 = this;
+      var _this = this;
       this.$Progress.start();
       axios.get('/api/regions').then(function (res) {
-        _this2.regions = res.data;
-        _this2.$Progress.finish();
+        _this.regions = res.data;
+        _this.$Progress.finish();
+      });
+    },
+    getWanteds: function getWanteds() {
+      var _this2 = this;
+      axios.get('/api/wanteds').then(function (res) {
+        _this2.wanteds = res.data.data;
       });
     },
     getWantedsByRegion: function getWantedsByRegion(id) {
@@ -276,24 +277,6 @@ var render = function render() {
 var staticRenderFns = [];
 render._withStripped = true;
 
-
-/***/ }),
-
-/***/ "./resources/js/Scripts/Wanteds/getWanteds.js":
-/*!****************************************************!*\
-  !*** ./resources/js/Scripts/Wanteds/getWanteds.js ***!
-  \****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "getWanteds": () => (/* binding */ getWanteds)
-/* harmony export */ });
-function getWanteds(wantedsList) {
-  return axios.get('/api/wanteds').then(function (res) {
-    return res.data.data;
-  });
-}
 
 /***/ }),
 

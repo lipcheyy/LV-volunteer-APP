@@ -1,19 +1,19 @@
 <template>
     <div class="create_container">
-        login
+        Логін
         <input type="text" v-model="name" class="form-control">
-        email
+        Пошта
         <input type="email" v-model="email" class="form-control">
-        pass
+        Пароль
         <input type="password" v-model="password" class="form-control">
-        passs_conf
+        Підтвердження паролю
         <input type="password" class="mb-2 form-control" v-model="password_confirm" >
         <select v-model="role_id" class="form-control">
             <template v-for="(role,roleId) in roles">
                 <option :value="roleId">{{role}}</option>
             </template>
         </select>
-        <input @click.prevent="store" type="submit" value="add new" class="btn btn-success">
+        <input @click.prevent="store" type="submit" value="Створити" class="btn btn-success">
     </div>
 </template>
 

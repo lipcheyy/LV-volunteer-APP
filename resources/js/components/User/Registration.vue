@@ -17,7 +17,7 @@
             <label for="password_confirm">Confirm Password</label>
             <input type="password" v-model="password_confirm" class="form-control" id="password_confirm">
         </div>
-        <button @click.prevent="storeUser" class="btn btn-primary">Register</button>
+        <button @click.prevent="storeUser" class="btn btn-primary">Зареєструватися</button>
         <p v-if="error" class="alert alert-danger mt-2">{{ this.error }}</p>
     </div>
 </template>

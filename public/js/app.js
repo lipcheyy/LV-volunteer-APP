@@ -5406,13 +5406,13 @@ var render = function render() {
         name: "user.registration"
       }
     }
-  }, [_vm._v("Реєстрація")]) : _vm._e(), _vm._v(" "), _vm.access_token ? _c("router-link", {
+  }, [_vm._v("Реєстрація")]) : _vm._e(), _vm._v(" "), _c("router-link", {
     attrs: {
       to: {
         name: "posts.index"
       }
     }
-  }, [_vm._v("Новини")]) : _vm._e(), _vm._v(" "), _vm.access_token ? _c("router-link", {
+  }, [_vm._v("Новини")]), _vm._v(" "), _vm.access_token ? _c("router-link", {
     attrs: {
       to: {
         name: "donation.index"
@@ -5513,6 +5513,7 @@ api.interceptors.response.use(function (config) {
 
   //console.log(error.response.status);
   if (error.response.status) {
+    localStorage.clear();
     _router__WEBPACK_IMPORTED_MODULE_1__["default"].push({
       name: 'user.login'
     });

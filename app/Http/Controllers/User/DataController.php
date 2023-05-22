@@ -7,7 +7,11 @@ use App\Http\Requests\User\DataRequest;
 use App\Http\Requests\User\UpdateDataRequest;
 use App\Http\Resources\Donation\DonationResource;
 use App\Http\Resources\User\UserResource;
+use App\Models\Goal;
+use App\Models\Post;
 use App\Models\User;
+use App\Models\VolunteerStatus;
+use App\Models\Wanted;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -37,6 +41,17 @@ class DataController extends Controller
             return response()->json(['error'=>'wrong old password']);
         };
         User::where('email',$email)->update(['password'=>$data['password']]);
+    }
+    public function getNotifications(){
+        $notifications=[
+            'category_count'=>Goal::count(),
+            'users_count'=>User::count(),
+            'news'=>Post::count(),
+            'wanteds_count'=>Wanted::count(),
+            'volunteer_requests_count'=>VolunteerStatus::count(),
+            'wanted_request_count'=>Wanted::where('approved',0)->count()
+        ];
+        return $notifications;
     }
     public function updateUsername(){
         $data=\request()->validate(['name'=>'string']);

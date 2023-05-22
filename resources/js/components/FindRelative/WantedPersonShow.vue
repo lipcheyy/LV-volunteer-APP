@@ -19,8 +19,7 @@
                     </div>
                 </div>
                 <div v-if="!access_token" class="non-auth">Допоможіть знайти!Додайте відгук якщо вам відома інформація про людину
-                    <a href="#" class="btn btn-primary">Відгук</a></div>
-
+                    <router-link :to="{name:'user.login'}" href="#" class="btn btn-primary">Відгук</router-link></div>
                 <div class="comment-section" v-if="access_token">
                     <div class="mb-2">Відгуки:</div>
                     <div class="comments-container ">

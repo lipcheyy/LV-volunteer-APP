@@ -122,12 +122,15 @@ var render = function render() {
     staticClass: "about"
   }, [_c("p", [_vm._v(_vm._s(_vm.wanted.about))])])]) : _vm._e()]), _vm._v(" "), !_vm.access_token ? _c("div", {
     staticClass: "non-auth"
-  }, [_vm._v("Допоможіть знайти!Додайте відгук якщо вам відома інформація про людину\n                "), _c("a", {
+  }, [_vm._v("Допоможіть знайти!Додайте відгук якщо вам відома інформація про людину\n                "), _c("router-link", {
     staticClass: "btn btn-primary",
     attrs: {
+      to: {
+        name: "user.login"
+      },
       href: "#"
     }
-  }, [_vm._v("Відгук")])]) : _vm._e(), _vm._v(" "), _vm.access_token ? _c("div", {
+  }, [_vm._v("Відгук")])], 1) : _vm._e(), _vm._v(" "), _vm.access_token ? _c("div", {
     staticClass: "comment-section"
   }, [_c("div", {
     staticClass: "mb-2"

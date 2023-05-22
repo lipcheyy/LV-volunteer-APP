@@ -115,6 +115,7 @@ Route::group([
             Route::patch('/update','DataController@updateData');
             Route::patch('/update/name','DataController@updateUsername');
             Route::get('/userdata','DataController@data');
+            Route::get('/notifications','DataController@getNotifications');
             Route::get('/likedPosts','DataController@liked');
             Route::get('/own-donations','DonationController@getUsersOwnDonations');
         });
