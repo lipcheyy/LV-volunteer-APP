@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="main">
-            <div class="wanted">
+            <div class="wanted" v-if="wanted">
                 <div class="sub-container">
                     <div class="image">
                         <template v-for="image in wanted.images">
@@ -18,7 +18,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="comment-section">
+                <div v-if="!access_token" class="non-auth">Допоможіть знайти!Додайте відгук якщо вам відома інформація про людину
+                    <router-link :to="{name:'user.login'}" href="#" class="btn btn-primary">Відгук</router-link></div>
+                <div class="comment-section" v-if="access_token">
                     <div class="mb-2">Відгуки:</div>
                     <div class="comments-container ">
                         <template v-for="comment in wanted.comment">
@@ -30,7 +32,7 @@
                                     </span>
                                     <span :class="commentToEdit(comment.id)?'':'d-none'">
                                         <input v-model="contentToEdit">
-                                        <a href="" @click.prevent="update(comment.id)">upd</a>
+                                        <a href="" @click.prevent="update(comment.id)" class="btn btn-outline-success">Оновити</a>
                                     </span>
                                 </div>
                                 <div class="comment-interactions">
@@ -48,7 +50,7 @@
                     </div>
                     <div class="actions">
                         <input type="text" v-model="commentContent" class="form-control ipt">
-                        <input type="submit" value="add" @click.prevent="storeComment" class="tn btn btn-success">
+                        <input type="submit" value="Залишити відгук" @click.prevent="storeComment" class="tn btn btn-success">
                     </div>
 
                 </div>
@@ -79,7 +81,7 @@ export default {
     },
     methods: {
         getWanted() {
-            axios.get(`/api/wanted/${this.wantedId}`)
+            axios.get(`/api/wanteds/${this.wantedId}`)
                 .then(res => {
                     this.wanted = res.data.data
                     console.log(this.wanted);
@@ -149,7 +151,7 @@ img {
 }
 
 .ipt {
-    width: 80%;
+    width: 73%;
     margin-right: 3px;
 }
 
@@ -157,7 +159,16 @@ img {
     min-height: 100px;
     width: 100%;
 }
-
+.non-auth{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    border: 4px solid black;
+    border-radius: 5px;
+    height: 15%;
+    margin-left:10px ;
+}
 .about {
     max-width: 400px;
 }
@@ -187,7 +198,7 @@ img {
 .comment-section {
     position: relative;
     height: 100%;
-    width: 420px;
+    width: 500px;
     padding: 0 15px 0 15px;
     overflow-y: auto;
 }

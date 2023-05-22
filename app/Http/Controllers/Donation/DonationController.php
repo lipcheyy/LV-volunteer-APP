@@ -15,8 +15,18 @@ class DonationController extends Controller
         $data['user_id']=auth()->user()->id;
         Donation::create($data);
     }
+    public function closeDonation(Donation $donation){
+        $data=\request()->all();
+        $donation->update(['is_active'=>$data['is_active']]);
+        return response()->json(['message'=>'closed']);
+    }
     public function index(){
-        $donations=Donation::all();
+        $donations = Donation::where('is_active', 1)
+            ->orderBy('likes_count', 'desc')
+            ->get();
         return DonationResource::collection($donations);
+    }
+    public function getDonation(Donation $donation){
+        return new DonationResource($donation);
     }
 }

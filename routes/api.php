@@ -27,9 +27,13 @@ Route::group(['namespace'=>'Admin'],function (){
         Route::get('/','PostController@index');
     });
 });
-Route::group(['namespace' => 'Wanted', 'prefix' => 'wanted'], function () {
+Route::group(['namespace' => 'Wanted', 'prefix' => 'wanteds'], function () {
     Route::get('/','WantedController@index');
     Route::get('/{wanted}','WantedController@show');
+});
+Route::group(['namespace' => 'Region', 'prefix' => 'regions'], function () {
+    Route::get('/','RegionController@index');
+    Route::get('/{region}','RegionController@getWantedByRegion');
 });
 Route::group([
 
@@ -58,6 +62,8 @@ Route::group([
             Route::group(['namespace' => 'Volunteer', 'prefix' => 'volunteer'],function (){
                 Route::get('/','VolunteerController@index');
                 Route::patch('/{user}','VolunteerController@update');
+                Route::delete('/volunteer-statuses/{volunteerStatus}','VolunteerController@disapprove');
+
             });
             Route::group(['namespace'=>'User','prefix'=>'users'],function (){
                 Route::get('/','UsersController@index');
@@ -78,25 +84,42 @@ Route::group([
                 Route::patch('/{comment}','CommentController@update');
                 Route::delete('/{comment}','CommentController@destroy');
             });
-            Route::get('/{wanted}','WantedController@show');
+            Route::get('/user','WantedController@getUsersRequests');
+            Route::post('/','WantedController@store');
+            Route::delete('/{wanted}','WantedController@destroy');
         });
         Route::group(['namespace' => 'Goal', 'prefix' => 'goals'], function () {
+            Route::post('/','GoalController@store');
+            Route::patch('/{goal}','GoalController@update');
+            Route::delete('/{goal}','GoalController@destroy');
             Route::get('/','GoalController@getGoals');
+            Route::get('/get-related-donations/{goal}','GoalController@getDonations');
         });
         Route::group(['namespace' => 'Donation', 'prefix' => 'donations'], function () {
+            Route::group(['prefix'=>'images','namespace'=>'Image'],function (){
+                Route::post('/','StoreController');
+            });
+            Route::group(['namespace' => 'Like', 'prefix' => '/{donation}'], function () {
+                Route::post('/like','LikeController@store');
+            });
             Route::post('/','DonationController@store');
+            Route::get('/{donation}','DonationController@getDonation');
+            Route::patch('/{donation}','DonationController@closeDonation');
             Route::get('/','DonationController@index');
         });
-        Route::group(['namespace' => 'Wanted', 'prefix' => 'wanted'], function () {
-            Route::post('/','WantedController@store');
 
-        });
         Route::group(['namespace'=>'VolunteerRoleRequest','prefix'=>'volunteer-role-request'],function (){
             Route::post('/','VolunteerRoleController@store');
         });
         Route::group(['namespace' => 'User', 'prefix' => 'user'], function () {
-            Route::post('/userdata','DataController');
+            Route::patch('/update','DataController@updateData');
+            Route::patch('/update/name','DataController@updateUsername');
+            Route::get('/userdata','DataController@data');
+            Route::get('/notifications','DataController@getNotifications');
+            Route::get('/likedPosts','DataController@liked');
+            Route::get('/own-donations','DonationController@getUsersOwnDonations');
         });
+
         Route::group(['namespace' => 'Marker', 'prefix' => '/markers'], function () {
             Route::post('/','MarkerController@store');
             Route::get('/','MarkerController@getMarkers');

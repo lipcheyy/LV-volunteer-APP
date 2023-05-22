@@ -14,8 +14,14 @@ class VolunteerController extends Controller
         return $volunteerRequests;
     }
     public function update(User $user){
-        $data=\request()->validate(['role'=>'integer']);
+        $data=\request()->validate(['role'=>'integer',
+        'card'=>'integer']);
         $user->update($data);
+        VolunteerStatus::where('user_id',$user->id)->delete();
         return $user;
+    }
+    public function disapprove(VolunteerStatus $volunteerStatus){
+        $volunteerStatus->delete();
+        return response()->json(['message'=>'disaprove']);
     }
 }

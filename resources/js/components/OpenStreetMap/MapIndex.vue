@@ -1,16 +1,15 @@
 <template>
-    <div>
+    <div class="main">
+        <h1>КАРТА ВОЛОНТЕРСЬКИХ ЦЕНТРІВ В УКРАЇНІ</h1>
         <div id="map"></div>
-        <a href="#" @click.prevent="saveMarkers">save</a>
+        <a href="#" @click.prevent="saveMarkers" class="btn btn-success mt-2" v-if="user_role===2">Зберегти</a>
     </div>
 </template>
 
 <script>
-import MapComponent from "./MapComponent";
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet'
 import api from '../../api'
-import {toString} from "lodash";
 export default {
     name: "MapIndex",
     data(){
@@ -21,10 +20,11 @@ export default {
             lng:'',
             markerIconUrl: '',
             markerIconSize: [],
-            markerIconAnchor: []
+            markerIconAnchor: [],
+            user_role:parseInt(localStorage.getItem('user_role'))
         }
     },
-    components: {MapComponent},
+
     mounted() {
         let map=L.map('map').setView([48.6208, 22.2879],13)
         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -45,9 +45,11 @@ export default {
     },
     methods:{
         addNewMarker(click){
-            let marker = L.marker(click.latlng,{icon: this.createMarkerIcon()});
-            this.markers.addLayer(marker)
-            this.marker.push(marker);
+            if (this.user_role===2){
+                let marker = L.marker(click.latlng,{icon: this.createMarkerIcon()});
+                this.markers.addLayer(marker)
+                this.marker.push(marker);
+            }
         },
         createMarkerIcon() {
             return L.icon({
@@ -63,24 +65,21 @@ export default {
         },
         saveMarkers() {
             const coordinates = this.marker.map((marker) => marker.getLatLng());
-
             coordinates.forEach(coordinate=>{
                 this.lat=coordinate.lat
                 this.lng=coordinate.lng
             })
-            console.log(this.lat,this.lng);
             api.post('/api/auth/markers',
                 {lat:this.lat, lng:this.lng })
-                .then((response) => {
-
-                });
         },
         getMarkers(){
+            this.$Progress.start()
             api.get('/api/auth/markers')
                 .then(res=>{
                     res.data.forEach(mark=>{
                         let markes=L.marker([mark.lat,mark.lng], {icon: this.createMarkerIcon()});
                         this.markers.addLayer(markes)
+                        this.$Progress.finish()
                     })
                 })
         }
@@ -92,7 +91,16 @@ export default {
 
 
 <style scoped>
+div{
+    color: black;
+}
     #map{
+        width: 1200px;
         height: 600px;
+    }
+    .main{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 </style>

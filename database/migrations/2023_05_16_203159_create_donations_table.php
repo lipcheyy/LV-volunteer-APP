@@ -19,6 +19,7 @@ class CreateDonationsTable extends Migration
             $table->string('title');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('goal_id');
+            $table->unsignedBigInteger('is_active')->default(1);
             $table->timestamps();
         });
     }

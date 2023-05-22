@@ -17,6 +17,8 @@ class DonationResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id'=>$this->id,
+            'likes_count'=>$this->likes_count,
             'title'=>$this->title,
             'content'=>$this->content,
             'user'=>new UserResource($this->user)

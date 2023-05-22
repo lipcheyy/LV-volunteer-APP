@@ -1,8 +1,10 @@
 <template>
     <div>
-        input category title
-        <input v-model="title" type="text">
-        <a href="#" @click.prevent="create()">create</a>
+        <div class="con">
+            <label for="text">Напишіть назву категорії</label>
+            <input v-model="title" id="text" type="text" class="form-control">
+            <a href="#" @click.prevent="create()" class="btn btn-success">Додати категорію</a>
+        </div>
     </div>
 </template>
 
@@ -18,19 +20,27 @@ export default {
     },
     methods:{
         create(){
-            api.post('/api/auth/admin/category',{title:this.title})
+            api.post('/api/auth/goals',{title:this.title})
                 .then(res=>{
                     this.title=''
                     this.$parent.getCategories();
                 })
         },
-        backcall(){
-            console.log('siiiuiii');;
-        }
     }
 }
 </script>
 
 <style scoped>
+.con{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom:30px ;
+}
 
+a, input{
+    width: 25%;
+}
 </style>

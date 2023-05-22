@@ -9,7 +9,7 @@
             <label for="password">Password</label>
             <input type="password" v-model="password" class="form-control" id="password">
         </div>
-        <button type="submit" @click.prevent="login" class="btn btn-primary">Log in</button>
+        <button type="submit" @click.prevent="login" class="btn btn-primary">Вхід</button>
         <p v-if="error" class="error-message">{{error}}</p>
     </div>
 </template>
@@ -49,11 +49,23 @@ export default {
 
 <style scoped>
 .login-container {
+    color: white;
     max-width: 400px;
     margin: 0 auto;
     text-align: center;
+    background: radial-gradient(black, transparent);
+    padding: 20px;
+    border-radius: 10px;
+    -webkit-box-shadow: 4px 24px 103px -19px rgba(117, 117, 117, 1);
+    -moz-box-shadow: 4px 24px 103px -19px rgba(117, 117, 117, 1);
+    box-shadow: 4px 24px 103px -19px rgba(117, 117, 117, 1);
 }
+.login-container:hover{
+    -webkit-box-shadow: 4px 24px 103px -19px rgba(117, 117, 117, 1);
+    -moz-box-shadow: 4px 24px 103px -19px rgba(117, 117, 117, 1);
+    box-shadow: 4px 24px 103px -19px rgb(82, 42, 42);
 
+}
 .login-title {
     margin-bottom: 1.5rem;
 }

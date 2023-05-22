@@ -14,8 +14,21 @@ use Illuminate\Support\Facades\Storage;
 class WantedController extends Controller
 {
     public function index(){
-        $wanteds=Wanted::where('approved',true)->get();
+        $wanteds=Wanted::where('approved',true)->orderByDesc('id')->get();
         return WantedResource::collection($wanteds);
+    }
+    public function destroy(Wanted $wanted){
+        $wanted_images=$wanted->images;
+        foreach ($wanted_images as $image){
+            Storage::disk('public')->delete($image->path);
+            $wanted->images()->delete();
+        }
+        $wanted->delete();
+        return response()->json(['message'=>'deleted']);
+    }
+    public function getUsersRequests(){
+        $user_requests=auth()->user()->findRequest()->where('approved',1)->orderByDesc('id')->get();
+        return WantedResource::collection($user_requests);
     }
     public function store(StoreRequest $request){
         $data=$request->validated();

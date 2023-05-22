@@ -1,15 +1,15 @@
 <template>
     <div >
-        <div style="margin-bottom: 10px">
-            <router-link v-if="!access_token" :to="{name:'user.login'}">logn</router-link>
-            <router-link v-if="!access_token" :to="{name:'user.registration'}">registration</router-link>
-            <router-link v-if="access_token" :to="{name:'posts.index'}">posts</router-link>
-            <router-link v-if="access_token" :to="{name:'personal.page'}">personal</router-link>
+        <div style="margin-bottom: 10px" class="header">
+            <router-link v-if="!access_token" :to="{name:'user.login'}">Авторизація</router-link>
+            <router-link v-if="!access_token" :to="{name:'user.registration'}">Реєстрація</router-link>
+            <router-link  :to="{name:'posts.index'}">Новини</router-link>
             <router-link v-if="access_token" :to="{name:'donation.index'}">Донати</router-link>
-            <router-link :to="{name:'map.index'}">map</router-link>
-            <router-link  :to="{name:'wanted.index'}">wanted</router-link>
-            <router-link v-if="access_token && user_role===1" :to="{name:'admin.statistic'}">admin</router-link>
-            <a href="#" v-if="access_token" @click.prevent="logout">logout</a>
+            <router-link v-if="access_token" :to="{name:'map.index'}">Карта</router-link>
+            <router-link  :to="{name:'wanted.index'}">Шукай Зниклих</router-link>
+            <router-link v-if="access_token && user_role===1" :to="{name:'admin.statistic'}">Адмін Панель</router-link>
+            <router-link v-if="access_token" :to="{name:'personal.page'}"><i class="fas fa-user"></i></router-link>
+            <a href="#" v-if="access_token" @click.prevent="logout"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
         </div>
 
         <router-view></router-view>
@@ -25,7 +25,8 @@ export default {
     data(){
         return{
             access_token:null,
-            user_role:null
+            user_role:null,
+            siu:'suuui'
         }
     },
     mounted() {
@@ -49,6 +50,7 @@ export default {
                         const user =res.data
                         localStorage.setItem('user_role',user.role)
                         localStorage.setItem('id',user.id)
+                        localStorage.setItem('username',user.name)
                         this.user_role=parseInt(user.role)
                     })
             }
@@ -77,5 +79,15 @@ export default {
 </script>
 
 <style scoped>
+.header{
+    padding: 19px 20px;
+    background-color: black;
+    display: flex;
+    justify-content: space-around;
+}
+a{
+    color:white;
+    text-decoration: none;
+}
 
 </style>

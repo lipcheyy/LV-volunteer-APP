@@ -22,6 +22,15 @@ class User extends Authenticatable implements JWTSubject
             self::ROLE_VOLUNTEER=>'Volunteer',
         ];
     }
+    public function donations(){
+        return $this->hasMany(Donation::class);
+    }
+    public function likes(){
+        return $this->belongsToMany(Donation::class,'donation_user_likes','user_id','donation_id');
+    }
+    public function findRequest(){
+        return $this->hasMany(Wanted::class);
+    }
     /**
      * The attributes that are mass assignable.
      *
@@ -31,7 +40,8 @@ class User extends Authenticatable implements JWTSubject
         'name',
         'email',
         'password',
-        'role'
+        'role',
+        'card'
     ];
 
     /**

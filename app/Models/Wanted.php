@@ -18,4 +18,5 @@ class Wanted extends Model
     public function comments(){
         return $this->hasMany(Comment::class);
     }
+    protected $withCount=['comments'];
 }

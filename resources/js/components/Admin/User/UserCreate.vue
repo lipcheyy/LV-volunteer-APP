@@ -1,19 +1,19 @@
 <template>
-    <div class="d-flex flex-md-column w-25">
-        login
-        <input type="text" v-model="name">
-        email
-        <input type="email" v-model="email">
-        pass
-        <input type="password" v-model="password">
-        passs_conf
-        <input type="password" class="mb-2" v-model="password_confirm">
-        <select v-model="role_id">
+    <div class="create_container">
+        Логін
+        <input type="text" v-model="name" class="form-control">
+        Пошта
+        <input type="email" v-model="email" class="form-control">
+        Пароль
+        <input type="password" v-model="password" class="form-control">
+        Підтвердження паролю
+        <input type="password" class="mb-2 form-control" v-model="password_confirm" >
+        <select v-model="role_id" class="form-control">
             <template v-for="(role,roleId) in roles">
                 <option :value="roleId">{{role}}</option>
             </template>
         </select>
-        <input @click.prevent="store" type="submit" value="add new">
+        <input @click.prevent="store" type="submit" value="Створити" class="btn btn-success">
     </div>
 </template>
 
@@ -62,5 +62,11 @@ export default {
 </script>
 
 <style scoped>
-
+.create_container{
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    gap: 10px;
+    width: 300px;
+}
 </style>

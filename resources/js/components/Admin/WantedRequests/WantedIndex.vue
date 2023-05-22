@@ -1,20 +1,18 @@
 <template>
     <div>
-        <div v-for="wanted in wanteds" class="w-100">
-            <template v-for="image in wanted.images">
-                <div>
-                    <img :src="image.url" alt="">
-                </div>
-            </template>
-            <div>
-                {{ wanted.name }}
-            </div>
-            <div>
-                {{ wanted.about }}
-            </div>
-            <div>
-                <input type="submit" @click.prevent="approveRequest(wanted.id)"
-                       class="btn btn-success" value="approve this request">
+        <div class="main">
+            <div class="containers" v-for="wanted in wanteds">
+                <template v-for="image in wanted.images">
+                    <wanted-template
+                        :name="wanted.name"
+                        :about="wanted.about"
+                        :url="image.url"
+                        :id="wanted.id"
+
+                    >
+                    </wanted-template>
+                    <div class="approve btn btn-success" @click.prevent="approveRequest(wanted.id)">approve</div>
+                </template>
             </div>
         </div>
     </div>
@@ -22,8 +20,11 @@
 
 <script>
 import api from "../../../api";
-
+import WantedTemplate from "../../FindRelative/WantedTemplate";
 export default {
+    components:{
+        WantedTemplate
+    },
     name: "WantedIndex",
     data() {
         return {
@@ -53,5 +54,19 @@ export default {
 </script>
 
 <style scoped>
-
+.main{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.containers{
+    background-color: black;
+    margin-bottom: 40px;
+    border: 2px solid #b4b4b4;
+    border-radius: 10px;
+    padding-bottom: 20px;
+}
+.approve{
+    margin-left: 20px;
+}
 </style>

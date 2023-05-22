@@ -14,7 +14,6 @@ class CategoryController extends Controller
     public function index(){
         $categories = Category::all();
         return CategoryResource::collection($categories);
-
     }
     public function store(StoreRequest $request){
         $data=$request->validated();

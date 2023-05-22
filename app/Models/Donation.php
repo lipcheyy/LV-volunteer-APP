@@ -12,4 +12,11 @@ class Donation extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+    public function likes(){
+        return $this->belongsToMany(User::class,'donation_user_likes','donation_id','user_id');
+    }
+    public function goal(){
+        return $this->belongsTo(Goal::class);
+    }
+    protected $withCount=['likes'];
 }

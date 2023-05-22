@@ -90,6 +90,11 @@ const route =new VueRouter({
            path:'/wanted/:id/info',
            component:()=>import('./components/FindRelative/WantedPersonShow'),
            name:'wanted.show'
+        },
+        {
+            path:'/donate/:id',
+            component:()=>import('./components/MakeDonation/DonateComponent'),
+            name:'user.donate'
         }
     ]
 })
@@ -99,7 +104,8 @@ route.beforeEach((to,from,next)=>{
     const user_role=localStorage.getItem('user_role')
     if (!access_token){
         if (to.name==='user.login' || to.name==='user.registration'
-            ||to.name==='wanted.index'||to.name==='wanted.show'){
+            ||to.name==='wanted.index'||to.name==='wanted.show'||to.name==='map.index'
+            || to.name==='regions.index' || to.name==='posts.index'){
             return next()
         }
         else {
@@ -111,7 +117,7 @@ route.beforeEach((to,from,next)=>{
     if (user_role!=='1'){
         if (to.name==='admin.statistic'){
             return next({
-                name:'personal.page'
+                name:''
             })
         }
     }

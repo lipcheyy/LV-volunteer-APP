@@ -35,6 +35,7 @@ class StoreRequest extends FormRequest
     {
         return [
             'password.same'=>'Паролі не співпадають',
+            'name.required'=>'Заповніть поля'
         ];
     }
 }

@@ -21,7 +21,9 @@ __webpack_require__.r(__webpack_exports__);
     return {
       name: '',
       about: '',
-      dropzone: null
+      dropzone: null,
+      region_id: 1,
+      regions: null
     };
   },
   mounted: function mounted() {
@@ -30,10 +32,12 @@ __webpack_require__.r(__webpack_exports__);
       maxFiles: 1,
       autoProcessQueue: false
     });
+    this.getRegions();
   },
   methods: {
     store: function store() {
       var _this = this;
+      this.$Progress.start();
       var images = this.dropzone.getAcceptedFiles();
       var data = new FormData();
       images.forEach(function (image) {
@@ -41,10 +45,18 @@ __webpack_require__.r(__webpack_exports__);
       });
       data.append('name', this.name);
       data.append('about', this.about);
+      data.append('region_id', this.region_id);
       _api__WEBPACK_IMPORTED_MODULE_1__["default"].post('/api/auth/wanted', data).then(function (res) {
         _this.dropzone.removeAllFiles();
         _this.about = '';
         _this.name = '';
+        _this.$Progress.finish();
+      });
+    },
+    getRegions: function getRegions() {
+      var _this2 = this;
+      _api__WEBPACK_IMPORTED_MODULE_1__["default"].get('/api/regions').then(function (res) {
+        _this2.regions = res.data;
       });
     }
   }
@@ -52,10 +64,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FindRelative/FindPersonRequestForm.vue?vue&type=template&id=5cfdbfc6&scoped=true&":
-/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FindRelative/FindPersonRequestForm.vue?vue&type=template&id=5cfdbfc6&scoped=true& ***!
-  \****************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FindRelative/FindPersonRequestForm.vue?vue&type=template&id=5cfdbfc6&":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FindRelative/FindPersonRequestForm.vue?vue&type=template&id=5cfdbfc6& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -67,8 +79,16 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "w-25 d-flex gap-4 flex-column"
-  }, [_vm._v("\n    name of wanted person\n    "), _c("div", [_c("input", {
+    staticClass: "container"
+  }, [_c("div", {
+    staticClass: "form-container"
+  }, [_c("div", {
+    staticClass: "d-flex flex-column gap-4"
+  }, [_c("label", {
+    attrs: {
+      "for": "name"
+    }
+  }, [_vm._v("ПІБ")]), _vm._v(" "), _c("div", [_c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -77,7 +97,8 @@ var render = function render() {
     }],
     staticClass: "form-control",
     attrs: {
-      type: "text"
+      type: "text",
+      id: "name"
     },
     domProps: {
       value: _vm.name
@@ -88,7 +109,11 @@ var render = function render() {
         _vm.name = $event.target.value;
       }
     }
-  })]), _vm._v("\n    write about person\n    "), _c("div", [_c("textarea", {
+  })]), _vm._v(" "), _c("label", {
+    attrs: {
+      "for": "about"
+    }
+  }, [_vm._v("Додайте опис про людину(характерні риси і тому подібне):")]), _vm._v(" "), _c("div", [_c("textarea", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -96,6 +121,9 @@ var render = function render() {
       expression: "about"
     }],
     staticClass: "form-control",
+    attrs: {
+      id: "about"
+    },
     domProps: {
       value: _vm.about
     },
@@ -105,14 +133,43 @@ var render = function render() {
         _vm.about = $event.target.value;
       }
     }
-  })]), _vm._v(" "), _c("div", {
+  })]), _vm._v(" "), _c("label", {
+    attrs: {
+      "for": "region"
+    }
+  }, [_vm._v("Виберіть регіон:")]), _vm._v(" "), _c("div", [_c("select", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.region_id,
+      expression: "region_id"
+    }],
+    staticClass: "form-control",
+    on: {
+      change: function change($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+          return o.selected;
+        }).map(function (o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val;
+        });
+        _vm.region_id = $event.target.multiple ? $$selectedVal : $$selectedVal[0];
+      }
+    }
+  }, [_vm._l(_vm.regions, function (region) {
+    return [_c("option", {
+      domProps: {
+        value: region.id
+      }
+    }, [_vm._v(_vm._s(region.title))])];
+  })], 2)]), _vm._v(" "), _c("div", {
     ref: "dropzone",
-    staticClass: "p-4 bg-info"
-  }), _vm._v(" "), _c("div", [_c("input", {
+    staticClass: "dropzoone"
+  }, [_vm._v("\n                Перетягніть сюди фото, або виберіть\n            ")]), _vm._v(" "), _c("div", [_c("input", {
     staticClass: "btn btn-success",
     attrs: {
       type: "submit",
-      value: "add request"
+      value: "Зробити запит"
     },
     on: {
       click: function click($event) {
@@ -120,10 +177,33 @@ var render = function render() {
         return _vm.store.apply(null, arguments);
       }
     }
-  })])]);
+  })])])])]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FindRelative/FindPersonRequestForm.vue?vue&type=style&index=0&id=5cfdbfc6&lang=css&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FindRelative/FindPersonRequestForm.vue?vue&type=style&index=0&id=5cfdbfc6&lang=css& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n.container {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\ndiv{\n    color: white;\n}\n.form-container {\n    width: 400px;\n    padding: 20px;\n    background-color: #494949;\n    border-radius: 10px;\n}\n.form-control {\n    width: 100%;\n    padding: 8px;\n    border-radius: 4px;\n    border: 1px solid #ccc;\n}\n.dz-details,.dz-success-mark,.dz-error-mark{\n    display: none;\n}\n.dropzoone {\n    border: 2px dashed #ccc;\n    background-color: #f8f8f8;\n    min-height: 200px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    cursor: pointer;\n    font-weight: bold;\n    color: #888;\n}\n.dropzoone:hover {\n    border-color: #666;\n}\n.btn {\n    padding: 8px 16px;\n    border-radius: 4px;\n    border: none;\n    color: #fff;\n    cursor: pointer;\n}\n.btn-success {\n    background-color: #28a745;\n}\n.btn:hover {\n    opacity: 0.8;\n}\n\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
 
 /***/ }),
@@ -216,6 +296,35 @@ function isUnextendable(val) {
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FindRelative/FindPersonRequestForm.vue?vue&type=style&index=0&id=5cfdbfc6&lang=css&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FindRelative/FindPersonRequestForm.vue?vue&type=style&index=0&id=5cfdbfc6&lang=css& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_FindPersonRequestForm_vue_vue_type_style_index_0_id_5cfdbfc6_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./FindPersonRequestForm.vue?vue&type=style&index=0&id=5cfdbfc6&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FindRelative/FindPersonRequestForm.vue?vue&type=style&index=0&id=5cfdbfc6&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_FindPersonRequestForm_vue_vue_type_style_index_0_id_5cfdbfc6_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_FindPersonRequestForm_vue_vue_type_style_index_0_id_5cfdbfc6_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
 /***/ "./resources/js/components/FindRelative/FindPersonRequestForm.vue":
 /*!************************************************************************!*\
   !*** ./resources/js/components/FindRelative/FindPersonRequestForm.vue ***!
@@ -226,23 +335,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _FindPersonRequestForm_vue_vue_type_template_id_5cfdbfc6_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FindPersonRequestForm.vue?vue&type=template&id=5cfdbfc6&scoped=true& */ "./resources/js/components/FindRelative/FindPersonRequestForm.vue?vue&type=template&id=5cfdbfc6&scoped=true&");
+/* harmony import */ var _FindPersonRequestForm_vue_vue_type_template_id_5cfdbfc6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FindPersonRequestForm.vue?vue&type=template&id=5cfdbfc6& */ "./resources/js/components/FindRelative/FindPersonRequestForm.vue?vue&type=template&id=5cfdbfc6&");
 /* harmony import */ var _FindPersonRequestForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FindPersonRequestForm.vue?vue&type=script&lang=js& */ "./resources/js/components/FindRelative/FindPersonRequestForm.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _FindPersonRequestForm_vue_vue_type_style_index_0_id_5cfdbfc6_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./FindPersonRequestForm.vue?vue&type=style&index=0&id=5cfdbfc6&lang=css& */ "./resources/js/components/FindRelative/FindPersonRequestForm.vue?vue&type=style&index=0&id=5cfdbfc6&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
+;
 
 
 /* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _FindPersonRequestForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _FindPersonRequestForm_vue_vue_type_template_id_5cfdbfc6_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-  _FindPersonRequestForm_vue_vue_type_template_id_5cfdbfc6_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _FindPersonRequestForm_vue_vue_type_template_id_5cfdbfc6___WEBPACK_IMPORTED_MODULE_0__.render,
+  _FindPersonRequestForm_vue_vue_type_template_id_5cfdbfc6___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
-  "5cfdbfc6",
+  null,
   null
   
 )
@@ -269,18 +380,30 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/FindRelative/FindPersonRequestForm.vue?vue&type=template&id=5cfdbfc6&scoped=true&":
-/*!*******************************************************************************************************************!*\
-  !*** ./resources/js/components/FindRelative/FindPersonRequestForm.vue?vue&type=template&id=5cfdbfc6&scoped=true& ***!
-  \*******************************************************************************************************************/
+/***/ "./resources/js/components/FindRelative/FindPersonRequestForm.vue?vue&type=template&id=5cfdbfc6&":
+/*!*******************************************************************************************************!*\
+  !*** ./resources/js/components/FindRelative/FindPersonRequestForm.vue?vue&type=template&id=5cfdbfc6& ***!
+  \*******************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_FindPersonRequestForm_vue_vue_type_template_id_5cfdbfc6_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_FindPersonRequestForm_vue_vue_type_template_id_5cfdbfc6_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_FindPersonRequestForm_vue_vue_type_template_id_5cfdbfc6___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_FindPersonRequestForm_vue_vue_type_template_id_5cfdbfc6___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_FindPersonRequestForm_vue_vue_type_template_id_5cfdbfc6_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./FindPersonRequestForm.vue?vue&type=template&id=5cfdbfc6&scoped=true& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FindRelative/FindPersonRequestForm.vue?vue&type=template&id=5cfdbfc6&scoped=true&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_FindPersonRequestForm_vue_vue_type_template_id_5cfdbfc6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./FindPersonRequestForm.vue?vue&type=template&id=5cfdbfc6& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FindRelative/FindPersonRequestForm.vue?vue&type=template&id=5cfdbfc6&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/FindRelative/FindPersonRequestForm.vue?vue&type=style&index=0&id=5cfdbfc6&lang=css&":
+/*!*********************************************************************************************************************!*\
+  !*** ./resources/js/components/FindRelative/FindPersonRequestForm.vue?vue&type=style&index=0&id=5cfdbfc6&lang=css& ***!
+  \*********************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_FindPersonRequestForm_vue_vue_type_style_index_0_id_5cfdbfc6_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./FindPersonRequestForm.vue?vue&type=style&index=0&id=5cfdbfc6&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FindRelative/FindPersonRequestForm.vue?vue&type=style&index=0&id=5cfdbfc6&lang=css&");
 
 
 /***/ }),
